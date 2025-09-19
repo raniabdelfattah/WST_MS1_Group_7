@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Name - Recipes 4 Keeps</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Gradient Orange Theme */
+        .back-button, .recipe-link {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border: none;
+            color: white;
+        }
+        .back-button:hover, .recipe-link:hover {
+            background: linear-gradient(135deg, #f7931e, #ffcc02);
+            transform: translateY(-1px);
+        }
+        .share-button {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border: none;
+            color: white;
+        }
+        .share-button:hover {
+            background: linear-gradient(135deg, #f7931e, #ffcc02);
+            transform: translateY(-1px);
+        }
+        .main-footer {
+            background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+            margin-top: 96px; /* 1 inch = 96px */
+        }
+        .back-button {
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-book-open"></i>
+                        <i class="fas fa-utensils"></i>
+                        RECIPES 4 KEEPS
+                    </a>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="recipes.html" class="nav-link">Recipes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="about.html" class="nav-link">About</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="search-container">
+                    <form class="search-form" role="search">
+                        <input type="search" 
+                               class="search-input" 
+                               placeholder="Search a recipe..." 
+                               aria-label="Search recipes">
+                        <button type="submit" class="search-button" aria-label="Search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                
+                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Recipe Detail Section -->
+        <section class="recipe-detail">
+            <div class="container">
+                <div class="recipe-detail-content">
+                    <!-- Recipe Header -->
+                    <header class="recipe-header">
+                        <div class="recipe-hero-image">
+                            <img src="https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=Recipe+Image" 
+                                 alt="Recipe Image" 
+                                 class="recipe-main-photo">
+                        </div>
+                        
+                        <div class="recipe-header-info">
+                            <h1 class="recipe-title">Recipe Name</h1>
+                            <p class="recipe-description">Description is placed here.</p>
+                            
+                            <div class="recipe-meta-info">
+                                <div class="meta-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span class="meta-label">Prep Time:</span>
+                                    <span class="meta-value">45 minutes</span>
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span class="meta-label">Cook Time:</span>
+                                    <span class="meta-value">30 minutes</span>
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fas fa-users"></i>
+                                    <span class="meta-label">Servings:</span>
+                                    <span class="meta-value">4 people</span>
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fas fa-signal"></i>
+                                    <span class="meta-label">Difficulty:</span>
+                                    <span class="meta-value difficulty easy">Easy</span>
+                                </div>
+                            </div>
+                            
+                            <div class="recipe-tags">
+                                <span class="tag">Cuisine</span>
+                                <span class="tag">Meal Type</span>
+                                <span class="tag">Meat Type</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- Recipe Content -->
+                    <div class="recipe-content-grid">
+                        <!-- Ingredients Section -->
+                        <section class="ingredients-section">
+                            <h2 class="section-title">Ingredients</h2>
+                            <div class="ingredients-list">
+                                <h3>Main Ingredients</h3>
+                                <ul class="ingredients">
+                                    <li class="ingredient">
+                                        <span class="ingredient-amount">2 lbs</span>
+                                        <span class="ingredient-name">ingredient 1</span>
+                                    </li>
+                                    <li class="ingredient">
+                                        <span class="ingredient-amount">1 cup</span>
+                                        <span class="ingredient-name">ingredient 2</span>
+                                    </li>
+                                    <li class="ingredient">
+                                        <span class="ingredient-amount">2 cups</span>
+                                        <span class="ingredient-name">ingredient 3</span>
+                                    </li>
+                                    <li class="ingredient">
+                                        <span class="ingredient-amount">1 tsp</span>
+                                        <span class="ingredient-name">ingredient 4</span>
+                                    </li>
+                                    <li class="ingredient">
+                                        <span class="ingredient-amount">2 tbsp</span>
+                                        <span class="ingredient-name">ingredient 5</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <!-- Instructions Section -->
+                        <section class="instructions-section">
+                            <h2 class="section-title">Instructions</h2>
+                            <div class="instructions-list">
+                                <div class="instruction-step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <p>Recipe Instruction Detailed instruction is placed here.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="instruction-step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <p>Recipe Instruction Detailed instruction is placed here.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="instruction-step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <p>Recipe Instruction Detailed instruction is placed here.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="instruction-step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <p>Recipe Instruction Detailed instruction is placed here.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="instruction-step">
+                                    <div class="step-number">5</div>
+                                    <div class="step-content">
+                                        <p>Recipe Instruction Detailed instruction is placed here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <section class="recipe-notes">
+                        <h2 class="section-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Cooking Tips & Notes
+                        </h2>
+                        <div class="notes-content">
+                            <div class="tip">
+                                <h3>Pro Tip</h3>
+                                <p>Detailed cooking tips and notes are placed here.</p>
+                            </div>
+                            <div class="tip">
+                                <h3>Storage</h3>
+                                <p>Detailed storage tips and notes are placed here.</p>
+                            </div>
+                            <div class="tip">
+                                <h3>Variations</h3>
+                                <p>Detailed variation options are placed here.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Social Sharing -->
+                    <section class="social-sharing">
+                        <h3>Share This Recipe</h3>
+                        <div class="share-buttons">
+                            <a href="#" class="share-button facebook" target="_blank" rel="noopener" aria-label="Share on Facebook">
+                                <i class="fab fa-facebook"></i>
+                                Facebook
+                            </a>
+                            <a href="#" class="share-button twitter" target="_blank" rel="noopener" aria-label="Share on Twitter">
+                                <i class="fab fa-twitter"></i>
+                                Twitter
+                            </a>
+                            <a href="#" class="share-button pinterest" target="_blank" rel="noopener" aria-label="Share on Pinterest">
+                                <i class="fab fa-pinterest"></i>
+                                Pinterest
+                            </a>
+                            <a href="#" class="share-button email" aria-label="Share via Email">
+                                <i class="fas fa-envelope"></i>
+                                Email
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- Back to Recipes -->
+                    <div class="back-to-recipes">
+                        <a href="recipes.html" class="back-button">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to All Recipes
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Recipes 4 Keeps</h3>
+                    <p>Foods and recipes are treasures worth keeping...</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="footer-social">
+                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="privacy-disclaimer">
+                    <p>
+                        <strong>Privacy Notice:</strong> We respect your privacy and do not collect 
+                        personal information without your consent. Any information shared with us 
+                        is used solely for improving your cooking experience.
+                    </p>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Recipes 4 Keeps. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

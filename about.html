@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Recipes 4 Keeps</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Gradient Orange Theme */
+        .back-button {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border: none;
+            color: white;
+        }
+        .back-button:hover {
+            background: linear-gradient(135deg, #f7931e, #ffcc02);
+            transform: translateY(-1px);
+        }
+        .main-footer {
+            background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+            margin-top: 96px; /* 1 inch = 96px */
+        }
+        .browse-all-section {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        .browse-all-button {
+            text-align: center;
+        }
+        .back-button {
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        /* Fixed Page Header with Orange Gradient */
+        .page-header {
+            background: linear-gradient(135deg, #ff6b35, #f7931e, #ffcc02);
+            padding: 60px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .page-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .page-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        /* Fixed Our Story Section - Centered Layout */
+        .our-story {
+            background: #fafafa;
+            padding: 60px 0;
+        }
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .story-paragraph {
+            margin: 0;
+            line-height: 1.6;
+            color: #333;
+            font-size: 1rem;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin: 60px 0 40px 0;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .team-member {
+            text-align: center;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .member-photo {
+            margin-bottom: 20px;
+        }
+        .member-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .member-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .member-bio {
+            color: #666;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-book-open"></i>
+                        <i class="fas fa-utensils"></i>
+                        RECIPES 4 KEEPS
+                    </a>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="recipes.html" class="nav-link">Recipes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="about.html" class="nav-link active">About</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="search-container">
+                    <form class="search-form" role="search">
+                        <input type="search" 
+                               class="search-input" 
+                               placeholder="Search a recipe..." 
+                               aria-label="Search recipes">
+                        <button type="submit" class="search-button" aria-label="Search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                
+                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header with Orange Gradient -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Our Story</h1>
+                <p class="page-subtitle">Why we love what we do and why we want to share this with you!</p>
+            </div>
+        </section>
+
+        <!-- Our Story Section with Centered Text -->
+        <section class="our-story">
+            <div class="container">
+                <div class="story-content">
+                    <p class="story-paragraph">
+                        We are four friends who bonded over our love for cooking and sharing family recipes. What started as casual cooking sessions turned into this beautiful collection of treasured recipes that have been passed down through our families for generations.
+                    </p>
+                    <p class="story-paragraph">
+                        Each recipe here tells a story - from grandmother's secret ingredients to modifications we've made to suit modern kitchens. We believe that food is the best way to preserve memories and create new ones.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="container">
+                <h2 class="section-title">Meet the Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="https://via.placeholder.com/200x200/4ECDC4/FFFFFF?text=Helena" 
+                                 alt="Helena Tantoco" 
+                                 class="member-image">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Helena Tantoco</h3>
+                            <p class="member-bio">
+                                Helena's love for her mama and lola's cooking is a generational lovestory! The rest goes on
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="https://via.placeholder.com/200x200/FFE66D/FFFFFF?text=Karissa" 
+                                 alt="Karissa Manicad" 
+                                 class="member-image">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Karissa Manicad</h3>
+                            <p class="member-bio">
+                                Karissa's love for her mama and lola's cooking is a generational lovestory! The rest goes on
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="https://via.placeholder.com/200x200/95E1D3/FFFFFF?text=Rania" 
+                                 alt="Rania Abdelfattah" 
+                                 class="member-image">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Rania Abdelfattah</h3>
+                            <p class="member-bio">
+                                Rania's love for her mama and lola's cooking is a generational lovestory! The rest goes on
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="https://via.placeholder.com/200x200/F38BA8/FFFFFF?text=Chadley" 
+                                 alt="Chadley De Lara" 
+                                 class="member-image">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Chadley De Lara</h3>
+                            <p class="member-bio">
+                                Chadley's love for her mama and lola's cooking is a generational lovestory! The rest goes on
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Browse All Section -->
+        <section class="browse-all-section">
+            <div class="container">
+                <div class="browse-all-button">
+                    <a href="recipes.html" class="back-button">
+                        <i class="fas fa-arrow-right"></i>
+                        Browse All
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Recipes 4 Keeps</h3>
+                    <p>Foods and recipes are treasures worth keeping...</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="footer-social">
+                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="privacy-disclaimer">
+                    <p>
+                        <strong>Privacy Notice:</strong> We respect your privacy and do not collect 
+                        personal information without your consent. Any information shared with us 
+                        is used solely for improving your cooking experience.
+                    </p>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Recipes 4 Keeps. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

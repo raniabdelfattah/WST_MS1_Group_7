@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Recipes - Recipes 4 Keeps</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Gradient Orange Theme */
+        .filter-box {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border: 2px solid #ff6b35;
+            cursor: pointer;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 8px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .filter-box:hover {
+            background: linear-gradient(135deg, #f7931e, #ffcc02);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 107, 53, 0.3);
+        }
+        .filter-box.active {
+            background: linear-gradient(135deg, #ffcc02, #ff6b35);
+            box-shadow: 0 2px 4px rgba(255, 107, 53, 0.5);
+        }
+        .recipe-link {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border: none;
+            color: white;
+        }
+        .recipe-link:hover {
+            background: linear-gradient(135deg, #f7931e, #ffcc02);
+            transform: translateY(-1px);
+        }
+        .main-footer {
+            background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+            margin-top: 96px; /* 1 inch = 96px */
+        }
+        .section-title.left-aligned {
+            text-align: left;
+        }
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            align-items: start;
+        }
+        .filter-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+        .filter-boxes {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            flex: 1;
+        }
+        .filter-title {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .page-header {
+            background: linear-gradient(135deg, #ff6b35, #f7931e, #ffcc02);
+            padding: 60px 0;
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-book-open"></i>
+                        <i class="fas fa-utensils"></i>
+                        RECIPES 4 KEEPS
+                    </a>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="recipes.html" class="nav-link active">Recipes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="about.html" class="nav-link">About</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="search-container">
+                    <form class="search-form" role="search">
+                        <input type="search" 
+                               class="search-input" 
+                               placeholder="Search a recipe..." 
+                               aria-label="Search recipes">
+                        <button type="submit" class="search-button" aria-label="Search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                
+                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">All Recipes</h1>
+                <p class="page-subtitle">Search for your favorites or discover new recipes 4 keeps!</p>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="filter-section">
+            <div class="container">
+                <div class="filter-grid">
+                    <!-- Cuisine Type Filter -->
+                    <div class="filter-column">
+                        <h3 class="filter-title">Cuisine Type</h3>
+                        <div class="filter-boxes">
+                            <div class="filter-box" data-filter="filipino">Filipino</div>
+                            <div class="filter-box" data-filter="arab">Arab</div>
+                            <div class="filter-box" data-filter="japanese">Japanese</div>
+                            <div class="filter-box" data-filter="south-korean">South Korean</div>
+                            <div class="filter-box" data-filter="chinese">Chinese</div>
+                        </div>
+                    </div>
+
+                    <!-- Meal Type Filter -->
+                    <div class="filter-column">
+                        <h3 class="filter-title">Meal Type</h3>
+                        <div class="filter-boxes">
+                            <div class="filter-box" data-filter="breakfast">Breakfast</div>
+                            <div class="filter-box" data-filter="lunch">Lunch</div>
+                            <div class="filter-box" data-filter="dinner">Dinner</div>
+                            <div class="filter-box" data-filter="main-course">Main Course</div>
+                            <div class="filter-box" data-filter="dessert">Dessert</div>
+                            <div class="filter-box" data-filter="pasta">Pasta</div>
+                            <div class="filter-box" data-filter="snack">Snack</div>
+                        </div>
+                    </div>
+
+                    <!-- Ingredient Filter -->
+                    <div class="filter-column">
+                        <h3 class="filter-title">Ingredient</h3>
+                        <div class="filter-boxes">
+                            <div class="filter-box" data-filter="chicken">Chicken</div>
+                            <div class="filter-box" data-filter="fish">Fish</div>
+                            <div class="filter-box" data-filter="vegetables">Vegetables</div>
+                            <div class="filter-box" data-filter="beef">Beef</div>
+                            <div class="filter-box" data-filter="pork">Pork</div>
+                        </div>
+                    </div>
+
+                    <!-- Difficulty Filter -->
+                    <div class="filter-column">
+                        <h3 class="filter-title">Difficulty</h3>
+                        <div class="filter-boxes">
+                            <div class="filter-box" data-filter="easy">Easy</div>
+                            <div class="filter-box" data-filter="medium">Medium</div>
+                            <div class="filter-box" data-filter="hard">Hard</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommended Recipes Section -->
+        <section class="recommended-recipes">
+            <div class="container">
+                <h2 class="section-title left-aligned">Recommended Recipes</h2>
+                <div class="recipe-grid">
+                    <!-- Recipe Card 1 -->
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://via.placeholder.com/300x200/4ECDC4/FFFFFF?text=Recipe" 
+                                 alt="Recipe Image" 
+                                 class="recipe-photo">
+                            <div class="recipe-overlay">
+                                <div class="recipe-meta">
+                                    <span class="cooking-time">
+                                        <i class="fas fa-clock"></i> 45 mins
+                                    </span>
+                                    <span class="difficulty easy">Easy</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe-content">
+                            <h3 class="recipe-title">Recipe Name</h3>
+                            <p class="recipe-description">Description is placed here.</p>
+                            <div class="recipe-tags">
+                                <span class="tag">Cuisine</span>
+                                <span class="tag">Meal Type</span>
+                                <span class="tag">Meat Type</span>
+                            </div>
+                            <a href="recipe-detail.html" class="recipe-link">View Recipe</a>
+                        </div>
+                    </article>
+
+                    <!-- Recipe Card 2 -->
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://via.placeholder.com/300x200/FFE66D/FFFFFF?text=Recipe" 
+                                 alt="Recipe Image" 
+                                 class="recipe-photo">
+                            <div class="recipe-overlay">
+                                <div class="recipe-meta">
+                                    <span class="cooking-time">
+                                        <i class="fas fa-clock"></i> 45 mins
+                                    </span>
+                                    <span class="difficulty easy">Easy</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe-content">
+                            <h3 class="recipe-title">Recipe Name</h3>
+                            <p class="recipe-description">Description is placed here.</p>
+                            <div class="recipe-tags">
+                                <span class="tag">Cuisine</span>
+                                <span class="tag">Meal Type</span>
+                                <span class="tag">Meat Type</span>
+                            </div>
+                            <a href="recipe-detail.html" class="recipe-link">View Recipe</a>
+                        </div>
+                    </article>
+
+                    <!-- Recipe Card 3 -->
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://via.placeholder.com/300x200/FF6B6B/FFFFFF?text=Recipe" 
+                                 alt="Recipe Image" 
+                                 class="recipe-photo">
+                            <div class="recipe-overlay">
+                                <div class="recipe-meta">
+                                    <span class="cooking-time">
+                                        <i class="fas fa-clock"></i> 45 mins
+                                    </span>
+                                    <span class="difficulty easy">Easy</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe-content">
+                            <h3 class="recipe-title">Recipe Name</h3>
+                            <p class="recipe-description">Description is placed here.</p>
+                            <div class="recipe-tags">
+                                <span class="tag">Cuisine</span>
+                                <span class="tag">Meal Type</span>
+                                <span class="tag">Meat Type</span>
+                            </div>
+                            <a href="recipe-detail.html" class="recipe-link">View Recipe</a>
+                        </div>
+                    </article>
+
+                    <!-- Recipe Card 4 -->
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://via.placeholder.com/300x200/95E1D3/FFFFFF?text=Recipe" 
+                                 alt="Recipe Image" 
+                                 class="recipe-photo">
+                            <div class="recipe-overlay">
+                                <div class="recipe-meta">
+                                    <span class="cooking-time">
+                                        <i class="fas fa-clock"></i> 45 mins
+                                    </span>
+                                    <span class="difficulty easy">Easy</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe-content">
+                            <h3 class="recipe-title">Recipe Name</h3>
+                            <p class="recipe-description">Description is placed here.</p>
+                            <div class="recipe-tags">
+                                <span class="tag">Cuisine</span>
+                                <span class="tag">Meal Type</span>
+                                <span class="tag">Meat Type</span>
+                            </div>
+                            <a href="recipe-detail.html" class="recipe-link">View Recipe</a>
+                        </div>
+                    </article>
+
+                    <!-- Recipe Card 5 -->
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://via.placeholder.com/300x200/F38BA8/FFFFFF?text=Recipe" 
+                                 alt="Recipe Image" 
+                                 class="recipe-photo">
+                            <div class="recipe-overlay">
+                                <div class="recipe-meta">
+                                    <span class="cooking-time">
+                                        <i class="fas fa-clock"></i> 45 mins
+                                    </span>
+                                    <span class="difficulty easy">Easy</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe-content">
+                            <h3 class="recipe-title">Recipe Name</h3>
+                            <p class="recipe-description">Description is placed here.</p>
+                            <div class="recipe-tags">
+                                <span class="tag">Cuisine</span>
+                                <span class="tag">Meal Type</span>
+                                <span class="tag">Meat Type</span>
+                            </div>
+                            <a href="recipe-detail.html" class="recipe-link">View Recipe</a>
+                        </div>
+                    </article>
+
+                    <!-- Recipe Card 6 -->
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://via.placeholder.com/300x200/A8E6CF/FFFFFF?text=Recipe" 
+                                 alt="Recipe Image" 
+                                 class="recipe-photo">
+                            <div class="recipe-overlay">
+                                <div class="recipe-meta">
+                                    <span class="cooking-time">
+                                        <i class="fas fa-clock"></i> 45 mins
+                                    </span>
+                                    <span class="difficulty easy">Easy</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe-content">
+                            <h3 class="recipe-title">Recipe Name</h3>
+                            <p class="recipe-description">Description is placed here.</p>
+                            <div class="recipe-tags">
+                                <span class="tag">Cuisine</span>
+                                <span class="tag">Meal Type</span>
+                                <span class="tag">Meat Type</span>
+                            </div>
+                            <a href="recipe-detail.html" class="recipe-link">View Recipe</a>
+                        </div>
+                    </article>
+
+                    <!-- Recipe Card 7 -->
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://via.placeholder.com/300x200/FFB6C1/FFFFFF?text=Recipe" 
+                                 alt="Recipe Image" 
+                                 class="recipe-photo">
+                            <div class="recipe-overlay">
+                                <div class="recipe-meta">
+                                    <span class="cooking-time">
+                                        <i class="fas fa-clock"></i> 45 mins
+                                    </span>
+                                    <span class="difficulty easy">Easy</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe-content">
+                            <h3 class="recipe-title">Recipe Name</h3>
+                            <p class="recipe-description">Description is placed here.</p>
+                            <div class="recipe-tags">
+                                <span class="tag">Cuisine</span>
+                                <span class="tag">Meal Type</span>
+                                <span class="tag">Meat Type</span>
+                            </div>
+                            <a href="recipe-detail.html" class="recipe-link">View Recipe</a>
+                        </div>
+                    </article>
+
+                    <!-- Recipe Card 8 -->
+                    <article class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="https://via.placeholder.com/300x200/DDA0DD/FFFFFF?text=Recipe" 
+                                 alt="Recipe Image" 
+                                 class="recipe-photo">
+                            <div class="recipe-overlay">
+                                <div class="recipe-meta">
+                                    <span class="cooking-time">
+                                        <i class="fas fa-clock"></i> 45 mins
+                                    </span>
+                                    <span class="difficulty easy">Easy</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe-content">
+                            <h3 class="recipe-title">Recipe Name</h3>
+                            <p class="recipe-description">Description is placed here.</p>
+                            <div class="recipe-tags">
+                                <span class="tag">Cuisine</span>
+                                <span class="tag">Meal Type</span>
+                                <span class="tag">Meat Type</span>
+                            </div>
+                            <a href="recipe-detail.html" class="recipe-link">View Recipe</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Recipes 4 Keeps</h3>
+                    <p>Foods and recipes are treasures worth keeping...</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="footer-social">
+                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="privacy-disclaimer">
+                    <p>
+                        <strong>Privacy Notice:</strong> We respect your privacy and do not collect 
+                        personal information without your consent. Any information shared with us 
+                        is used solely for improving your cooking experience.
+                    </p>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Recipes 4 Keeps. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
