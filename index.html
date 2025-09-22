@@ -6,131 +6,49 @@
     <title>Recipes 4 Keeps - Home</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        /* Gradient Orange Theme */
-        .hero-section {
-            background: linear-gradient(135deg, #ff6b35, #f7931e, #ffcc02);
-        }
-        .filter-box {
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            border: 2px solid #ff6b35;
-        }
-        .filter-box:hover {
-            background: linear-gradient(135deg, #f7931e, #ffcc02);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(255, 107, 53, 0.3);
-        }
-        .category-box {
-            background: white;
-            border: 2px solid #333;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .category-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .category-box {
-            border-color: #ff6b35;
-            background: #fff5f0;
-        }
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .category-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        .category-name {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #333;
-            margin: 0;
-        }
-        .back-button, .recipe-link {
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            border: none;
-            color: white;
-        }
-        .back-button:hover, .recipe-link:hover {
-            background: linear-gradient(135deg, #f7931e, #ffcc02);
-            transform: translateY(-1px);
-        }
-        .main-footer {
-            background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
-            margin-top: 96px; /* 1 inch = 96px */
-        }
-        .section-title.left-aligned {
-            text-align: left;
-        }
-        .browse-all-section {
-            display: flex;
-            justify-content: center;
-            margin: 40px 0;
-        }
-        .browse-all-button {
-            text-align: center;
-        }
-        .back-button {
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-    </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="main-header">
+    <header class="header">
         <nav class="navbar">
-            <div class="nav-container">
-                <div class="nav-brand">
+            <div class="navbar__container">
+                <div class="navbar__brand">
                     <a href="index.html" class="logo">
-                        <i class="fas fa-book-open"></i>
-                        <i class="fas fa-utensils"></i>
-                        RECIPES 4 KEEPS
+                        <i class="fas fa-book-open logo__icon"></i>
+                        <i class="fas fa-utensils logo__icon"></i>
+                        <span class="logo__text">RECIPES 4 KEEPS</span>
                     </a>
                 </div>
                 
-                <div class="nav-menu" id="nav-menu">
-                    <ul class="nav-list">
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link active">Home</a>
+                <nav class="navbar__menu" id="nav-menu" aria-label="Main navigation">
+                    <ul class="navbar__list">
+                        <li class="navbar__item">
+                            <a href="index.html" class="navbar__link navbar__link--active" aria-current="page">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="recipes.html" class="nav-link">Recipes</a>
+                        <li class="navbar__item">
+                            <a href="recipes.html" class="navbar__link">Recipes</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="about.html" class="nav-link">About</a>
+                        <li class="navbar__item">
+                            <a href="about.html" class="navbar__link">About</a>
                         </li>
                     </ul>
-                </div>
+                </nav>
                 
-                <div class="search-container">
-                    <form class="search-form" role="search">
+                <div class="search">
+                    <form class="search__form" role="search">
+                        <label for="search-input" class="sr-only">Search recipes</label>
                         <input type="search" 
-                               class="search-input" 
+                               id="search-input"
+                               class="search__input" 
                                placeholder="Search a recipe..." 
                                aria-label="Search recipes">
-                        <button type="submit" class="search-button" aria-label="Search">
-                            <i class="fas fa-search"></i>
+                        <button type="submit" class="search__button" aria-label="Search">
+                            <i class="fas fa-search" aria-hidden="true"></i>
                         </button>
                     </form>
                 </div>
                 
-                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+                <button class="navbar__toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span class="hamburger"></span>
                     <span class="hamburger"></span>
                     <span class="hamburger"></span>
@@ -140,12 +58,12 @@
     </header>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="main">
         <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Foods and recipes are treasures worth keeping...</h1>
-                <p class="hero-subtitle">At Recipes 4 Keeps, we bring together our favorite meals—each one a delicious link to our traditions and stories.</p>
+        <section class="hero">
+            <div class="hero__content">
+                <h1 class="hero__title">Foods and recipes are treasures worth keeping...</h1>
+                <p class="hero__subtitle">At Recipes 4 Keeps, we bring together our favorite meals—each one a delicious link to our traditions and stories.</p>
             </div>
         </section>
 
@@ -156,109 +74,117 @@
                 <div class="recipe-grid">
                     <!-- Recipe Card 1 -->
                     <article class="recipe-card">
-                        <div class="recipe-image">
+                        <div class="recipe-card__image">
                             <img src="https://via.placeholder.com/300x200/4ECDC4/FFFFFF?text=Adobo" 
-                                 alt="Chicken Adobo" 
-                                 class="recipe-photo">
-                            <div class="recipe-overlay">
+                                 alt="Chicken Adobo dish" 
+                                 class="recipe-card__photo">
+                            <div class="recipe-card__overlay">
                                 <div class="recipe-meta">
-                                    <span class="cooking-time">
-                                        <i class="fas fa-clock"></i> 45 mins
+                                    <span class="recipe-meta__time">
+                                        <i class="fas fa-clock" aria-hidden="true"></i>
+                                        <span class="sr-only">Cooking time:</span>
+                                        45 mins
                                     </span>
-                                    <span class="difficulty easy">Easy</span>
+                                    <span class="recipe-meta__difficulty recipe-meta__difficulty--easy">Easy</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="recipe-content">
-                            <h3 class="recipe-title">Recipe Name</h3>
-                            <p class="recipe-description">Description is placed here.</p>
+                        <div class="recipe-card__content">
+                            <h3 class="recipe-card__title">Recipe Name</h3>
+                            <p class="recipe-card__description">Description is placed here.</p>
                             <div class="recipe-tags">
-                                <span class="tag">Cuisine</span>
-                                <span class="tag">Meal Type</span>
-                                <span class="tag">Meat Type</span>
+                                <span class="recipe-tags__item">Cuisine</span>
+                                <span class="recipe-tags__item">Meal Type</span>
+                                <span class="recipe-tags__item">Meat Type</span>
                             </div>
-                            <a href="recipe-detail.html" class="recipe-link">View Recipe</a>
+                            <a href="recipe-detail.html" class="recipe-card__link">View Recipe</a>
                         </div>
                     </article>
 
                     <!-- Recipe Card 2 -->
                     <article class="recipe-card">
-                        <div class="recipe-image">
+                        <div class="recipe-card__image">
                             <img src="https://via.placeholder.com/300x200/FFE66D/FFFFFF?text=Pancakes" 
-                                 alt="Fluffy Pancakes" 
-                                 class="recipe-photo">
-                            <div class="recipe-overlay">
+                                 alt="Fluffy Pancakes stack" 
+                                 class="recipe-card__photo">
+                            <div class="recipe-card__overlay">
                                 <div class="recipe-meta">
-                                    <span class="cooking-time">
-                                        <i class="fas fa-clock"></i> 55 mins
+                                    <span class="recipe-meta__time">
+                                        <i class="fas fa-clock" aria-hidden="true"></i>
+                                        <span class="sr-only">Cooking time:</span>
+                                        55 mins
                                     </span>
-                                    <span class="difficulty medium">Medium</span>
+                                    <span class="recipe-meta__difficulty recipe-meta__difficulty--medium">Medium</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="recipe-content">
-                            <h3 class="recipe-title">Recipe Name</h3>
-                            <p class="recipe-description">Description is placed here.</p>
+                        <div class="recipe-card__content">
+                            <h3 class="recipe-card__title">Recipe Name</h3>
+                            <p class="recipe-card__description">Description is placed here.</p>
                             <div class="recipe-tags">
-                                <span class="tag">Cuisine</span>
-                                <span class="tag">Meal Type</span>
-                                <span class="tag">Meat Type</span>
+                                <span class="recipe-tags__item">Cuisine</span>
+                                <span class="recipe-tags__item">Meal Type</span>
+                                <span class="recipe-tags__item">Meat Type</span>
                             </div>
-                            <a href="recipe-detail.html" class="recipe-link">View Recipe</a>
+                            <a href="recipe-detail.html" class="recipe-card__link">View Recipe</a>
                         </div>
                     </article>
 
                     <!-- Recipe Card 3 -->
                     <article class="recipe-card">
-                        <div class="recipe-image">
+                        <div class="recipe-card__image">
                             <img src="https://via.placeholder.com/300x200/FF6B6B/FFFFFF?text=Salad" 
-                                 alt="Caesar Salad" 
-                                 class="recipe-photo">
-                            <div class="recipe-overlay">
+                                 alt="Caesar Salad bowl" 
+                                 class="recipe-card__photo">
+                            <div class="recipe-card__overlay">
                                 <div class="recipe-meta">
-                                    <span class="cooking-time">
-                                        <i class="fas fa-clock"></i> 30 mins
+                                    <span class="recipe-meta__time">
+                                        <i class="fas fa-clock" aria-hidden="true"></i>
+                                        <span class="sr-only">Cooking time:</span>
+                                        30 mins
                                     </span>
-                                    <span class="difficulty easy">Easy</span>
+                                    <span class="recipe-meta__difficulty recipe-meta__difficulty--easy">Easy</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="recipe-content">
-                            <h3 class="recipe-title">Recipe Name</h3>
-                            <p class="recipe-description">Description is placed here.</p>
+                        <div class="recipe-card__content">
+                            <h3 class="recipe-card__title">Recipe Name</h3>
+                            <p class="recipe-card__description">Description is placed here.</p>
                             <div class="recipe-tags">
-                                <span class="tag">Cuisine</span>
-                                <span class="tag">Meal Type</span>
-                                <span class="tag">Meat Type</span>
+                                <span class="recipe-tags__item">Cuisine</span>
+                                <span class="recipe-tags__item">Meal Type</span>
+                                <span class="recipe-tags__item">Meat Type</span>
                             </div>
-                            <a href="recipe-detail.html" class="recipe-link">View Recipe</a>
+                            <a href="recipe-detail.html" class="recipe-card__link">View Recipe</a>
                         </div>
                     </article>
 
                     <!-- Recipe Card 4 -->
                     <article class="recipe-card">
-                        <div class="recipe-image">
+                        <div class="recipe-card__image">
                             <img src="https://via.placeholder.com/300x200/95E1D3/FFFFFF?text=Pasta" 
-                                 alt="Creamy Pasta" 
-                                 class="recipe-photo">
-                            <div class="recipe-overlay">
+                                 alt="Creamy Pasta dish" 
+                                 class="recipe-card__photo">
+                            <div class="recipe-card__overlay">
                                 <div class="recipe-meta">
-                                    <span class="cooking-time">
-                                        <i class="fas fa-clock"></i> 1 hr
+                                    <span class="recipe-meta__time">
+                                        <i class="fas fa-clock" aria-hidden="true"></i>
+                                        <span class="sr-only">Cooking time:</span>
+                                        1 hr
                                     </span>
-                                    <span class="difficulty hard">Hard</span>
+                                    <span class="recipe-meta__difficulty recipe-meta__difficulty--hard">Hard</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="recipe-content">
-                            <h3 class="recipe-title">Recipe Name</h3>
-                            <p class="recipe-description">Description is placed here.</p>
+                        <div class="recipe-card__content">
+                            <h3 class="recipe-card__title">Recipe Name</h3>
+                            <p class="recipe-card__description">Description is placed here.</p>
                             <div class="recipe-tags">
-                                <span class="tag">Cuisine</span>
-                                <span class="tag">Meal Type</span>
-                                <span class="tag">Meat Type</span>
+                                <span class="recipe-tags__item">Cuisine</span>
+                                <span class="recipe-tags__item">Meal Type</span>
+                                <span class="recipe-tags__item">Meat Type</span>
                             </div>
-                            <a href="recipe-detail.html" class="recipe-link">View Recipe</a>
+                            <a href="recipe-detail.html" class="recipe-card__link">View Recipe</a>
                         </div>
                     </article>
                 </div>
@@ -266,11 +192,11 @@
         </section>
 
         <!-- Browse All Section -->
-        <section class="browse-all-section">
+        <section class="browse-section">
             <div class="container">
-                <div class="browse-all-button">
-                    <a href="recipes.html" class="back-button">
-                        <i class="fas fa-arrow-right"></i>
+                <div class="browse-section__content">
+                    <a href="recipes.html" class="btn btn--primary">
+                        <i class="fas fa-arrow-right btn__icon" aria-hidden="true"></i>
                         Browse All
                     </a>
                 </div>
@@ -278,45 +204,45 @@
         </section>
 
         <!-- Top Categories Section -->
-        <section class="top-categories">
+        <section class="categories">
             <div class="container">
                 <h2 class="section-title">Top Categories</h2>
-                <div class="categories-grid">
-                    <div class="category-box">
-                        <div class="category-icon">
-                            <i class="fas fa-utensils"></i>
+                <div class="categories__grid">
+                    <div class="category-card" role="button" tabindex="0">
+                        <div class="category-card__icon">
+                            <i class="fas fa-utensils" aria-hidden="true"></i>
                         </div>
-                        <h3 class="category-name">Pasta</h3>
+                        <h3 class="category-card__name">Pasta</h3>
                     </div>
-                    <div class="category-box">
-                        <div class="category-icon">
-                            <i class="fas fa-flag"></i>
+                    <div class="category-card" role="button" tabindex="0">
+                        <div class="category-card__icon">
+                            <i class="fas fa-flag" aria-hidden="true"></i>
                         </div>
-                        <h3 class="category-name">Filipino</h3>
+                        <h3 class="category-card__name">Filipino</h3>
                     </div>
-                    <div class="category-box">
-                        <div class="category-icon">
-                            <i class="fas fa-flag"></i>
+                    <div class="category-card" role="button" tabindex="0">
+                        <div class="category-card__icon">
+                            <i class="fas fa-flag" aria-hidden="true"></i>
                         </div>
-                        <h3 class="category-name">South Korean</h3>
+                        <h3 class="category-card__name">South Korean</h3>
                     </div>
-                    <div class="category-box">
-                        <div class="category-icon">
-                            <i class="fas fa-drumstick-bite"></i>
+                    <div class="category-card" role="button" tabindex="0">
+                        <div class="category-card__icon">
+                            <i class="fas fa-drumstick-bite" aria-hidden="true"></i>
                         </div>
-                        <h3 class="category-name">Chicken</h3>
+                        <h3 class="category-card__name">Chicken</h3>
                     </div>
-                    <div class="category-box">
-                        <div class="category-icon">
-                            <i class="fas fa-birthday-cake"></i>
+                    <div class="category-card" role="button" tabindex="0">
+                        <div class="category-card__icon">
+                            <i class="fas fa-birthday-cake" aria-hidden="true"></i>
                         </div>
-                        <h3 class="category-name">Dessert</h3>
+                        <h3 class="category-card__name">Dessert</h3>
                     </div>
-                    <div class="category-box">
-                        <div class="category-icon">
-                            <i class="fas fa-thumbs-up"></i>
+                    <div class="category-card" role="button" tabindex="0">
+                        <div class="category-card__icon">
+                            <i class="fas fa-thumbs-up" aria-hidden="true"></i>
                         </div>
-                        <h3 class="category-name">Easy</h3>
+                        <h3 class="category-card__name">Easy</h3>
                     </div>
                 </div>
             </div>
@@ -324,43 +250,43 @@
     </main>
 
     <!-- Footer -->
-    <footer class="main-footer">
+    <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Recipes 4 Keeps</h3>
-                    <p>Foods and recipes are treasures worth keeping...</p>
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3 class="footer__title">Recipes 4 Keeps</h3>
+                    <p class="footer__description">Foods and recipes are treasures worth keeping...</p>
                 </div>
                 
-                <div class="footer-section">
-                    <h3>Connect With Us</h3>
-                    <div class="footer-social">
-                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="Facebook">
-                            <i class="fab fa-facebook"></i>
+                <div class="footer__section">
+                    <h3 class="footer__title">Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-links__item" target="_blank" rel="noopener" aria-label="Follow us on Facebook">
+                            <i class="fab fa-facebook" aria-hidden="true"></i>
                         </a>
-                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
+                        <a href="#" class="social-links__item" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
                         </a>
-                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
+                        <a href="#" class="social-links__item" target="_blank" rel="noopener" aria-label="Follow us on Twitter">
+                            <i class="fab fa-twitter" aria-hidden="true"></i>
                         </a>
-                        <a href="#" class="footer-social-link" target="_blank" rel="noopener" aria-label="YouTube">
-                            <i class="fab fa-youtube"></i>
+                        <a href="#" class="social-links__item" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
+                            <i class="fab fa-youtube" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
             </div>
             
-            <div class="footer-bottom">
-                <div class="privacy-disclaimer">
-                    <p>
+            <div class="footer__bottom">
+                <div class="privacy-notice">
+                    <p class="privacy-notice__text">
                         <strong>Privacy Notice:</strong> We respect your privacy and do not collect 
                         personal information without your consent. Any information shared with us 
                         is used solely for improving your cooking experience.
                     </p>
                 </div>
                 <div class="copyright">
-                    <p>&copy; 2025 Recipes 4 Keeps. All rights reserved.</p>
+                    <p class="copyright__text">&copy; 2025 Recipes 4 Keeps. All rights reserved.</p>
                 </div>
             </div>
         </div>
