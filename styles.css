@@ -876,9 +876,10 @@ body {
     color: white;
 }
 
-.share-btn--twitter {
-    background: #1da1f2;
+.share-btn--x {
+    background: #000000;
     color: white;
+    padding: 0.8rem 1.2rem;
 }
 
 .share-btn--pinterest {
