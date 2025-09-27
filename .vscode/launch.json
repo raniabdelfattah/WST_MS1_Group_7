@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open about.html",
-            "file": "c:\\Users\\USER\\Downloads\\MS1 - HTML + CSS\\about.html"
+            "file": "c:\\Users\\USER\\Downloads\\MS1 - HTML + CSS\\index.html"
         }
     ]
 }
