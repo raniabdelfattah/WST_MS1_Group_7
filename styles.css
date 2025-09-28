@@ -823,7 +823,7 @@ body {
 }
 
 /* ==========================================================================
-   SHARED RECIPE CARD COMPONENT 
+   SHARED RECIPE CARD COMPONENT - UPDATED WITH ALIGNED CATEGORY TAGS
    ========================================================================== */
 
 .featured-recipes {
@@ -950,6 +950,7 @@ body {
     color: white;
 }
 
+/* UPDATED RECIPE CARD CONTENT WITH ALIGNED CATEGORY TAGS */
 .recipe-card__content {
     padding: 1.5rem;
     flex: 1;
@@ -963,21 +964,15 @@ body {
     margin-bottom: 0.8rem;
     font-weight: 600;
     line-height: 1.3;
-}
-
-.recipe-card__description {
-    color: #666;
-    margin-bottom: 1rem;
-    line-height: 1.5;
-    font-size: 0.95rem;
-    flex: 1;
+    order: 1; /* Title appears first */
 }
 
 .recipe-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
+    order: 2; /* Tags appear immediately after title for alignment */
 }
 
 .recipe-tags__item {
@@ -987,6 +982,15 @@ body {
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 500;
+}
+
+.recipe-card__description {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    font-size: 0.95rem;
+    flex: 1; /* Takes up remaining space, pushing button to bottom */
+    order: 3; /* Description appears after tags */
 }
 
 .recipe-card__link {
@@ -1003,7 +1007,8 @@ body {
     transition: all 0.3s ease;
     border: none;
     font-size: 0.95rem;
-    margin-top: auto;
+    margin-top: auto; /* Button stays at bottom */
+    order: 4; /* Button appears last */
 }
 
 .recipe-card__link:hover {
