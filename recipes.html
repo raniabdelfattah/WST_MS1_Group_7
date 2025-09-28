@@ -14,8 +14,7 @@
             <div class="navbar__container">
                 <div class="navbar__brand">
                     <a href="index.html" class="logo">
-                        <i class="fas fa-book-open logo__icon" aria-hidden="true"></i>
-                        <i class="fas fa-utensils logo__icon" aria-hidden="true"></i>
+                        <img src="images/Recipe4Keeps_White.png" alt="Recipes 4 Keeps Logo" class="logo__image">
                         <span class="logo__text">RECIPES 4 KEEPS</span>
                     </a>
                 </div>
@@ -70,33 +69,30 @@
             </div>
         </section>
 
-        <!-- Filter Section -->
+        <!-- Filter Section - Updated with 4 columns as requested -->
         <section class="filters">
             <div class="container">
                 <div class="filters__grid">
-                    <!-- Cuisine Type Filter -->
-                    <div class="filter-group">
-                        <h3 class="filter-group__title">Cuisine Type</h3>
-                        <div class="filter-group__items">
-                            <button class="filter-item" data-filter="filipino" type="button">Filipino</button>
-                            <button class="filter-item" data-filter="arab" type="button">Arab</button>
-                            <button class="filter-item" data-filter="japanese" type="button">Japanese</button>
-                            <button class="filter-item" data-filter="south-korean" type="button">South Korean</button>
-                            <button class="filter-item" data-filter="chinese" type="button">Chinese</button>
-                        </div>
-                    </div>
-
                     <!-- Meal Type Filter -->
                     <div class="filter-group">
                         <h3 class="filter-group__title">Meal Type</h3>
                         <div class="filter-group__items">
                             <button class="filter-item" data-filter="breakfast" type="button">Breakfast</button>
-                            <button class="filter-item" data-filter="lunch" type="button">Lunch</button>
-                            <button class="filter-item" data-filter="dinner" type="button">Dinner</button>
-                            <button class="filter-item" data-filter="main-course" type="button">Main Course</button>
+                            <button class="filter-item" data-filter="main-dish" type="button">Main Dish</button>
+                            <button class="filter-item" data-filter="side-dish" type="button">Side Dish</button>
                             <button class="filter-item" data-filter="dessert" type="button">Dessert</button>
-                            <button class="filter-item" data-filter="pasta" type="button">Pasta</button>
                             <button class="filter-item" data-filter="snack" type="button">Snack</button>
+                        </div>
+                    </div>
+
+                    <!-- Cuisine Type Filter -->
+                    <div class="filter-group">
+                        <h3 class="filter-group__title">Cuisine Type</h3>
+                        <div class="filter-group__items">
+                            <button class="filter-item" data-filter="american" type="button">American</button>
+                            <button class="filter-item" data-filter="asian" type="button">Asian</button>
+                            <button class="filter-item" data-filter="european" type="button">European</button>
+                            <button class="filter-item" data-filter="middle-eastern" type="button">Middle Eastern</button>
                         </div>
                     </div>
 
@@ -104,11 +100,10 @@
                     <div class="filter-group">
                         <h3 class="filter-group__title">Ingredient</h3>
                         <div class="filter-group__items">
-                            <button class="filter-item" data-filter="chicken" type="button">Chicken</button>
-                            <button class="filter-item" data-filter="fish" type="button">Fish</button>
-                            <button class="filter-item" data-filter="vegetables" type="button">Vegetables</button>
-                            <button class="filter-item" data-filter="beef" type="button">Beef</button>
-                            <button class="filter-item" data-filter="pork" type="button">Pork</button>
+                            <button class="filter-item" data-filter="meat" type="button">Meat</button>
+                            <button class="filter-item" data-filter="pantry" type="button">Pantry</button>
+                            <button class="filter-item" data-filter="seafood" type="button">Seafood</button>
+                            <button class="filter-item" data-filter="vegetable" type="button">Vegetable</button>
                         </div>
                     </div>
 
@@ -130,122 +125,124 @@
             <div class="container">
                 <h2 class="section-title section-title--left">Recommended Recipes</h2>
                 <div class="recipe-grid">
-                    <!-- Recipe Card 1 -->
+                    <!-- Recipe Card 1 - Maja Blanca -->
                     <article class="recipe-card">
                         <div class="recipe-card__image">
-                            <img src="https://via.placeholder.com/300x200/4ECDC4/FFFFFF?text=Recipe" 
-                                 alt="Recipe dish" 
+                            <img src="images/Maja Blanca.jpg" 
+                                 alt="Maja Blanca - Rich and creamy coconut pudding" 
                                  class="recipe-card__photo">
                             <div class="recipe-card__overlay">
                                 <div class="recipe-meta">
                                     <span class="recipe-meta__time">
                                         <i class="fas fa-clock" aria-hidden="true"></i>
-                                        <span class="sr-only">Cooking time:</span>
-                                        45 mins
+                                        <span class="sr-only">Total time:</span>
+                                        2h 15m
                                     </span>
                                     <span class="recipe-meta__difficulty recipe-meta__difficulty--easy">Easy</span>
                                 </div>
                             </div>
                         </div>
                         <div class="recipe-card__content">
-                            <h3 class="recipe-card__title">Recipe Name</h3>
-                            <p class="recipe-card__description">Description is placed here.</p>
+                            <h3 class="recipe-card__title">Maja Blanca</h3>
+                            <p class="recipe-card__description">Rich and creamy coconut pudding.</p>
                             <div class="recipe-tags">
-                                <span class="recipe-tags__item">Cuisine</span>
-                                <span class="recipe-tags__item">Meal Type</span>
-                                <span class="recipe-tags__item">Ingredient</span>
+                                <span class="recipe-tags__item">Asian</span>
+                                <span class="recipe-tags__item">Dessert</span>
                             </div>
                             <a href="recipe-detail.html" class="recipe-card__link">View Recipe</a>
                         </div>
                     </article>
 
-                    <!-- Recipe Card 2 -->
+                    <!-- Recipe Card 2 - Siu Mai -->
                     <article class="recipe-card">
                         <div class="recipe-card__image">
-                            <img src="https://via.placeholder.com/300x200/FFE66D/FFFFFF?text=Recipe" 
-                                 alt="Recipe dish" 
+                            <img src="images/Siu Mai.jpg" 
+                                 alt="Siu Mai - Cantonese dim sum with pork and shrimp filling" 
                                  class="recipe-card__photo">
                             <div class="recipe-card__overlay">
                                 <div class="recipe-meta">
                                     <span class="recipe-meta__time">
                                         <i class="fas fa-clock" aria-hidden="true"></i>
-                                        <span class="sr-only">Cooking time:</span>
-                                        45 mins
+                                        <span class="sr-only">Total time:</span>
+                                        37m
+                                    </span>
+                                    <span class="recipe-meta__difficulty recipe-meta__difficulty--medium">Medium</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe-card__content">
+                            <h3 class="recipe-card__title">Siu Mai (Shumai, 烧卖)</h3>
+                            <p class="recipe-card__description">Cantonese dim sum with pork and shrimp filling.</p>
+                            <div class="recipe-tags">
+                                <span class="recipe-tags__item">Asian</span>
+                                <span class="recipe-tags__item">Main Dish</span>
+                                <span class="recipe-tags__item">Side Dish</span>
+                            </div>
+                            <a href="recipe-detail.html" class="recipe-card__link">View Recipe</a>
+                        </div>
+                    </article>
+
+                    <!-- Recipe Card 3 - Japchae -->
+                    <article class="recipe-card">
+                        <div class="recipe-card__image">
+                            <img src="images/Japchae.png" 
+                                 alt="Japchae Korean Glass Noodles with vegetables in savory soy sauce" 
+                                 class="recipe-card__photo">
+                            <div class="recipe-card__overlay">
+                                <div class="recipe-meta">
+                                    <span class="recipe-meta__time">
+                                        <i class="fas fa-clock" aria-hidden="true"></i>
+                                        <span class="sr-only">Total time:</span>
+                                        35m
+                                    </span>
+                                    <span class="recipe-meta__difficulty recipe-meta__difficulty--medium">Medium</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe-card__content">
+                            <h3 class="recipe-card__title">Japchae Korean Glass Noodles</h3>
+                            <p class="recipe-card__description">Sweet potato noodles with vegetables in savory soy sauce.</p>
+                            <div class="recipe-tags">
+                                <span class="recipe-tags__item">Asian</span>
+                                <span class="recipe-tags__item">Main Dish</span>
+                                <span class="recipe-tags__item">Side Dish</span>
+                            </div>
+                            <a href="recipe-detail.html" class="recipe-card__link">View Recipe</a>
+                        </div>
+                    </article>
+
+                    <!-- Recipe Card 4 - Bok Choy -->
+                    <article class="recipe-card">
+                        <div class="recipe-card__image">
+                            <img src="images/Stir-Fry Garlic Bok Choy with Mushroom.jpg" 
+                                 alt="Stir-Fry Garlic Bok Choy with Mushroom dish" 
+                                 class="recipe-card__photo">
+                            <div class="recipe-card__overlay">
+                                <div class="recipe-meta">
+                                    <span class="recipe-meta__time">
+                                        <i class="fas fa-clock" aria-hidden="true"></i>
+                                        <span class="sr-only">Total time:</span>
+                                        23m
                                     </span>
                                     <span class="recipe-meta__difficulty recipe-meta__difficulty--easy">Easy</span>
                                 </div>
                             </div>
                         </div>
                         <div class="recipe-card__content">
-                            <h3 class="recipe-card__title">Recipe Name</h3>
-                            <p class="recipe-card__description">Description is placed here.</p>
+                            <h3 class="recipe-card__title">Stir-Fry Garlic Bok Choy with Mushroom</h3>
+                            <p class="recipe-card__description">Bokchoy with earthy mushrooms, and fragrant garlic.</p>
                             <div class="recipe-tags">
-                                <span class="recipe-tags__item">Cuisine</span>
-                                <span class="recipe-tags__item">Meal Type</span>
-                                <span class="recipe-tags__item">Ingredient</span>
+                                <span class="recipe-tags__item">Asian</span>
+                                <span class="recipe-tags__item">Main Dish</span>
+                                <span class="recipe-tags__item">Side Dish</span>
                             </div>
                             <a href="recipe-detail.html" class="recipe-card__link">View Recipe</a>
                         </div>
                     </article>
-
-                    <!-- Recipe Card 3 -->
-                    <article class="recipe-card">
-                        <div class="recipe-card__image">
-                            <img src="https://via.placeholder.com/300x200/FF6B6B/FFFFFF?text=Recipe" 
-                                 alt="Recipe dish" 
-                                 class="recipe-card__photo">
-                            <div class="recipe-card__overlay">
-                                <div class="recipe-meta">
-                                    <span class="recipe-meta__time">
-                                        <i class="fas fa-clock" aria-hidden="true"></i>
-                                        <span class="sr-only">Cooking time:</span>
-                                        45 mins
-                                    </span>
-                                    <span class="recipe-meta__difficulty recipe-meta__difficulty--easy">Easy</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="recipe-card__content">
-                            <h3 class="recipe-card__title">Recipe Name</h3>
-                            <p class="recipe-card__description">Description is placed here.</p>
-                            <div class="recipe-tags">
-                                <span class="recipe-tags__item">Cuisine</span>
-                                <span class="recipe-tags__item">Meal Type</span>
-                                <span class="recipe-tags__item">Ingredient</span>
-                            </div>
-                            <a href="recipe-detail.html" class="recipe-card__link">View Recipe</a>
-                        </div>
-                    </article>
-
-                    <!-- Recipe Card 4 -->
-                    <article class="recipe-card">
-                        <div class="recipe-card__image">
-                            <img src="https://via.placeholder.com/300x200/95E1D3/FFFFFF?text=Recipe" 
-                                 alt="Recipe dish" 
-                                 class="recipe-card__photo">
-                            <div class="recipe-card__overlay">
-                                <div class="recipe-meta">
-                                    <span class="recipe-meta__time">
-                                        <i class="fas fa-clock" aria-hidden="true"></i>
-                                        <span class="sr-only">Cooking time:</span>
-                                        45 mins
-                                    </span>
-                                    <span class="recipe-meta__difficulty recipe-meta__difficulty--easy">Easy</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="recipe-card__content">
-                            <h3 class="recipe-card__title">Recipe Name</h3>
-                            <p class="recipe-card__description">Description is placed here.</p>
-                            <div class="recipe-tags">
-                                <span class="recipe-tags__item">Cuisine</span>
-                                <span class="recipe-tags__item">Meal Type</span>
-                                <span class="recipe-tags__item">Ingredient</span>
-                            </div>
-                            <a href="recipe-detail.html" class="recipe-card__link">View Recipe</a>
-                        </div>
-                    </article>
-
+                </div>
+                
+                <!-- Second Row of Recipe Cards -->
+                <div class="recipe-grid">
                     <!-- Recipe Card 5 -->
                     <article class="recipe-card">
                         <div class="recipe-card__image">
@@ -269,7 +266,6 @@
                             <div class="recipe-tags">
                                 <span class="recipe-tags__item">Cuisine</span>
                                 <span class="recipe-tags__item">Meal Type</span>
-                                <span class="recipe-tags__item">Ingredient</span>
                             </div>
                             <a href="recipe-detail.html" class="recipe-card__link">View Recipe</a>
                         </div>
@@ -298,7 +294,6 @@
                             <div class="recipe-tags">
                                 <span class="recipe-tags__item">Cuisine</span>
                                 <span class="recipe-tags__item">Meal Type</span>
-                                <span class="recipe-tags__item">Ingredient</span>
                             </div>
                             <a href="recipe-detail.html" class="recipe-card__link">View Recipe</a>
                         </div>
@@ -327,7 +322,6 @@
                             <div class="recipe-tags">
                                 <span class="recipe-tags__item">Cuisine</span>
                                 <span class="recipe-tags__item">Meal Type</span>
-                                <span class="recipe-tags__item">Ingredient</span>
                             </div>
                             <a href="recipe-detail.html" class="recipe-card__link">View Recipe</a>
                         </div>
@@ -356,7 +350,6 @@
                             <div class="recipe-tags">
                                 <span class="recipe-tags__item">Cuisine</span>
                                 <span class="recipe-tags__item">Meal Type</span>
-                                <span class="recipe-tags__item">Ingredient</span>
                             </div>
                             <a href="recipe-detail.html" class="recipe-card__link">View Recipe</a>
                         </div>
