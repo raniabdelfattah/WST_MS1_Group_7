@@ -239,7 +239,7 @@ body {
 .browse-section {
     display: flex;
     justify-content: center;
-    margin: 40px 0;
+    margin: 0 0 40px 0;
 }
 
 .browse-section__content {
@@ -477,8 +477,8 @@ body {
 .recipe-detail__header {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 3rem;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
     align-items: start;
 }
 
@@ -576,10 +576,10 @@ body {
 }
 
 .recipe-content-grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 3rem;
-    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
 /* Ingredients Section - Recipe detail page */
@@ -587,6 +587,7 @@ body {
     background: #f8f9fa;
     padding: 2rem;
     border-radius: 15px;
+    width: 100%;
 }
 
 .ingredients__title {
@@ -644,6 +645,7 @@ body {
     background: #f8f9fa;
     padding: 2rem;
     border-radius: 15px;
+    width: 100%;
 }
 
 .instructions__title {
@@ -1644,7 +1646,11 @@ body {
     }
 
     .recipe-meta-grid {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 0;
+        margin-bottom: 1rem
     }
 
     .filters__grid {
