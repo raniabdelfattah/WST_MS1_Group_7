@@ -19,13 +19,51 @@
                     </a>
                 </div>
                 
-                <!-- Hidden checkbox for mobile menu toggle -->
-                <input type="checkbox" id="nav-toggle" class="navbar__toggle-input">
+                <!-- Bootstrap Offcanvas Toggle Button -->
+                <button class="navbar__toggle" 
+                        type="button" 
+                        data-bs-toggle="offcanvas" 
+                        data-bs-target="#nav-menu"
+                        aria-controls="nav-menu"
+                        aria-label="Toggle navigation menu">
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                </button>
                 
-                <nav class="navbar__menu" id="nav-menu" aria-label="Main navigation">
+                <!-- Bootstrap Offcanvas Menu -->
+                <div class="navbar__menu offcanvas offcanvas-start" 
+                    id="nav-menu" 
+                    tabindex="-1"
+                    aria-labelledby="offcanvasNavLabel">
+                    
+                    <!-- Offcanvas Close Button -->
+                    <button type="button" 
+                            class="offcanvas-close" 
+                            data-bs-dismiss="offcanvas" 
+                            aria-label="Close menu">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    
+                    <!-- Mobile Search Bar (shows in hamburger menu on mobile) -->
+                    <div class="search mobile-search">
+                        <form class="search__form" role="search">
+                            <label for="mobile-search-input" class="sr-only">Search recipes</label>
+                            <input type="search" 
+                                id="mobile-search-input"
+                                class="search__input" 
+                                placeholder="Search a recipe..." 
+                                aria-label="Search recipes">
+                            <button type="submit" class="search__button" aria-label="Search">
+                                <i class="fas fa-search" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Navigation Links -->
                     <ul class="navbar__list">
                         <li class="navbar__item">
-                            <a href="index.html" class="navbar__link">Home</a>
+                            <a href="index.html" class="navbar__link navbar__link--active" aria-current="page">Home</a>
                         </li>
                         <li class="navbar__item">
                             <a href="recipes.html" class="navbar__link">Recipes</a>
@@ -34,27 +72,22 @@
                             <a href="about.html" class="navbar__link">About</a>
                         </li>
                     </ul>
-                </nav>
+                </div>
                 
-                <div class="search">
+                <!-- Desktop Search Bar (visible on larger screens) -->
+                <div class="search desktop-search">
                     <form class="search__form" role="search">
-                        <label for="recipe-search-input" class="sr-only">Search recipes</label>
+                        <label for="search-input" class="sr-only">Search recipes</label>
                         <input type="search" 
-                               id="recipe-search-input"
-                               class="search__input" 
-                               placeholder="Search a recipe..." 
-                               aria-label="Search recipes">
+                            id="search-input"
+                            class="search__input" 
+                            placeholder="Search a recipe..." 
+                            aria-label="Search recipes">
                         <button type="submit" class="search__button" aria-label="Search">
                             <i class="fas fa-search" aria-hidden="true"></i>
                         </button>
                     </form>
                 </div>
-                
-                <label for="nav-toggle" class="navbar__toggle" aria-label="Toggle navigation menu">
-                    <span class="hamburger"></span>
-                    <span class="hamburger"></span>
-                    <span class="hamburger"></span>
-                </label>
             </div>
         </nav>
     </header>
@@ -79,7 +112,23 @@
                             <p class="recipe-info__description">Japchae is one of those dishes I've been dying to try ever since falling in love with K-Dramas! When I finally tasted it at a buffet restaurant, I was completely hooked. While you can grab japchae from 7/11 stores, I found that the portions are never quite enough and it's so much more economical to make it at home when I want a larger serving. This colorful Korean noodle dish is sort of a stir-fry, sort of a noodle salad - it's tossed together in a bowl rather than cooked on the stove and served barely warm. The chewy, slippery sweet potato noodles combined with tender beef and vibrant vegetables create the perfect comfort food that makes amazing leftovers for lunch too!</p>
                         </div>
                     </header>
-                    
+
+                    <!-- Recipe Metadata - Published Date and Author -->
+                    <div class="recipe-author-meta">
+                    <div class="recipe-published">
+                        <div class="recipe-published__row">
+                        <i class="fas fa-calendar-alt recipe-published__icon" aria-hidden="true"></i>
+                        <span class="recipe-published__label">Published:</span>
+                        <span class="recipe-published__date">October 17, 2025</span>
+                        </div>
+                        <div class="recipe-author__row">
+                        <i class="fas fa-user-circle recipe-author__icon" aria-hidden="true"></i>
+                        <span class="recipe-author__label">Recipe by:</span>
+                        <span class="recipe-author__name">Helena Tantoco</span>
+                        </div>
+                    </div>
+                    </div>
+
                     <!-- Recipe Metadata - Moved below header -->
                     <div class="recipe-meta-grid">
                         <div class="recipe-meta-item">
@@ -395,5 +444,9 @@
             </div>
         </div>
     </footer>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+    crossorigin="anonymous"></script>
 </body>
 </html>

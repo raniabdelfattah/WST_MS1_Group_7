@@ -19,42 +19,75 @@
                     </a>
                 </div>
                 
-                <!-- Hidden checkbox for mobile menu toggle -->
-                <input type="checkbox" id="nav-toggle" class="navbar__toggle-input">
+                <!-- Bootstrap Offcanvas Toggle Button -->
+                <button class="navbar__toggle" 
+                        type="button" 
+                        data-bs-toggle="offcanvas" 
+                        data-bs-target="#nav-menu"
+                        aria-controls="nav-menu"
+                        aria-label="Toggle navigation menu">
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                </button>
                 
-                <nav class="navbar__menu" id="nav-menu" aria-label="Main navigation">
+                <!-- Bootstrap Offcanvas Menu -->
+                <div class="navbar__menu offcanvas offcanvas-start" 
+                    id="nav-menu" 
+                    tabindex="-1"
+                    aria-labelledby="offcanvasNavLabel">
+                    
+                    <!-- Offcanvas Close Button -->
+                    <button type="button" 
+                            class="offcanvas-close" 
+                            data-bs-dismiss="offcanvas" 
+                            aria-label="Close menu">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    
+                    <!-- Mobile Search Bar (shows in hamburger menu on mobile) -->
+                    <div class="search mobile-search">
+                        <form class="search__form" role="search">
+                            <label for="mobile-search-input" class="sr-only">Search recipes</label>
+                            <input type="search" 
+                                id="mobile-search-input"
+                                class="search__input" 
+                                placeholder="Search a recipe..." 
+                                aria-label="Search recipes">
+                            <button type="submit" class="search__button" aria-label="Search">
+                                <i class="fas fa-search" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Navigation Links -->
                     <ul class="navbar__list">
                         <li class="navbar__item">
-                            <a href="index.html" class="navbar__link">Home</a>
+                            <a href="index.html" class="navbar__link navbar__link--active" aria-current="page">Home</a>
                         </li>
                         <li class="navbar__item">
                             <a href="recipes.html" class="navbar__link">Recipes</a>
                         </li>
                         <li class="navbar__item">
-                            <a href="about.html" class="navbar__link navbar__link--active" aria-current="page">About</a>
+                            <a href="about.html" class="navbar__link">About</a>
                         </li>
                     </ul>
-                </nav>
+                </div>
                 
-                <div class="search">
+                <!-- Desktop Search Bar (visible on larger screens) -->
+                <div class="search desktop-search">
                     <form class="search__form" role="search">
-                        <label for="about-search-input" class="sr-only">Search recipes</label>
+                        <label for="search-input" class="sr-only">Search recipes</label>
                         <input type="search" 
-                               id="about-search-input"
-                               class="search__input" 
-                               placeholder="Search a recipe..." 
-                               aria-label="Search recipes">
+                            id="search-input"
+                            class="search__input" 
+                            placeholder="Search a recipe..." 
+                            aria-label="Search recipes">
                         <button type="submit" class="search__button" aria-label="Search">
                             <i class="fas fa-search" aria-hidden="true"></i>
                         </button>
                     </form>
                 </div>
-                
-                <label for="nav-toggle" class="navbar__toggle" aria-label="Toggle navigation menu">
-                    <span class="hamburger"></span>
-                    <span class="hamburger"></span>
-                    <span class="hamburger"></span>
-                </label>
             </div>
         </nav>
     </header>
@@ -202,5 +235,9 @@
             </div>
         </div>
     </footer>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+    crossorigin="anonymous"></script>
 </body>
 </html>

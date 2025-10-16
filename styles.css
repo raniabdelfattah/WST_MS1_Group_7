@@ -1,4 +1,9 @@
 /* ==========================================================================
+// RECIPES 4 KEEPS - MAIN CSS FILE
+// Handles the styling and design of the HTML pages
+// ==========================================================================*/
+
+/* ==========================================================================
    RESET AND BASE STYLES
    ========================================================================== */
 
@@ -46,7 +51,7 @@ body {
 }
 
 /* ==========================================================================
-   SHARED HEADER COMPONENT - Consistent colors and logo support
+   SHARED HEADER COMPONENT 
    ========================================================================== */
 
 .header {
@@ -208,7 +213,7 @@ body {
    HOMEPAGE SPECIFIC STYLES
    ========================================================================== */
 
-/* Hero Section - ORIGINAL GITHUB GRADIENT */
+/* Hero Section */
 .hero {
     background: linear-gradient(135deg, #ff6b35, #f7931e, #ffcc02);
     color: white;
@@ -221,7 +226,7 @@ body {
     margin: 0 auto;
 }
 
-/* Hero Section - RESTORED ORIGINAL STYLING */
+/* Hero Section */
 .hero__title {
     font-size: 3rem;
     margin-bottom: 1rem;
@@ -293,7 +298,7 @@ body {
    RECIPES PAGE SPECIFIC STYLES
    ========================================================================== */
 
-/* Page Header - ORIGINAL GITHUB GRADIENT */
+/* Page Header */
 .page-header {
     background: linear-gradient(135deg, #ff6b35, #f7931e, #ffcc02);
     padding: 60px 0;
@@ -317,7 +322,7 @@ body {
     margin-bottom: 40px;
 }
 
-/* Filter Section - Updated for better layout matching reference */
+/* Filter Section */
 .filters {
     background: white;
     padding: 2rem 0;
@@ -376,8 +381,18 @@ body {
 }
 
 .filter-item.active {
-    background: linear-gradient(135deg, #ffcc02, #ff6b35);
-    box-shadow: 0 2px 4px rgba(255, 107, 53, 0.5);
+    background: white !important;
+    color: #ff6b35 !important;
+    border: 4px solid #ff6b35;
+    box-shadow: 0 0 0 2px #ffcc02,
+                0 4px 12px rgba(255, 107, 53, 0.5);
+    transform: scale(1.08);
+    font-weight: 900;
+}
+
+.filter-item.active::after {
+    content: ' ✓';
+    font-weight: bold;
 }
 
 /* ==========================================================================
@@ -511,6 +526,70 @@ body {
     margin-bottom: 2rem;
     line-height: 1.8;
 }
+
+/* Recipe Author Metadata Container */
+.recipe-author-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #CD853F;
+}
+
+/* Recipe Author and Published Date Metadata Rows */
+.recipe-published__row,
+.recipe-author__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem; /* Unified text size */
+  margin-bottom: 0.5rem;
+}
+
+/* Recipe Author and Published Date Icons */
+.recipe-published__icon {
+  color: #CD853F;
+  font-size: 2rem; 
+  flex-shrink: 0;     /* Prevent icon from shrinking */
+}
+.recipe-author__icon {
+  color: #CD853F;
+  font-size: 1.1rem; /* Unified icon size */
+}
+
+/* Recipe Author and Published Date Labels */
+.recipe-published__label,
+.recipe-author__label {
+  font-size: 0.85rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Recipe Author and Published Date Values */
+.recipe-published__date,
+.recipe-author__name {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Recipe Author and Published Date - Mobile Responsive */
+@media (max-width: 767px) {
+  .recipe-author-meta {
+    padding: 1rem;
+  }
+
+  .recipe-published__row,
+  .recipe-author__row {
+    flex-wrap: wrap;
+  }
+}
+
+
 
 .recipe-meta-grid {
     display: grid;
@@ -825,7 +904,7 @@ body {
 }
 
 /* ==========================================================================
-   SHARED RECIPE CARD COMPONENT - UPDATED WITH ALIGNED CATEGORY TAGS
+   SHARED RECIPE CARD COMPONENT 
    ========================================================================== */
 
 .featured-recipes {
@@ -865,7 +944,7 @@ body {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    transition: all 0.4s ease, transform 0.2s ease;
     position: relative;
     width: 100%;
     min-height: 420px;
@@ -875,7 +954,7 @@ body {
 }
 
 .recipe-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) !important;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
@@ -894,7 +973,7 @@ body {
 }
 
 .recipe-card:hover .recipe-card__photo {
-    transform: scale(1.05);
+    transform: scale(1.05) !important;
 }
 
 .recipe-card__overlay {
@@ -952,7 +1031,7 @@ body {
     color: white;
 }
 
-/* UPDATED RECIPE CARD CONTENT WITH ALIGNED CATEGORY TAGS */
+/* RECIPE CARD CONTENT WITH ALIGNED CATEGORY TAGS */
 .recipe-card__content {
     padding: 1.5rem;
     flex: 1;
@@ -1730,6 +1809,48 @@ body {
 }
 
 /* ==========================================================================
+   MOBILE SEARCH BAR IN HAMBURGER MENU
+   ========================================================================== */
+
+/* Hide mobile search on desktop */
+.mobile-search {
+    display: none;
+}
+
+/* Show desktop search on desktop */
+.desktop-search {
+    display: flex;
+}
+
+/* Mobile menu styles for search */
+@media (max-width: 767px) {
+    /* Hide desktop search on mobile */
+    .desktop-search {
+        display: none !important;
+    }
+    
+    /* Show mobile search in hamburger menu */
+    .mobile-search {
+        display: flex !important;
+        width: 100%;
+        padding: 0 2rem;
+        margin-bottom: 2rem;
+        order: -1; /* Place search at the top of menu */
+    }
+    
+    .navbar__menu .mobile-search .search__form {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    /* Ensure the navbar menu shows search when open */
+    .navbar__toggle-input:checked ~ .navbar__menu .mobile-search {
+        display: flex !important;
+    }
+}
+
+
+/* ==========================================================================
    ACCESSIBILITY AND SPECIAL FEATURES
    ========================================================================== */
 
@@ -1845,4 +1966,148 @@ body {
 
 .skip-link:focus {
     top: 6px;
+}
+
+/* ==========================================================================
+   Bootstrap Offcanvas Override - Keep Current CSS Design
+   ========================================================================== */
+
+.offcanvas {
+    background: linear-gradient(135deg, #D2691E, #CD853F) !important;
+    border: none !important;
+    width: 100% !important;
+}
+
+.offcanvas-start {
+    top: 0 !important;
+    left: 0 !important;
+}
+
+/* Close button styling to match current CSS design */
+.offcanvas-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1001;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.offcanvas-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Keep current mobile menu styles */
+@media (max-width: 767px) {
+    /* Show the offcanvas content properly */
+    .navbar__menu.offcanvas {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 4rem 2rem;
+        visibility: hidden; /* Hidden by default */
+        transform: translateX(-100%); /* Off screen */
+        transition: transform 0.3s ease, visibility 0.3s ease;
+    }
+    
+    /* When Bootstrap adds .show class, make it visible */
+    .navbar__menu.offcanvas.show {
+        visibility: visible !important;
+        transform: translateX(0) !important;
+    }
+    
+    /* Ensure navbar list is visible */
+    .navbar__list {
+        display: flex !important;
+        flex-direction: column;
+        gap: 2rem;
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* Ensure nav links are styled properly */
+    .navbar__link {
+        display: block;
+        padding: 1.5rem 2rem;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 0 2rem;
+    }
+
+    .navbar__link:hover,
+    .navbar__link--active {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    /* Mobile search styling */
+    .mobile-search {
+        display: flex !important;
+        width: 100%;
+        padding: 0 2rem;
+        margin-bottom: 2rem;
+        order: -1;
+    }
+    
+    .navbar__menu .mobile-search .search__form {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .navbar__toggle {
+        display: flex;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        flex-direction: column;
+        gap: 4px;
+        padding: 0.5rem;
+        z-index: 1001;
+    }
+}
+
+
+/* Hide when offcanvas has .show class */
+body:has(.offcanvas.show) .navbar__toggle {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+/* Desktop - disable offcanvas */
+@media (min-width: 768px) {
+    .offcanvas {
+        position: static !important;
+        transform: none !important;
+        visibility: visible !important;
+        background: none !important;
+        width: auto !important;
+    }
+    
+    .offcanvas-close {
+        display: none;
+    }
+    
+    .navbar__menu {
+        display: flex;
+        align-items: center;
+    }
+    
+    .navbar__list {
+        display: flex !important;
+        flex-direction: row !important;
+    }
 }
