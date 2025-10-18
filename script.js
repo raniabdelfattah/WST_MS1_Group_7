@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ==========================================================================
-    // SEARCH FUNCTIONALITY 
+    // SEARCH FUNCTIONALITY - WITH REDIRECT TO RECIPES PAGE
     // ==========================================================================
     
     const searchForms = document.querySelectorAll('.search__form');
@@ -46,14 +46,55 @@ document.addEventListener('DOMContentLoaded', function() {
             const searchTerm = searchInput.value.trim().toLowerCase();
             
             if (searchTerm) {
-                searchRecipes(searchTerm);
+                // Store search term in sessionStorage
+                sessionStorage.setItem('searchTerm', searchTerm);
+                
+                // If not on recipes page, redirect to it
+                if (!window.location.pathname.includes('recipes.html')) {
+                    window.location.href = 'recipes.html';
+                } else {
+                    // Already on recipes page, perform search
+                    performSearch(searchTerm);
+                }
+                
+                // Close offcanvas menu if open
+                const offcanvasInstance = bootstrap.Offcanvas.getInstance(navMenu);
+                if (offcanvasInstance) {
+                    offcanvasInstance.hide();
+                }
             }
         });
     });
     
-    function searchRecipes(term) {
+    // Check if there's a search term when recipes page loads
+    if (window.location.pathname.includes('recipes.html')) {
+        const searchTerm = sessionStorage.getItem('searchTerm');
+        if (searchTerm) {
+            // Populate search inputs with the term
+            document.querySelectorAll('.search__input').forEach(input => {
+                input.value = searchTerm;
+            });
+            // Perform the search
+            performSearch(searchTerm);
+            // Clear the stored search term
+            sessionStorage.removeItem('searchTerm');
+        }
+        
+        // Also check for category filter from homepage
+        const selectedCategory = sessionStorage.getItem('selectedCategory');
+        if (selectedCategory) {
+            sessionStorage.removeItem('selectedCategory');
+            const matchingFilter = document.querySelector(`[data-filter="${selectedCategory}"]`);
+            if (matchingFilter) {
+                matchingFilter.click();
+            }
+        }
+    }
+    
+    function performSearch(term) {
         const recipeCards = document.querySelectorAll('.recipe-card');
         let foundCount = 0;
+        const foundRecipes = [];
         
         recipeCards.forEach(card => {
             const title = card.querySelector('.recipe-card__title')?.textContent.toLowerCase() || '';
@@ -64,70 +105,76 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Search in title, description, and tags
             if (title.includes(term) || description.includes(term) || tags.includes(term)) {
-                /* let CSS control layout; avoid forcing inline display */
-                card.style.display = '';
                 foundCount++;
-                // Add highlight effect
-                card.classList.add('search-highlight');
-                setTimeout(() => card.classList.remove('search-highlight'), 1000);
-            } else {
-                card.style.display = 'none';
+                foundRecipes.push(card.cloneNode(true));
             }
         });
         
-        // Show search results message
-        showSearchMessage(term, foundCount);
+        // Show search results message and cards
+        showSearchResults(term, foundCount, foundRecipes);
     }
     
-    function showSearchMessage(term, count) {
-        // Remove existing message
-        const existingMsg = document.querySelector('.search-message');
-        if (existingMsg) existingMsg.remove();
+    function showSearchResults(term, count, recipes) {
+        // Remove existing search results section
+        const existingSection = document.querySelector('.search-results-section');
+        if (existingSection) existingSection.remove();
         
-        // Create new message
-        const message = document.createElement('div');
-        message.className = 'search-message';
-        message.innerHTML = `
-            <div class="search-message__content">
-                <strong>Search Results:</strong> Found ${count} recipe(s) for "${term}"
-                ${count === 0 ? '<br><small>Try searching for different keywords or clear the search.</small>' : ''}
+        // Create search results section
+        const resultsSection = document.createElement('section');
+        resultsSection.className = 'search-results-section';
+        resultsSection.innerHTML = `
+            <div class="container">
+                <div class="search-message">
+                    <div class="search-message__content">
+                        <strong>Search Results:</strong> Found ${count} recipe(s) for "${term}"
+                        ${count === 0 ? '<br><small>Try searching for different keywords or <button class="clear-search-link" onclick="clearSearch()">clear the search</button>.</small>' : ''}
+                    </div>
+                    <button class="search-message__close" onclick="clearSearch()" aria-label="Clear search">
+                        ×
+                    </button>
+                </div>
+                ${count > 0 ? '<div class="recipe-grid search-results-grid"></div>' : ''}
             </div>
-            <button class="search-message__close" onclick="clearSearch()" aria-label="Clear search">
-                ×
-            </button>
         `;
         
-        // Insert message before recipe grid
-        const recipeSection = document.querySelector('.featured-recipes .container');
-        if (recipeSection) {
-            const firstChild = recipeSection.querySelector('.section-title') || recipeSection.firstChild;
-            if (firstChild && firstChild.nextSibling) {
-                recipeSection.insertBefore(message, firstChild.nextSibling);
-            } else {
-                recipeSection.insertBefore(message, recipeSection.firstChild);
+        // Insert before the recommended recipes section
+        const featuredSection = document.querySelector('.featured-recipes');
+        if (featuredSection) {
+            featuredSection.parentNode.insertBefore(resultsSection, featuredSection);
+            
+            // Add found recipe cards to the search results grid
+            if (count > 0) {
+                const resultsGrid = resultsSection.querySelector('.search-results-grid');
+                recipes.forEach(card => {
+                    resultsGrid.appendChild(card);
+                });
             }
+            
+            // Scroll to search results
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
     
     // Clear search function (global)
     window.clearSearch = function() {
-        const recipeCards = document.querySelectorAll('.recipe-card');
-        recipeCards.forEach(card => {
-            /* let CSS control layout */
-            card.style.display = '';
-        });
+        // Remove search results section
+        const existingSection = document.querySelector('.search-results-section');
+        if (existingSection) existingSection.remove();
+        
         // Clear search inputs
         document.querySelectorAll('.search__input').forEach(input => input.value = '');
-        // Remove message
-        const existingMsg = document.querySelector('.search-message');
-        if (existingMsg) existingMsg.remove();
+        
         // Clear any active filters
         document.querySelectorAll('.filter-item.active').forEach(btn => btn.classList.remove('active'));
         activeFilters.clear();
+        
+        // Remove filter results section
+        const filterSection = document.querySelector('.filter-results-section');
+        if (filterSection) filterSection.remove();
     };
     
     // ==========================================================================
-    // FILTER FUNCTIONALITY 
+    // FILTER FUNCTIONALITY - WITH RESULTS ABOVE RECOMMENDED
     // ==========================================================================
     
     const filterButtons = document.querySelectorAll('.filter-item');
@@ -152,17 +199,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     function applyFilters() {
-        const recipeCards = document.querySelectorAll('.recipe-card');
+        const recipeCards = document.querySelectorAll('.featured-recipes .recipe-card');
         let visibleCount = 0;
+        const filteredRecipes = [];
         
         if (activeFilters.size === 0) {
-            // Show all recipes if no filters active
-            recipeCards.forEach(card => {
-                /* let CSS decide layout */
-                card.style.display = '';
-                visibleCount++;
-            });
-            removeFilterMessage();
+            // Remove filter results section
+            const filterSection = document.querySelector('.filter-results-section');
+            if (filterSection) filterSection.remove();
         } else {
             recipeCards.forEach(card => {
                 // Get all tags from the card
@@ -187,60 +231,75 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 if (matches) {
-                    card.style.display = '';
                     visibleCount++;
-                } else {
-                    card.style.display = 'none';
+                    filteredRecipes.push(card.cloneNode(true));
                 }
             });
             
-            // Show filter message
-            showFilterMessage(visibleCount);
+            // Show filter results
+            showFilterResults(visibleCount, filteredRecipes);
         }
         
         // Announce to screen readers
         announceToScreenReader(`Showing ${visibleCount} recipes`);
     }
     
-    function showFilterMessage(count) {
-        // Remove existing message
-        removeFilterMessage();
+    function showFilterResults(count, recipes) {
+        // Remove existing filter results section
+        const existingSection = document.querySelector('.filter-results-section');
+        if (existingSection) existingSection.remove();
         
-        // Create new message
-        const message = document.createElement('div');
-        message.className = 'search-message filter-message';
-        message.innerHTML = `
-            <div class="search-message__content">
-                <strong>Filter Results:</strong> Showing ${count} recipe(s)
-                ${count === 0 ? '<br><small>No recipes match the selected filters. Try different combinations.</small>' : ''}
+        // Create filter results section
+        const resultsSection = document.createElement('section');
+        resultsSection.className = 'filter-results-section';
+        
+        // Get active filter names
+        const activeFilterNames = Array.from(activeFilters).map(filter => {
+            const btn = document.querySelector(`[data-filter="${filter}"]`);
+            return btn ? btn.textContent : filter;
+        }).join(', ');
+        
+        resultsSection.innerHTML = `
+            <div class="container">
+                <div class="search-message filter-message">
+                    <div class="search-message__content">
+                        <strong>Filter Results:</strong> Showing ${count} recipe(s) for: ${activeFilterNames}
+                        ${count === 0 ? '<br><small>No recipes match the selected filters. Try different combinations or <button class="clear-search-link" onclick="clearAllFilters()">clear filters</button>.</small>' : ''}
+                    </div>
+                    <button class="search-message__close" onclick="clearAllFilters()" aria-label="Clear filters">
+                        ×
+                    </button>
+                </div>
+                ${count > 0 ? '<div class="recipe-grid filter-results-grid"></div>' : ''}
             </div>
-            <button class="search-message__close" onclick="clearAllFilters()" aria-label="Clear filters">
-                ×
-            </button>
         `;
         
-        // Insert message
-        const recipeSection = document.querySelector('.featured-recipes .container');
-        if (recipeSection) {
-            const firstChild = recipeSection.querySelector('.section-title') || recipeSection.firstChild;
-            if (firstChild && firstChild.nextSibling) {
-                recipeSection.insertBefore(message, firstChild.nextSibling);
-            } else {
-                recipeSection.insertBefore(message, recipeSection.firstChild);
+        // Insert before the recommended recipes section
+        const featuredSection = document.querySelector('.featured-recipes');
+        if (featuredSection) {
+            featuredSection.parentNode.insertBefore(resultsSection, featuredSection);
+            
+            // Add filtered recipe cards to the results grid
+            if (count > 0) {
+                const resultsGrid = resultsSection.querySelector('.filter-results-grid');
+                recipes.forEach(card => {
+                    resultsGrid.appendChild(card);
+                });
             }
+            
+            // Scroll to filter results
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-    }
-    
-    function removeFilterMessage() {
-        const existingMsg = document.querySelector('.filter-message');
-        if (existingMsg) existingMsg.remove();
     }
     
     // Clear all filters function (global)
     window.clearAllFilters = function() {
         document.querySelectorAll('.filter-item.active').forEach(btn => btn.classList.remove('active'));
         activeFilters.clear();
-        applyFilters();
+        
+        // Remove filter results section
+        const filterSection = document.querySelector('.filter-results-section');
+        if (filterSection) filterSection.remove();
     };
     
     // ==========================================================================
@@ -263,20 +322,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Apply category filter on recipes page
-    if (window.location.pathname.includes('recipes.html')) {
-        const selectedCategory = sessionStorage.getItem('selectedCategory');
-        if (selectedCategory) {
-            sessionStorage.removeItem('selectedCategory');
-            const matchingFilter = document.querySelector(`[data-filter="${selectedCategory}"]`);
-            if (matchingFilter) {
-                matchingFilter.click();
-            }
-        }
-    }
-    
     // ==========================================================================
-    // RECIPE CARD ANIMATIONS
+    // RECIPE CARD ANIMATIONS 
     // ==========================================================================
     
     const recipeCards = document.querySelectorAll('.recipe-card');
@@ -286,9 +333,6 @@ document.addEventListener('DOMContentLoaded', function() {
         rootMargin: '0px 0px -50px 0px'
     };
     
-    /* IntersectionObserver: add a CSS class instead of writing inline transform styles.
-       This prevents the observer from overriding the hover transform and fixes the
-       text jumping issue you were seeing. */
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -414,35 +458,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // ACCESSIBILITY ENHANCEMENTS
     // ==========================================================================
     
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('change', function() {
-            if (this.checked) {
-                const focusableElements = navMenu.querySelectorAll('a, button, input');
-                const firstElement = focusableElements[0];
-                const lastElement = focusableElements[focusableElements.length - 1];
-                
-                setTimeout(() => firstElement?.focus(), 100);
-                
-                navMenu.addEventListener('keydown', function(e) {
-                    if (e.key === 'Tab') {
-                        if (e.shiftKey && document.activeElement === firstElement) {
-                            e.preventDefault();
-                            lastElement?.focus();
-                        } else if (!e.shiftKey && document.activeElement === lastElement) {
-                            e.preventDefault();
-                            firstElement?.focus();
-                        }
-                    }
-                    
-                    if (e.key === 'Escape') {
-                        navToggle.checked = false;
-                        document.body.style.overflow = '';
-                    }
-                });
-            }
-        });
-    }
-    
     function announceToScreenReader(message) {
         const announcement = document.createElement('div');
         announcement.setAttribute('role', 'status');
@@ -456,212 +471,3 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 
-// ==========================================================================
-// DYNAMIC CSS FOR JAVASCRIPT-ADDED ELEMENTS
-// ==========================================================================
-
-const style = document.createElement('style');
-style.textContent = `
-    .scroll-to-top {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #ff6b35, #f7931e);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1000;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-    
-    .scroll-to-top.show {
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    .scroll-to-top:hover {
-        background: linear-gradient(135deg, #f7931e, #ffcc02);
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    }
-    
-    .search-message {
-        margin-bottom: 2rem;
-        padding: 1rem 1.5rem;
-        background: #d1ecf1;
-        border: 1px solid #bee5eb;
-        border-radius: 8px;
-        color: #0c5460;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        animation: slideDown 0.3s ease;
-    }
-    
-    .search-message__content {
-        flex: 1;
-    }
-    
-    .search-message__close {
-        background: transparent;
-        border: none;
-        font-size: 2rem;
-        cursor: pointer;
-        color: #0c5460;
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 4px;
-        transition: background 0.2s ease;
-    }
-    
-    .search-message__close:hover {
-        background: rgba(12, 84, 96, 0.1);
-    }
-    
-    @keyframes slideDown {
-        from {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    .search-highlight {
-        animation: searchPulse 0.5s ease;
-    }
-    
-    @keyframes searchPulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.02); box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3); }
-    }
-    
-    .ingredient-checkbox {
-        width: 20px;
-        height: 20px;
-        cursor: pointer;
-        accent-color: #CD853F;
-        flex-shrink: 0;
-    }
-    
-    .ingredient-label {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        width: 100%;
-    }
-    
-    .ingredient-content {
-        flex: 1;
-        display: flex;
-        justify-content: space-between;
-        transition: all 0.3s ease;
-    }
-    
-    .ingredient-content.checked {
-        text-decoration: line-through;
-        opacity: 0.6;
-    }
-    
-    .recipe-author {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem 1.5rem;
-        background: #f8f9fa;
-        border-radius: 10px;
-        margin: 1.5rem 0;
-        border-left: 4px solid #CD853F;
-    }
-    
-    .recipe-author__icon {
-        font-size: 2rem;
-        color: #CD853F;
-    }
-    
-    .recipe-author__info {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .recipe-author__label {
-        font-size: 0.85rem;
-        color: #666;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    
-    .recipe-author__name {
-        font-size: 1.1rem;
-        color: #333;
-        font-weight: 600;
-    }
-    
-    .print-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    /* Fade-in effect when scrolling.
-    JS adds a class for the animation.
-    Avoid inline transforms so hover effects stay smooth. */
-    
-    .recipe-card {
-        opacity: 0;
-        transition: opacity 0.55s ease;
-        will-change: opacity;
-    }
-
-    .recipe-card.fade-in {
-        opacity: 1;
-    }
-    
-    @media (max-width: 767px) {
-        .scroll-to-top {
-            bottom: 20px;
-            right: 20px;
-            width: 45px;
-            height: 45px;
-        }
-        
-        .recipe-author {
-            padding: 0.8rem 1rem;
-        }
-        
-        .recipe-author__icon {
-            font-size: 1.5rem;
-        }
-        
-        .recipe-author__name {
-            font-size: 1rem;
-        }
-    }
-    
-    @media print {
-        .scroll-to-top,
-        .print-btn,
-        .search-message,
-        .ingredient-checkbox,
-        .social-sharing {
-            display: none !important;
-        }
-        
-        .recipe-author {
-            border: 1px solid #ddd;
-        }
-    }
-`;
-document.head.appendChild(style);
