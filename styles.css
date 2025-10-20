@@ -2149,7 +2149,7 @@ body:has(.offcanvas.show) .navbar__toggle {
 
 .search-results-section,
 .filter-results-section {
-    padding: 3rem 0 2rem 0;
+    padding: 4rem 0 2rem 0;
     background: #f8f9fa;
 }
 
@@ -2333,4 +2333,111 @@ body:has(.offcanvas.show) .navbar__toggle {
     .recipe-author {
         border: 1px solid #ddd;
     }
+}
+
+/* FILTER RESULTS SECTION */
+
+.filter-results-section {
+    padding-top: 2rem !important;   /* reduces top spacing */
+    padding-bottom: 2rem !important; /* reduces bottom spacing */
+    margin-bottom: 0 !important; 
+}
+
+.filter-results-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    padding-bottom: 0 !important;
+}
+
+/* Filter/Search Message Styling */
+.filter-message,
+.search-message {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.search-message__content,
+.filter-message .search-message__content {
+    flex: 1;
+}
+
+.search-message__close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #666;
+    padding: 0 0.5rem;
+    line-height: 1;
+    transition: color 0.3s;
+}
+
+.search-message__close:hover {
+    color: #333;
+}
+
+/* Filter Results Grid */
+.filter-results-grid,
+.search-results-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    grid-auto-rows: minmax(420px, auto);
+    grid-template-columns: repeat(4, 1fr); 
+    row-gap: 3rem !important;
+}
+
+/* Ensures recipe cards display in filter results */
+.filter-results-grid .recipe-card,
+.search-results-grid .recipe-card {
+    flex-direction: column;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative !important;
+    min-height: 420px !important;
+    transform: none !important;
+    margin-bottom: 0 !important;
+}
+
+.filter-results-grid .recipe-card__image,
+.search-results-grid .recipe-card__image {
+    display: block !important;
+}
+
+/* Clear search/filter link */
+.clear-search-link {
+    background: none;
+    border: none;
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+}
+
+.clear-search-link:hover {
+    color: #0056b3;
+}
+
+/* Screen reader only class */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }

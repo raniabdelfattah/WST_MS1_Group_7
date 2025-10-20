@@ -173,134 +173,170 @@ document.addEventListener('DOMContentLoaded', function() {
         if (filterSection) filterSection.remove();
     };
     
-    // ==========================================================================
-    // FILTER FUNCTIONALITY - WITH RESULTS ABOVE RECOMMENDED
-    // ==========================================================================
-    
-    const filterButtons = document.querySelectorAll('.filter-item');
-    let activeFilters = new Set();
-    
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const filterValue = this.dataset.filter.toLowerCase();
-            
-            // Toggle active state
-            this.classList.toggle('active');
-            
-            if (this.classList.contains('active')) {
-                activeFilters.add(filterValue);
-            } else {
-                activeFilters.delete(filterValue);
-            }
-            
-            // Apply filters
-            applyFilters();
-        });
-    });
-    
-    function applyFilters() {
-        const recipeCards = document.querySelectorAll('.featured-recipes .recipe-card');
-        let visibleCount = 0;
-        const filteredRecipes = [];
+// ==========================================================================
+// FILTER FUNCTIONALITY - USING JSON DATA
+// ==========================================================================
+
+let recipesData = [];
+let recipesLoaded = false;
+
+// Load recipes data on page load
+async function loadRecipesForFiltering() {
+    try {
+        const response = await fetch('recipes.json');
+        if (!response.ok) throw new Error('Failed to load recipes');
+        const data = await response.json();
+        recipesData = data.recipes;
+        recipesLoaded = true;
+        console.log('✓ Recipes loaded for filtering:', recipesData.length);
+    } catch (error) {
+        console.error('Error loading recipes:', error);
+    }
+}
+
+// Only load if on recipes page
+if (document.querySelector('.filters')) {
+    loadRecipesForFiltering();
+}
+
+const filterButtons = document.querySelectorAll('.filter-item');
+let activeFilters = new Set();
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        console.log('Button clicked:', this.dataset.filter);
         
-        if (activeFilters.size === 0) {
-            // Remove filter results section
-            const filterSection = document.querySelector('.filter-results-section');
-            if (filterSection) filterSection.remove();
+        const filterValue = this.dataset.filter.toLowerCase();
+        
+        // Toggle active state
+        this.classList.toggle('active');
+        
+        if (this.classList.contains('active')) {
+            activeFilters.add(filterValue);
         } else {
-            recipeCards.forEach(card => {
-                // Get all tags from the card
-                const tags = Array.from(card.querySelectorAll('.recipe-tags__item'))
-                    .map(tag => tag.textContent.toLowerCase().replace(/\s+/g, '-'));
-                
-                // Get difficulty from overlay
-                const difficultyElement = card.querySelector('.recipe-meta__difficulty');
-                if (difficultyElement) {
-                    const difficultyText = difficultyElement.textContent.toLowerCase().trim();
-                    tags.push(difficultyText);
-                }
-                
-                // Check if card matches any active filter
-                const matches = Array.from(activeFilters).some(filter => {
-                    return tags.some(tag => {
-                        // Handle multi-word filters (e.g., "main-dish", "side-dish")
-                        const normalizedTag = tag.replace(/\s+/g, '-');
-                        const normalizedFilter = filter.replace(/\s+/g, '-');
-                        return normalizedTag.includes(normalizedFilter) || normalizedFilter.includes(normalizedTag);
-                    });
-                });
-                
-                if (matches) {
-                    visibleCount++;
-                    filteredRecipes.push(card.cloneNode(true));
-                }
-            });
-            
-            // Show filter results
-            showFilterResults(visibleCount, filteredRecipes);
+            activeFilters.delete(filterValue);
         }
         
-        // Announce to screen readers
-        announceToScreenReader(`Showing ${visibleCount} recipes`);
+        console.log('Active filters:', Array.from(activeFilters));
+        
+        // Apply filters
+        applyFilters();
+    });
+});
+
+function applyFilters() {
+    console.log('applyFilters called');
+    
+    if (!recipesLoaded || recipesData.length === 0) {
+        console.warn('Recipes not loaded yet, retrying in 500ms...');
+        setTimeout(applyFilters, 500);
+        return;
     }
     
-    function showFilterResults(count, recipes) {
-        // Remove existing filter results section
-        const existingSection = document.querySelector('.filter-results-section');
-        if (existingSection) existingSection.remove();
-        
-        // Create filter results section
-        const resultsSection = document.createElement('section');
-        resultsSection.className = 'filter-results-section';
-        
-        // Get active filter names
-        const activeFilterNames = Array.from(activeFilters).map(filter => {
-            const btn = document.querySelector(`[data-filter="${filter}"]`);
-            return btn ? btn.textContent : filter;
-        }).join(', ');
-        
-        resultsSection.innerHTML = `
-            <div class="container">
-                <div class="search-message filter-message">
-                    <div class="search-message__content">
-                        <strong>Filter Results:</strong> Showing ${count} recipe(s) for: ${activeFilterNames}
-                        ${count === 0 ? '<br><small>No recipes match the selected filters. Try different combinations or <button class="clear-search-link" onclick="clearAllFilters()">clear filters</button>.</small>' : ''}
-                    </div>
-                    <button class="search-message__close" onclick="clearAllFilters()" aria-label="Clear filters">
-                        ×
-                    </button>
-                </div>
-                ${count > 0 ? '<div class="recipe-grid filter-results-grid"></div>' : ''}
-            </div>
-        `;
-        
-        // Insert before the recommended recipes section
-        const featuredSection = document.querySelector('.featured-recipes');
-        if (featuredSection) {
-            featuredSection.parentNode.insertBefore(resultsSection, featuredSection);
-            
-            // Add filtered recipe cards to the results grid
-            if (count > 0) {
-                const resultsGrid = resultsSection.querySelector('.filter-results-grid');
-                recipes.forEach(card => {
-                    resultsGrid.appendChild(card);
-                });
-            }
-            
-            // Scroll to filter results
-            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }
+    const recipeCards = document.querySelectorAll('.featured-recipes .recipe-card');
+    let visibleCount = 0;
+    const filteredRecipes = [];
     
-    // Clear all filters function (global)
-    window.clearAllFilters = function() {
-        document.querySelectorAll('.filter-item.active').forEach(btn => btn.classList.remove('active'));
-        activeFilters.clear();
-        
-        // Remove filter results section
+    if (activeFilters.size === 0) {
         const filterSection = document.querySelector('.filter-results-section');
         if (filterSection) filterSection.remove();
-    };
+        return;
+    }
+    
+    recipeCards.forEach(card => {
+        const titleElement = card.querySelector('.recipe-card__title');
+        const recipeTitle = titleElement ? titleElement.textContent.trim() : '';
+        
+        const recipeData = recipesData.find(r => r.name === recipeTitle);
+        
+        if (!recipeData) {
+            console.warn(`Recipe not found: ${recipeTitle}`);
+            return;
+        }
+        
+        const tags = recipeData.tags.map(tag => 
+            tag.toLowerCase().replace(/\s+/g, '-')
+        );
+        tags.push(recipeData.difficulty.toLowerCase());
+        
+        const matches = Array.from(activeFilters).some(filter => {
+            return tags.some(tag => {
+                const normalizedTag = tag.replace(/\s+/g, '-');
+                const normalizedFilter = filter.replace(/\s+/g, '-');
+                return normalizedTag.includes(normalizedFilter) || normalizedFilter.includes(normalizedTag);
+            });
+        });
+        
+        if (matches) {
+            visibleCount++;
+            filteredRecipes.push(card.cloneNode(true));
+        }
+    });
+    
+    console.log('Matches found:', visibleCount);
+    showFilterResults(visibleCount, filteredRecipes);
+    announceToScreenReader(`Showing ${visibleCount} recipes`);
+}
+
+function showFilterResults(count, recipes) {
+    const existingSection = document.querySelector('.filter-results-section');
+    if (existingSection) existingSection.remove();
+    
+    const resultsSection = document.createElement('section');
+    resultsSection.className = 'filter-results-section';
+    
+    const activeFilterNames = Array.from(activeFilters).map(filter => {
+        const btn = document.querySelector(`[data-filter="${filter}"]`);
+        return btn ? btn.textContent : filter;
+    }).join(', ');
+    
+    resultsSection.innerHTML = `
+        <div class="container">
+            <div class="search-message filter-message">
+                <div class="search-message__content">
+                    <strong>Filter Results:</strong> Showing ${count} recipe(s) for: ${activeFilterNames}
+                    ${count === 0 ? '<br><small>No recipes match the selected filters. Try different combinations or <button class="clear-search-link" onclick="clearAllFilters()">clear filters</button>.</small>' : ''}
+                </div>
+                <button class="search-message__close" onclick="clearAllFilters()" aria-label="Clear filters">
+                    ×
+                </button>
+            </div>
+            ${count > 0 ? '<div class="recipe-grid filter-results-grid"></div>' : ''}
+        </div>
+    `;
+    
+    const featuredSection = document.querySelector('.featured-recipes');
+    if (featuredSection) {
+        featuredSection.parentNode.insertBefore(resultsSection, featuredSection);
+        
+        if (count > 0) {
+            const resultsGrid = resultsSection.querySelector('.filter-results-grid');
+            recipes.forEach(card => {
+                resultsGrid.appendChild(card);
+            });
+        }
+        
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+window.clearAllFilters = function() {
+    document.querySelectorAll('.filter-item.active').forEach(btn => btn.classList.remove('active'));
+    activeFilters.clear();
+    
+    const filterSection = document.querySelector('.filter-results-section');
+    if (filterSection) filterSection.remove();
+};
+
+function announceToScreenReader(message) {
+    const announcement = document.createElement('div');
+    announcement.setAttribute('role', 'status');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.className = 'sr-only';
+    announcement.textContent = message;
+    document.body.appendChild(announcement);
+    setTimeout(() => announcement.remove(), 1000);
+}
     
     // ==========================================================================
     // CATEGORY CARD INTERACTIONS (Homepage)
@@ -437,6 +473,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================================================
     
     if (document.querySelector('.recipe-detail')) {
+    // Check if a print button already exists
+    if (!document.querySelector('.print-btn')) {
         const printBtn = document.createElement('button');
         printBtn.className = 'btn btn--secondary print-btn';
         printBtn.innerHTML = '<i class="fas fa-print"></i> Print Recipe';
@@ -453,6 +491,8 @@ document.addEventListener('DOMContentLoaded', function() {
             window.print();
         });
     }
+}
+
     
     // ==========================================================================
     // ACCESSIBILITY ENHANCEMENTS

@@ -1,0 +1,969 @@
+{
+  "recipes": [
+    {
+      "id": "japchae-korean-glass-noodles",
+      "name": "Japchae Korean Glass Noodles",
+      "description": "Japchae is one of those dishes I've been dying to try ever since falling in love with K-Dramas! When I finally tasted it at a buffet restaurant, I was completely hooked. While you can grab japchae from 7/11 stores, I found that the portions are never quite enough and it's so much more economical to make it at home when I want a larger serving. This colorful Korean noodle dish is sort of a stir-fry, sort of a noodle salad - it's tossed together in a bowl rather than cooked on the stove and served barely warm. The chewy, slippery sweet potato noodles combined with tender beef and vibrant vegetables create the perfect comfort food that makes amazing leftovers for lunch too!",
+      "image": "images/Japchae.png",
+      "prepTime": "20 minutes",
+      "cookTime": "15 minutes",
+      "servings": "4 people",
+      "difficulty": "Medium",
+      "published": "September 23, 2025",
+      "author": "Helena Tantoco",
+      "tags": ["Asian", "Main Dish", "Side Dish", "Meat", "Vegetables"],
+      "ingredients": [
+        {
+          "category": "Beef Options (choose one)",
+          "items": [
+            { "amount": "600g", "name": "bone-in beef short ribs (300g boneless) RECOMMENDED" },
+            { "amount": "300g", "name": "boneless beef short ribs RECOMMENDED" },
+            { "amount": "300g", "name": "scotch fillet/boneless rib eye or other steak" }
+          ]
+        },
+        {
+          "category": "Beef Marinade",
+          "items": [
+            { "amount": "2 tsp", "name": "soy sauce (all-purpose or light)" },
+            { "amount": "2 tsp", "name": "white sugar" },
+            { "amount": "2 tsp", "name": "finely minced garlic" },
+            { "amount": "1/2 tsp", "name": "black pepper" }
+          ]
+        },
+        {
+          "category": "Noodle Dressing",
+          "items": [
+            { "amount": "1/4 cup", "name": "soy sauce (all-purpose or light)" },
+            { "amount": "2 tsp", "name": "white sugar" },
+            { "amount": "1/2 tsp", "name": "finely minced garlic" },
+            { "amount": "1 1/2 tbsp", "name": "sesame oil" },
+            { "amount": "1/2 tsp", "name": "cooking/kosher salt" },
+            { "amount": "1/2 tsp", "name": "black pepper" }
+          ]
+        },
+        {
+          "category": "Noodles & Vegetables",
+          "items": [
+            { "amount": "250g", "name": "sweet potato noodles (dangmyeon), dried" },
+            { "amount": "4 tbsp", "name": "vegetable oil" },
+            { "amount": "1 tsp", "name": "cooking/kosher salt, divided" },
+            { "amount": "1", "name": "onion, halved and sliced into 6mm wedges" },
+            { "amount": "3", "name": "green onion stems, cut into 5cm lengths (white & green parts separated)" },
+            { "amount": "200g", "name": "fresh shiitake mushrooms, stems removed, sliced 5mm thick" },
+            { "amount": "2", "name": "carrots, peeled and cut into 3mm batons" },
+            { "amount": "1", "name": "red bell pepper, cut into 0.5cm slices" },
+            { "amount": "4 1/2 cups", "name": "tightly packed baby spinach" },
+            { "amount": "2 tbsp", "name": "white sesame seeds" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Prepare the beef: Cut beef into strips about 5mm thick, 1cm wide, and 5cm long. If using short ribs, trim excess fat and cut meat off the bone, then slice thinly.",
+        "Marinate beef: Place beef in a bowl, add marinade ingredients, and mix well. Set aside for 15-20 minutes.",
+        "Make the sauce: Mix all noodle dressing ingredients in a very large mixing bowl and set aside.",
+        "Cook noodles: Boil sweet potato noodles according to package directions (usually 8 minutes). Drain, briefly rinse under cold water, shake off excess water, and add to the bowl with dressing. DO NOT MIX yet.",
+        "Cook vegetables - Batch 1: Heat 2 tablespoons oil in a large non-stick pan over high heat. Cook onion, white parts of green onion, and shiitake mushrooms with 1/2 tsp salt for 2 1/2-3 minutes, stirring constantly until just starting to soften. Pour over noodles but don't mix.",
+        "Cook vegetables - Batch 2: In the same pan over high heat, add 1 tablespoon oil and cook carrots and bell pepper for 1 1/2 minutes, stirring constantly. Add spinach, green onion greens, and remaining 1/2 tsp salt. Cook for 1 1/2 minutes until spinach wilts. Add to noodle bowl but don't mix.",
+        "Cook beef: Heat final 1 tablespoon oil in the same pan over high heat. Add marinated beef and cook for 1 1/2 minutes until lightly golden and just cooked through. Add to noodle bowl.",
+        "Mix and serve: Add most of the sesame seeds (save some for garnish). Now toss everything together thoroughly. Transfer to serving bowl, sprinkle with remaining sesame seeds, and serve warm (not piping hot)."
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Cook each component separately and don't mix until the very end to maintain the distinct textures and flavors of each ingredient."
+        },
+        {
+          "title": "Storage",
+          "text": "Leftovers keep for 3 days in the fridge and make excellent lunch portions - not suitable for freezing."
+        },
+        {
+          "title": "Variations",
+          "text": "Substitute sweet potato noodles with glass noodles or vermicelli, use different mushroom varieties, or tenderize cheaper beef cuts with baking soda for 20 minutes before marinating."
+        }
+      ]
+    },
+    {
+      "id": "maja-blanca",
+      "name": "Maja Blanca",
+      "description": "Maja Blanca is a popular, rich, and creamy Filipino coconut pudding that is gelatin-like in consistency. It's made from coconut milk, cornstarch, and sugar, often with corn kernels incorporated into the pudding and a topping of grated cheese, toasted coconut flakes (latik), or other toppings before it sets. This sweet dessert is a staple at Filipino celebrations, holidays like Christmas, and fiestas. Families may also enjoy this coconut pudding well-chilled and set as an after-meal dessert or midday snack.",
+      "image": "images/Maja Blanca.jpg",
+      "prepTime": "5 minutes",
+      "cookTime": "10 minutes",
+      "chillTime": "2 hours",
+      "servings": "8 people",
+      "difficulty": "Easy",
+      "published": "October 17, 2025",
+      "author": "Karissa Mae Manicad",
+      "tags": ["Asian", "Dessert", "Pantry"],
+      "ingredients": [
+        {
+          "category": "Main Ingredients",
+          "items": [
+            { "amount": "27 ounces", "name": "coconut milk" },
+            { "amount": "14 ounces", "name": "cut corn, drained" },
+            { "amount": "½ cup", "name": "sugar" },
+            { "amount": "¼ cup", "name": "cold water" },
+            { "amount": "½ cup", "name": "cornstarch" },
+            { "amount": "¼ cup", "name": "desiccated coconut flakes" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Make the base: In a saucepan, combine coconut milk, corn, and sugar. Over medium heat, bring to a gentle boil, stirring occasionally until sugar is dissolved.",
+        "Create the slurry: In a small bowl, mix cornstarch and cold water until completely smooth. Slowly add to coconut milk, whisking vigorously to prevent lumps.",
+        "Thicken the mixture: Continue to cook, whisking regularly, for about 2 to 4 minutes or until mixture thickens to a smooth paste consistency.",
+        "Set in dish: In a lightly greased 8 x 8 baking dish, transfer thickened coconut mixture. Using a spatula, smooth surface.",
+        "Chill: Allow pudding to cool for a few minutes. Cover and refrigerate for about 1 to 2 hours or until completely set.",
+        "Prepare the garnish: In an ungreased skillet over medium heat, toast shredded coconut, stirring frequently, for about 1 to 2 minutes or until golden brown. Remove from heat immediately.",
+        "Serve: To serve maja blanca, sprinkle toasted coconut flakes on top and cut into squares."
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Simmer gently to prevent coconut milk from curdling, use first-extraction coconut milk for creaminess, and add toasted coconut just before serving for crunch."
+        },
+        {
+          "title": "Storage",
+          "text": "Refrigerate leftovers in a covered container for up to 3 days."
+        },
+        {
+          "title": "Variations",
+          "text": "Add ½ cup sweet corn for extra flavor or adjust baking dish size (9×6 or 8×8 inches)."
+        }
+      ]
+    },
+  {
+      "id": "siu-mai",
+      "name": "Siu Mai (Shumai, 烧卖)",
+      "description": "A Chinese dim sum siu mai is a popular, open-faced, steamed dumpling with a savory filling typically made of ground pork and shrimp, often combined with shiitake mushrooms. It's considered a staple of Cantonese cuisine and dim sum, recognizable by its distinctive shape with the top of the filling exposed, and sometimes garnished with finely diced carrots or fish roe. It is one of the most popular and classic items served at dim sum restaurants, particularly in Cantonese cuisine.",
+      "image": "images/Siu Mai.jpg",
+      "prepTime": "30 minutes",
+      "cookTime": "7 minutes",
+      "servings": "20 pieces",
+      "difficulty": "Medium",
+      "published": "September 27, 2025",
+      "author": "Karissa Mae Manicad",
+      "tags": ["Asian", "Main Dish", "Side Dish", "Meat", "Seafood"],
+      "ingredients": [
+        {
+          "category": "Main Ingredients",
+          "items": [
+            { "amount": "8 oz", "name": "ground pork" },
+            { "amount": "7 oz", "name": "raw, peeled shrimp, cut into cubes" },
+            { "amount": "3 large", "name": "dried shiitake mushrooms, rehydrated and minced (see note 2)" },
+            { "amount": "3 tbsp", "name": "water in which the mushrooms are soaked" },
+            { "amount": "1 tsp", "name": "minced ginger" },
+            { "amount": "1 tbsp", "name": "cornstarch" },
+            { "amount": "1 tbsp", "name": "Shaoxing rice wine" },
+            { "amount": "1 tsp", "name": "light soy sauce" },
+            { "amount": "½ tsp", "name": "sesame oil" },
+            { "amount": "½ tsp", "name": "salt" },
+            { "amount": "1 pinch", "name": "sugar" },
+            { "amount": "1 pinch", "name": "ground white pepper" },
+            { "amount": "20", "name": "siu mai wrappers (or thin wonton wrappers)" },
+            { "amount": "20 slices", "name": "carrot for lining" },
+            { "amount": "As needed", "name": "finely minced carrot for garnishing" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Prepare the filling - Combine all ingredients: Add all the ingredients for the filling to a large mixing bowl. Use chopsticks or a spatula to stir the mixture vigorously in one direction for 5 minutes or so until everything is combined into a sticky mass. You may use a stand mixer to speed up the process (with a flat beater on medium speed).",
+        "Assemble the siu mai - Prepare the wrappers: Take the wrappers out of the package. Remember to cover them if not used immediately as they dry out easily.",
+        "Begin assembly: Put a tablespoonful of the filling in the middle of a wrapper. Then let the wrapper securely sit in the hole formed by the thumb and index finger of your non-dominant hand.",
+        "Fill generously: Top up with more filling. Level with a frosting spatula or the handle of a spoon so that the wrapper is generously filled to the rim.",
+        "Steam the siu mai - Arrange and garnish: Scatter the carrot slices in the steamer basket. Then place the assembled siu mai over the carrot. Garnish each siu mai with a pinch of finely minced carrot.",
+        "Set up the steamer: Add 2 cups (500ml) of water to the wok/pan you plan to use for steaming. Bring it to a full boil then place the steamer baskets over (you may stack up multiple baskets and cook all at once).",
+        "Steam to perfection: Leave to steam over high heat for 7 minutes.",
+        "Serve: Serve immediately, on their own, or with a sauce of your choice (such as chili oil, black rice vinegar etc.)."
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Use fatty ground pork (≈20%), soak shiitake mushrooms until soft, and line steamers with carrots, parchment, or a thin oil layer to prevent sticking."
+        },
+        {
+          "title": "Storage",
+          "text": "Freeze assembled siu mai in a single layer, then transfer to airtight containers for up to 3 months; steam from frozen 10–12 minutes."
+        },
+        {
+          "title": "Variations",
+          "text": "You may use ground chicken as a substitute. In this case, use the one made with dark cuts of chicken instead of breasts."
+        }
+      ]
+    },
+    {
+      "id": "stir-fry-garlic-bok-choy-mushroom",
+      "name": "Stir-Fry Garlic Bok Choy with Mushroom",
+      "description": "This simple and comforting bok choy and mushroom stir fry holds a special place in my heart. My grandma used to pack this dish for my elementary and junior high school lunches, usually serving it alongside fried chicken as a side dish, though it's hearty enough to stand alone as a main meal. I have fond memories of enjoying this after exhausting Friday Taekwondo sessions; it was the perfect reward after a tiring day. What I love most about this recipe is its simplicity. The ingredients are easy to find and the cooking process is quick, making it an ideal weekday meal. The tender mushrooms and crisp bok choy come together in a savory, gingery sauce that's both satisfying and nostalgic.",
+      "image": "images/Stir-Fry Garlic Bok Choy with Mushroom.jpg",
+      "prepTime": "15 minutes",
+      "cookTime": "8 minutes",
+      "servings": "4 people",
+      "difficulty": "Easy",
+      "published": "September 23, 2025",
+      "author": "Helena Tantoco",
+      "tags": ["Asian", "Main Dish", "Side Dish", "Vegetable"],
+      "ingredients": [
+        {
+          "category": "For the Sauce",
+          "items": [
+            { "amount": "2 tablespoons", "name": "water" },
+            { "amount": "2 tablespoons", "name": "soy sauce" },
+            { "amount": "1 tablespoon", "name": "vegetarian oyster sauce (or regular oyster sauce)" },
+            { "amount": "1 teaspoon", "name": "sugar" },
+            { "amount": "1/4 teaspoon", "name": "ground black pepper" },
+            { "amount": "1/2 teaspoon", "name": "sesame oil" }
+          ]
+        },
+        {
+          "category": "For the Cornstarch Slurry",
+          "items": [
+            { "amount": "1 tablespoon", "name": "cornstarch" },
+            { "amount": "2 tablespoons", "name": "water" }
+          ]
+        },
+        {
+          "category": "For the Stir-Fry",
+          "items": [
+            { "amount": "1 lb", "name": "baby bok choy, cut into large bite-size pieces" },
+            { "amount": "Pinch of", "name": "salt" },
+            { "amount": "2 1/2 tablespoons", "name": "peanut oil" },
+            { "amount": "1 lb", "name": "brown mushrooms, halved (or quartered if large)" },
+            { "amount": "4", "name": "dried Chinese chili peppers" },
+            { "amount": "2", "name": "garlic cloves, minced" },
+            { "amount": "1 thumb-sized piece", "name": "ginger, minced" },
+            { "amount": "2", "name": "green onions, sliced" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Prepare the sauce: In a small bowl, mix together water, soy sauce, vegetarian oyster sauce, sugar, black pepper, and sesame oil. Set aside.",
+        "Make the slurry: In another small bowl, combine cornstarch and water, stirring until smooth. Set aside.",
+        "Steam the bok choy: Heat 1/4 cup water in a large skillet over medium-high heat. When it begins to boil, add the bok choy and sprinkle with salt. Cover and steam for 30 seconds, then uncover and stir. Cover again for another 30 seconds until softened. Transfer to a large platter.",
+        "Cook the mushrooms: Wipe the pan clean and add 2 tablespoons oil over high heat. Add mushrooms and let them sear undisturbed for 1 minute. Flip and continue cooking, stirring occasionally, for 2-3 minutes until browned and no liquid remains.",
+        "Add aromatics: Push mushrooms to one side of the pan. Add remaining 1/2 tablespoon oil to the empty side, then add chili peppers, garlic, ginger, and green onions. Stir until chilies turn dark red, then mix everything together.",
+        "Finish the dish: Pour in the prepared sauce and cook for 30 seconds. Stir the cornstarch slurry again until smooth, then swirl it into the pan. Cook and stir until the sauce thickens. Transfer everything to a serving plate.",
+        "Serve: Enjoy hot as a side dish or over steamed rice as a main course."
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Steam the bok choy first, then sear the mushrooms at high heat to prevent them from becoming watery."
+        },
+        {
+          "title": "Storage",
+          "text": "Leftovers can be refrigerated for up to 2 days - reheat gently in a pan to maintain texture."
+        },
+        {
+          "title": "Variations",
+          "text": "Substitute with shiitake or button mushrooms, use tamari for gluten-free version, or adjust chili peppers to taste."
+        }
+      ]
+    },
+    {
+      "id": "ooey-gooey-brownies",
+      "name": "Ooey Gooey Brownies",
+      "description": "Brownies are one of the most well-known staple desserts there is around the world. Whether you're a sweet-tooth or not, you have eaten a piece of brownie that you loved the most, you can't get enough of it and possibly want to recreate it to bring to a Sunday soireé with friends. As someone who loves a warm brownie to go with her tea or coffee, this foolproof recipe is tested and proven after trying out a bunch of other recipes out there and sharing this with friends and family have been a success in the past 2 years after i've developed my very own take on a fudgy, gooey brownie recipe. Enjoy!",
+      "image": "images/Ooey Gooey Brownies.png",
+      "prepTime": "15 minutes",
+      "cookTime": "35-40 minutes",
+      "servings": "6-8 people",
+      "difficulty": "Easy",
+      "published": "September 24, 2025",
+      "author": "Chadley Marie De Lara",
+      "tags": ["American", "Dessert", "Pantry"],
+      "ingredients": [
+        {
+          "category": "Main Ingredients",
+          "items": [
+            { "amount": "1 ½ cup", "name": "chocolates (Chocolate Bar, Morsels) for melting" },
+            { "amount": "1 cup", "name": "chocolates (to be set aside and added on the latter part)" },
+            { "amount": "¼ cup", "name": "white sugar" },
+            { "amount": "½ cup", "name": "brown sugar" },
+            { "amount": "½ cup", "name": "flour (plain/bread flour)" },
+            { "amount": "¼ cup", "name": "dutch processed cocoa powder" },
+            { "amount": "⅓ cup", "name": "butter" },
+            { "amount": "2 large", "name": "eggs" },
+            { "amount": "As needed", "name": "vanilla extract/essence" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Melt the chocolates: In a large mixing bowl, if you're using a chocolate bar, break apart the chocolates before melting as this allows the chocolate to melt faster. For morsel-type of chocolate, melt it straight and just enough to mix with the rest of the ingredients. Set aside.",
+        "Combine all the dry ingredients: In a separate mixing bowl, combine the dry ingredients using a balloon whisk to thoroughly breakdown the clump of flour and avoid your brownie batter from clumping. Set aside.",
+        "Combine the wet ingredients with the dry ingredients: slowly add the rest of the wet ingredients with the dry ingredients. Mix thoroughly.",
+        "Add the rest of the unmelted chocolates: Add the rest of the unmelted chocolates to your brownie batter. Refrigerate for 20-30mins before baking for best results.",
+        "Begin the baking process - Preheat oven to 170 degrees.",
+        "Bake the brownie for 30mins.",
+        "Lower down the temp to 165 degrees 30mins into baking.",
+        "Bake for another 5-10mins to underbake to get that gooey texture.",
+        "Remove the brownies from the oven and set aside on the counter for 30mins before cutting it into slices. Enjoy!"
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Underbake slightly (5-10 minutes less) to achieve that perfect gooey center. Let cool for 30 minutes before slicing for clean cuts."
+        },
+        {
+          "title": "Storage",
+          "text": "Store in an airtight container at room temperature for up to 5 days, or refrigerate for up to a week."
+        },
+        {
+          "title": "Variations",
+          "text": "Add nuts like walnuts or pecans, swirl in peanut butter or caramel, or top with sea salt for a sweet-salty contrast."
+        }
+      ]
+    },
+    {
+      "id": "curry-katsu",
+      "name": "Curry Katsu",
+      "description": "I love good katsu. That crispy, just thick enough chicken katsu I often crave after a long day or even just to cap the night off? But katsu with curry sauce is even better. It elevates the whole meal experience without overboarding and it never fails to warm my heart no matter how bad (or even how good!) my day goes. I've lived in Tokyo for years now and have learned to create this katsu recipe which I often cook for family and friends whenever they come over to visit the city.",
+      "image": "images/Curry Katsu.png",
+      "prepTime": "20 minutes",
+      "cookTime": "35 minutes",
+      "servings": "4 people",
+      "difficulty": "Medium",
+      "published": "September 24, 2025",
+      "author": "Chadley Marie De Lara",
+      "tags": ["Asian", "Main Dish", "Meat"],
+      "ingredients": [
+        {
+          "category": "For the Katsu",
+          "items": [
+            { "amount": "4", "name": "chicken breast cutlets (pounded thin) or pork cutlets" },
+            { "amount": "1 cup", "name": "all-purpose flour" },
+            { "amount": "2", "name": "eggs, beaten" },
+            { "amount": "2 cups", "name": "panko breadcrumbs" },
+            { "amount": "To taste", "name": "salt and pepper" },
+            { "amount": "As needed", "name": "vegetable oil for frying" }
+          ]
+        },
+        {
+          "category": "For the Curry Sauce",
+          "items": [
+            { "amount": "2 tablespoons", "name": "butter" },
+            { "amount": "1", "name": "onion, diced" },
+            { "amount": "2", "name": "carrots, diced" },
+            { "amount": "2", "name": "potatoes, cubed" },
+            { "amount": "3 tablespoons", "name": "curry powder/3 cubes curry" },
+            { "amount": "2 tablespoons", "name": "flour" },
+            { "amount": "2 cups", "name": "chicken broth" },
+            { "amount": "1 tablespoon", "name": "soy sauce" },
+            { "amount": "1 teaspoon", "name": "sugar" },
+            { "amount": "To taste", "name": "salt" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Make the Curry Sauce - Heat butter in a large pot over medium heat.",
+        "Sauté onions until translucent, about 5 minutes.",
+        "Add carrots and potatoes, cook for 3-4 minutes.",
+        "Sprinkle in curry powder and flour, stir for 1 minute.",
+        "Gradually add chicken broth, stirring constantly.",
+        "Add soy sauce and sugar.",
+        "Simmer for 20-25 minutes until vegetables are tender.",
+        "Season with salt and blend if you want a smoother texture.",
+        "Prepare the Katsu - Season cutlets with salt and pepper.",
+        "Set up three stations: flour in one dish, beaten eggs in another, panko in a third.",
+        "Coat each cutlet in flour, then egg, then panko, pressing gently.",
+        "Heat oil in a large pan to 350°F (175°C).",
+        "Fry cutlets for 3-4 minutes per side until golden brown.",
+        "Drain on paper towels and slice into strips.",
+        "Serve: Place sliced katsu over rice and pour the warm curry sauce over top. Garnish with chopped green onions if desired."
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Fry the katsu until golden brown and let it rest on a wire rack to keep it crispy before serving with curry."
+        },
+        {
+          "title": "Storage",
+          "text": "Store leftover curry and katsu separately in airtight containers in the fridge for up to 2 days; reheat gently to maintain texture."
+        },
+        {
+          "title": "Variations",
+          "text": "Substitute chicken with pork, tofu, or shrimp, add vegetables like carrots and potatoes to the curry, or adjust spice level with chili or garam masala."
+        }
+      ]
+    },
+    {
+      "id": "molokhia",
+      "name": "Molokhia",
+      "description": "What else can warm you up better than a hearty bowl of soup? Molokhia is a Middle Eastern dish that originated from Egypt thousands of years ago, and the dish's name came from the Arabic word Mulukia (meaning royals) and the word malek meaning king, referring to food served exclusively to royalty. Eating this dish is so fulfilling because of the amount of labour and love that goes into it! My dad would buy 5-6 big bunches of these green leaves, and our family would gather around the room to pick apart the leaves from its long stems before washing and finely chopping it with a mincing knife the next day for it to be cooked. This soup is fulfilling and packed with the healthiest benefits to keep you nourished.",
+      "image": "images/Molokhia.png",
+      "prepTime": "20 minutes",
+      "cookTime": "40 minutes",
+      "servings": "6 people",
+      "difficulty": "Easy",
+      "published": "September 24, 2025",
+      "author": "Rania Nabil Abdelfattah",
+      "tags": ["Middle Eastern", "Main Dish", "Side Dish", "Vegetable"],
+      "ingredients": [
+        {
+          "category": "For the Molokhia",
+          "items": [
+            { "amount": "1 lb", "name": "fresh molokhia leaves, stems removed and finely minced (or frozen chopped molokhia)" },
+            { "amount": "6 cups", "name": "chicken or vegetable broth" },
+            { "amount": "1 whole", "name": "chicken, cut into pieces (optional)" },
+            { "amount": "1", "name": "bay leaf" },
+            { "amount": "1", "name": "onion" },
+            { "amount": "To taste", "name": "salt and black pepper" }
+          ]
+        },
+        {
+          "category": "For the Taklia (Spice Mixture)",
+          "items": [
+            { "amount": "6", "name": "garlic cloves, minced" },
+            { "amount": "2 tablespoons", "name": "ground coriander" },
+            { "amount": "3 tablespoons", "name": "ghee or vegetable oil" },
+            { "amount": "1/4 teaspoon", "name": "ground black pepper" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Prepare the broth: If using chicken, place chicken pieces in a large pot with 8 cups water, bay leaf, onion, salt, and pepper. Bring to boil, then simmer for 20 minutes until tender. Remove chicken, bay leaf, and onion then strain broth, reserving 6 cups. Set aside the chicken.",
+        "Cook the molokhia: Bring the reserved broth to a boil in a large pot. Add the minced molokhia leaves gradually while stirring constantly to prevent clumping. Reduce heat to medium and simmer for 8-10 minutes, stirring frequently.",
+        "Prepare the taklia: In a small pan, heat ghee or oil over medium heat. Add minced garlic and cook until golden and fragrant, about 2 minutes. Add ground coriander and black pepper, stirring for 30 seconds until aromatic.",
+        "Combine everything: Pour the hot taklia mixture into the simmering molokhia while stirring vigorously. The mixture should sizzle.",
+        "Final simmer: Continue cooking for 3-5 minutes, stirring occasionally. The molokhia should have a slightly thick, soupy consistency with a distinctive slimy texture.",
+        "Fry chicken: While the molokhia is simmering, fry the boiled chicken in batches for 10-12 minutes on each side until golden brown. Remove and set aside.",
+        "Season and serve: Taste the molokhia and adjust salt and pepper. Remove from heat immediately to prevent overcooking.",
+        "Plate: Serve hot in bowls over Egyptian white rice with fried chicken."
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Never cover the pot while cooking molokhia as this can make it too slimy. Stir constantly when adding leaves to prevent lumps."
+        },
+        {
+          "title": "Storage",
+          "text": "Best consumed fresh, but leftovers can be refrigerated for 3 days. Reheat gently and add a splash of broth if needed."
+        },
+        {
+          "title": "Variations",
+          "text": "Make vegetarian using vegetable broth, add beef or lamb instead of chicken, or use whole molokhia leaves without mincing it for a Lebanese variation. Some regions add tomato paste to the taklia for extra flavor."
+        }
+      ]
+    },
+    {
+      "id": "fettuccine-alfredo",
+      "name": "Fettuccine Alfredo",
+      "description": "One of the most memorable alfredo dishes I've tasted was my close friend's recipe during high school. Cooked surrounded by friends in her little kitchen, I was reminded of not only the comforting taste of her pasta dish, but also of the presence of everyone I loved dearly. This dish may be simple and quick to make, but not everything hearty and fulfilling should be difficult to do. It's rich, creamy, delicious, and can be made for any occasion, whether for yourself or for gatherings with friends, let this be a memorable dish to you as it is for me.",
+      "image": "images/Fettuccine Alfredo.png",
+      "prepTime": "10 minutes",
+      "cookTime": "15 minutes",
+      "servings": "4 people",
+      "difficulty": "Easy",
+      "published": "September 24, 2025",
+      "author": "Rania Nabil Abdelfattah",
+      "tags": ["European", "Main Dish", "Pantry"],
+      "ingredients": [
+        {
+          "category": "For the Pasta",
+          "items": [
+            { "amount": "1 lb", "name": "fettuccine pasta" },
+            { "amount": "As needed", "name": "salt for pasta water" }
+          ]
+        },
+        {
+          "category": "For the Alfredo Sauce",
+          "items": [
+            { "amount": "4 tablespoons", "name": "butter" },
+            { "amount": "2 tablespoons", "name": "all-purpose flour" },
+            { "amount": "2 cups", "name": "whole milk" },
+            { "amount": "3", "name": "garlic cloves, finely chopped" },
+            { "amount": "1/2 teaspoon", "name": "salt (or to taste)" },
+            { "amount": "1/4 teaspoon", "name": "black pepper" },
+            { "amount": "1/4 teaspoon", "name": "garlic powder" },
+            { "amount": "1/2 cup", "name": "grated Parmesan cheese (optional)" }
+          ]
+        },
+        {
+          "category": "For Garnish",
+          "items": [
+            { "amount": "As needed", "name": "fresh parsley, chopped (optional)" },
+            { "amount": "As needed", "name": "extra Parmesan cheese for serving" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Cook the pasta: Bring a large pot of salted water to boil. Add fettuccine and cook according to package directions until al dente. Reserve 1/2 cup pasta water before draining.",
+        "Make the roux: In a large skillet or saucepan, melt butter over medium heat. Add flour and whisk constantly for 1-2 minutes to create a light roux without browning.",
+        "Add aromatics: Add finely chopped garlic to the roux and cook for 30 seconds until fragrant, stirring constantly to prevent burning.",
+        "Create the sauce base: Gradually pour in milk while whisking continuously to prevent lumps. Bring to a gentle simmer and cook for 3-4 minutes, whisking frequently until sauce begins to thicken.",
+        "Season the sauce: Add salt, black pepper, and garlic powder. Whisk well and taste for seasoning adjustments.",
+        "Add cheese (if using): Remove from heat and gradually whisk in Parmesan cheese until melted and smooth. If the sauce is too thick, add reserved pasta water a tablespoon at a time.",
+        "Combine with pasta: Add drained fettuccine to the sauce and toss gently until well coated. If needed, add more pasta water to achieve desired consistency.",
+        "Serve: Transfer to serving plates immediately and garnish with fresh parsley and additional Parmesan if desired."
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Keep the heat at medium to prevent the milk from curdling. Whisk constantly when adding milk to avoid lumps in your sauce."
+        },
+        {
+          "title": "Storage",
+          "text": "Best served immediately. Leftovers can be refrigerated for 2 days - reheat gently with a splash of milk to restore creaminess."
+        },
+        {
+          "title": "Variations",
+          "text": "Add cooked chicken or shrimp for protein, substitute with almond or oat milk for dairy-free version, or add steamed broccoli for extra vegetables."
+        }
+      ]
+    },
+    {
+      "id": "sourdough-like-a-pro",
+      "name": "Sourdough Like a Pro!",
+      "description": "You probably scrolled by a sourdough bread on TikTok or Instagram during the pandemic lockdown and was inspired to bake one successful loaf but find it intimidating with the mention of 'sourdough starter' because what even is that? Don't most of us just know about yeast before the pandemic happened? And because I had too much time on my hands when the world shut down, I decided to try to bake all on my own and as I write this I'm proud to finally share with you my (and 100% successful!) take on sourdough loaf, perfect for a weekend bake as the entire process takes more than one day.",
+      "image": "images/Sourdough Like a Pro!.png",
+      "prepTime": "15 minutes",
+      "cookTime": "24-28 hours",
+      "servings": "6 people",
+      "difficulty": "Hard",
+      "published": "October 16, 2025",
+      "author": "Chadley Marie De Lara",
+      "tags": ["European", "Snack", "Pantry"],
+      "ingredients": [
+        {
+          "category": "Main Ingredients",
+          "items": [
+            { "amount": "80g", "name": "sourdough starter" },
+            { "amount": "300g", "name": "warm, filtered water" },
+            { "amount": "8g", "name": "salt" },
+            { "amount": "400g", "name": "bread flour/type 00 flour" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Combine all the wet ingredients: In a large mixing bowl, mix together sourdough starter and water to dilute the starter.",
+        "Combine wet ingredients with dry ingredients: Add salt and flour to the rest of the ingredients, mix together until a loose dough forms. Careful not to overmix.",
+        "Rest for 1 hour: Using a damp baking cloth, cover the dough for 1 hour and let it rest on the counter.",
+        "Begin the stretch and fold method: Begin the stretch and fold method 4x for two hours with 30 minute interval rest in between stretch and fold. Cover the dough with a damp baking towel with each 30 minute interval rest. This allows the dough to form a strong gluten structure.",
+        "Note: To keep the dough moist and prevent it from drying and sticking to the bowl, mildly spray the dough with filtered water during the stretch and fold process. Additionally, keep your hands wet to make it easier to do the stretch and fold process and avoid the dough from sticking to your hands.",
+        "Let the dough rest: Allow the dough to rest for another 6 hours over the counter, continuously covering it with damp baking cloth.",
+        "Shape the dough: After 6 hours, shape the dough using the tuck and fold method. Keep the dough tight and form a large (football shape) dough. At this point, if you have a banneton you may use it to store the dough in the fridge. Any circular container will do, just make sure to generously sprinkle the top of the dough with more flour before storing it inside the fridge.",
+        "Slow proofing in the fridge: Cover your banneton/container with the dough using the same damp baking cloth to prevent it from drying during the resting process whilst inside the fridge. Let it slowly proof and double in size for 10-12hrs.",
+        "Begin the baking process - The next day: To prevent the dough from overproofing, it is ideal to bake the dough after proofing for 12-24hrs. Take the dough out of the fridge and let it rest on the counter for 1hr before baking.",
+        "Preheat oven: Preheat your oven to 425-450 degrees with a dutch oven inside for 1hr/whilst the dough is resting on the counter.",
+        "Final tuck and shape: Finally, remove the dough from the banneton/container into a floured surface and keep it tight and tucked one more time before scoring the top of the dough. Don't forget to sprinkle a bit more flour on top of the dough for best results.",
+        "Bake the dough: Bake the dough for 25-30mins at 450 degrees with the dutch oven covered. Remove the cover after 30mins and lower the temperature to 425-430 degrees for another 20mins.",
+        "Et voila: After baking, let the sourdough loaf rest on the counter for 30mins before slicing through. This will ensure the loaf is fully baked all the way through whilst ensuring the slicing process will leave minimal crumbs on your table."
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Feed your starter regularly and allow the dough to ferment slowly for a tangy, airy loaf."
+        },
+        {
+          "title": "Storage",
+          "text": "Wrap baked sourdough in a cloth or paper bag at room temperature for up to 3 days; freeze slices for longer storage."
+        },
+        {
+          "title": "Variations",
+          "text": "Add seeds, herbs, or dried fruits to the dough, or make sandwich loaves or boules."
+        }
+      ]
+    },
+    {
+      "id": "pancakes",
+      "name": "Fluffy Pancakes",
+      "description": "Perhaps we can all agree that the best and quickest way to satisfy our craving for a cake is by making pancakes whether it's pancakes with a side of bacon or just a stack of pancakes with a nice, melty butter and some sweet maple syrup (or if you're on the healthy side of things, accompany it with some berries!) This quick and easy recipe will have you wanting to make it almost every morning.",
+      "image": "images/Pancakes.png",
+      "prepTime": "15 minutes",
+      "cookTime": "30 minutes",
+      "servings": "4 people (12-14 pancakes)",
+      "difficulty": "Easy",
+      "published": "October 16, 2025",
+      "author": "Chadley Marie De Lara",
+      "tags": ["American", "Breakfast", "Pantry"],
+      "ingredients": [
+        {
+          "category": "Main Ingredients",
+          "items": [
+            { "amount": "2 cups", "name": "all-purpose flour" },
+            { "amount": "2 tablespoons", "name": "white sugar" },
+            { "amount": "2 teaspoons", "name": "baking powder" },
+            { "amount": "1 teaspoon", "name": "baking soda" },
+            { "amount": "½ teaspoon", "name": "salt" },
+            { "amount": "2 cups", "name": "buttermilk (or regular milk with 1 tablespoon vinegar, let sit 5 mins)" },
+            { "amount": "2 large", "name": "eggs" },
+            { "amount": "¼ cup", "name": "melted butter (plus extra for the pan)" },
+            { "amount": "1 teaspoon", "name": "vanilla extract" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Prepare the dry ingredients: In a large mixing bowl, whisk together flour, sugar, baking powder, baking soda, and salt until well combined and no lumps remain. Set aside.",
+        "Mix the wet ingredients: In a separate bowl, whisk together buttermilk, eggs, melted butter, and vanilla extract until smooth.",
+        "Combine everything: Pour the wet ingredients into the dry ingredients. Gently fold together using a spatula or wooden spoon until just combined. The batter should be slightly lumpy - don't overmix or your pancakes will be tough! Let the batter rest for 5 minutes while your pan heats up.",
+        "Begin the cooking process - Heat a non-stick pan or griddle over medium heat and add a small pat of butter.",
+        "Pour ¼ cup of batter for each pancake onto the pan.",
+        "Cook until bubbles form on the surface and the edges look set (about 2-3 minutes).",
+        "Flip and cook for another 1-2 minutes until golden brown.",
+        "Keep finished pancakes warm in a low oven (200°F) while you cook the rest.",
+        "Serve immediately: Stack them high and serve with your favorite toppings - maple syrup, butter, fresh berries, whipped cream, or even peanut butter. Best enjoyed while still warm!"
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Don't press down on the pancakes while cooking - let them puff up naturally for maximum fluffiness!"
+        },
+        {
+          "title": "Storage",
+          "text": "Keep cooked pancakes in an airtight container in the fridge for up to 2 days; reheat in a skillet or microwave."
+        },
+        {
+          "title": "Variations",
+          "text": "Mix in blueberries, chocolate chips, or banana slices, or use whole wheat or oat flour for a healthier twist."
+        }
+      ]
+    },
+    {
+      "id": "not-another-loaded-fries",
+      "name": "Not Another Loaded Fries",
+      "description": "Nacho fries are the ultimate comfort food mashup that combines two beloved snacks into one incredible dish. Whether you're hosting game night with friends, need a late-night study snack, or just craving something indulgent, these loaded fries hit every craving. As a uni student who's hosted plenty of movie nights and casual hangouts, I've learned that nacho fries are always a crowd-pleaser and surprisingly easy to pull off. This recipe came together after experimenting with different seasoning blends and topping combinations, and now it's my go-to whenever I want something satisfying without spending hours in the kitchen. The best part? You can customize the toppings based on what you have in your fridge or what your friends like. These fries disappear fast, so consider making a double batch!",
+      "image": "images/Not Another Loaded Fries.png",
+      "prepTime": "15 minutes",
+      "cookTime": "30 minutes",
+      "servings": "4-6 people",
+      "difficulty": "Easy",
+      "published": "October 16, 2025",
+      "author": "Chadley Marie De Lara",
+      "tags": ["American", "Snack", "Meat"],
+      "ingredients": [
+        {
+          "category": "For the Fries",
+          "items": [
+            { "amount": "4 large", "name": "russet potatoes, cut into fries" },
+            { "amount": "3 tablespoons", "name": "vegetable oil" },
+            { "amount": "1 teaspoon", "name": "paprika" },
+            { "amount": "1 teaspoon", "name": "garlic powder" },
+            { "amount": "½ teaspoon", "name": "cumin" },
+            { "amount": "½ teaspoon", "name": "chili powder" },
+            { "amount": "To taste", "name": "salt and pepper" }
+          ]
+        },
+        {
+          "category": "For the Toppings",
+          "items": [
+            { "amount": "2 cups", "name": "shredded cheddar cheese (or Mexican blend)" },
+            { "amount": "1 cup", "name": "sour cream" },
+            { "amount": "1 cup", "name": "salsa or pico de gallo" },
+            { "amount": "1", "name": "jalapeño, sliced (fresh or pickled)" },
+            { "amount": "¼ cup", "name": "sliced black olives" },
+            { "amount": "2", "name": "green onions, chopped" },
+            { "amount": "As needed", "name": "smoked bacon" },
+            { "amount": "As needed", "name": "fresh cilantro (optional)" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Make the seasoned fries: Cut potatoes into even-sized fries and soak in cold water for 10 minutes to remove excess starch. Pat completely dry with paper towels. Toss the fries with oil, paprika, garlic powder, cumin, chili powder, salt, and pepper until evenly coated.",
+        "Cook the fries: Spread fries in a single layer on baking sheets. Bake at 425°F (220°C) for 25-30 minutes, flipping halfway through, until golden and crispy. Alternatively, air fry at 400°F for 15-20 minutes or deep fry at 350°F for 4-5 minutes.",
+        "Prepare the seasoned beef: While fries are cooking, heat oil in a pan over medium-high heat. Add ground beef and break it apart with a spatula. Cook until browned, about 5-7 minutes. Drain excess fat. Add taco seasoning and water, stir well, and simmer for 3-4 minutes until the sauce thickens. Set aside.",
+        "Assemble the nacho fries - Transfer hot fries to a large oven-safe platter or baking dish.",
+        "Sprinkle half the cheese over the fries.",
+        "Add the seasoned beef evenly across the top.",
+        "Sprinkle the remaining cheese over everything.",
+        "Place under the broiler for 2-3 minutes until cheese is melted and bubbly.",
+        "Add the final toppings: Remove from the oven and immediately top with dollops of sour cream, salsa, jalapeño slices, black olives, green onions, and cilantro."
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Make sure your fries are really crispy before adding toppings, otherwise they'll get soggy. And don't skip the broiling step - that melted cheese is what holds everything together!"
+        },
+        {
+          "title": "Storage",
+          "text": "Store fries and toppings separately in airtight containers in the fridge for up to 1 day; reheat fries in the oven to restore crispiness."
+        },
+        {
+          "title": "Variations",
+          "text": "Top with cheese, bacon, pulled chicken, chili, or veggies, and drizzle with sauces like garlic aioli, sriracha, or ranch."
+        }
+      ]
+    },
+    {
+      "id": "inabraw-dinengdeng",
+      "name": "Inabraw/Dinengdeng",
+      "description": "This is my all-time favorite vegetable recipe and a dish that truly feels like home. Growing up in an Ilokano household, Inabraw was a constant presence at our dining table, appearing at lunch or dinner about 10 times a month if I had to estimate. Every time I eat it, the warmth fills not just my stomach but my heart as well. This isn't just food; it's a living tradition passed down through generations, from my lola's grandmother to her, then to my mom, and now to me. Getting the specifics of the Inabraw recipe was a bit of a challenge, as my lola was already getting a little impatient with me when I asked for her recipe. She doesn't like me asking too many questions. But hey, I've done it! I might need to wait three business days before asking for another recipe.",
+      "image": "images/Inabraw (Dinengdeng).png",
+      "prepTime": "15 minutes",
+      "cookTime": "20 minutes",
+      "servings": "4 people",
+      "difficulty": "Easy",
+      "published": "October 17, 2025",
+      "author": "Helena Tantoco",
+      "tags": ["Asian", "Main Dish", "Side Dish", "Vegetable"],
+      "ingredients": [
+        {
+          "category": "For the Soup Base",
+          "items": [
+            { "amount": "3 cups", "name": "water" },
+            { "amount": "2 cloves", "name": "garlic, crushed" },
+            { "amount": "1", "name": "chicken cube (preferrably Knorr)" },
+            { "amount": "3 tbsp", "name": "bagoong isda (fish sauce/anchovy sauce)" }
+          ]
+        },
+        {
+          "category": "For the Vegetables",
+          "items": [
+            { "amount": "1", "name": "gabi (taro), sliced into cubes" },
+            { "amount": "2 medium", "name": "eggplant, sliced into 2-inch length" },
+            { "amount": "¼ kg", "name": "squash (kalabasa), sliced into cubes" },
+            { "amount": "1 bunch/tali", "name": "string beans (sitaw), cut into 3-inch lengths" },
+            { "amount": "1 bunch/tali", "name": "jute leaves (saluyot)" }
+          ]
+        },
+        {
+          "category": "Other Addition",
+          "items": [
+            { "amount": "As needed", "name": "dried armang (small dried fish) for extra umami depth" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Build the broth: Pour 3 cups of water into a cooking pot and bring to a boil over medium-high heat. Add the crushed garlic and chicken cube, stirring until the cube completely dissolves.",
+        "Cook the root vegetables: Add the gabi and squash first, as they take longer to cook. Cover and simmer for 8 to 10 minutes until slightly tender.",
+        "Add the anchovy sauce: Pour in the 3 tablespoons of bagoong isda and stir well to combine.",
+        "Add the remaining vegetables: Add the eggplant and string beans. Cover and cook for another 5 minutes until all vegetables are tender but not mushy.",
+        "Finish with greens: Add the jute leaves (saluyot) and stir gently. Cook uncovered for 1 minute until the greens are wilted.",
+        "Add the armang: Turn off the heat and add the washed dried small shrimps (armang) without covering the pot. Stir the soup to incorporate the armang throughout.",
+        "Serve: Transfer to a serving plate or bowl. Serve hot with warm white rice and enjoy!"
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Don't overcook the vegetables—they should be tender but still have a slight bite to maintain their nutrients and texture. Adjust the bagoong amount to your taste, starting with less if you're new to this ingredient."
+        },
+        {
+          "title": "Storage",
+          "text": "Best enjoyed fresh, but leftovers can be refrigerated for up to 2 days. Note that the vegetables will soften further upon reheating."
+        },
+        {
+          "title": "Variations",
+          "text": "Use whatever fresh vegetables are available—moringa leaves (malunggay), okra, or bitter melon are excellent additions. Pair with fried fish or grilled meat for a heartier meal."
+         }
+      ]
+    },
+    {
+      "id": "buttered-garlic-shrimp",
+      "name": "Buttered Garlic Shrimp",
+      "description": "Buttered Garlic Shrimp is a beloved Filipino seafood dish featuring plump shrimp sautéed in an indulgent sauce of butter, garlic, and savory seasonings. This dish showcases the Filipino love for bold garlic flavors combined with the richness of butter, often enhanced with a splash of lemon-lime soda (like Sprite or 7UP) for a subtle sweetness that balances the savory elements. It's a popular pulutan (appetizer paired with drinks) and a favorite main dish served with steaming white rice. This recipe captures the restaurant-style version often found in Filipino seafood houses and dampa-style eateries, where fresh seafood meets simple but flavorful cooking techniques.",
+      "image": "images/Buttered Garlic Shrimp.png",
+      "prepTime": "15 minutes",
+      "cookTime": "10 minutes",
+      "servings": "4 people",
+      "difficulty": "Easy",
+      "published": "October 18, 2025",
+      "author": "Karissa Mae Manicad",
+      "tags": ["Asian", "Side Dish", "Seafood"],
+      "ingredients": [
+        {
+          "category": "Main Ingredients",
+          "items": [
+            { "amount": "1 pound", "name": "large shrimp (21-25 count), cleaned and deveined, tails on" },
+            { "amount": "½ cup", "name": "butter (1 stick)" },
+            { "amount": "8 cloves", "name": "garlic, minced" },
+            { "amount": "½ cup", "name": "lemon-lime soda (Sprite or 7UP)" },
+            { "amount": "2 tablespoons", "name": "oyster sauce" },
+            { "amount": "1 tablespoon", "name": "fish sauce (patis)" },
+            { "amount": "¼ teaspoon", "name": "ground black pepper" },
+            { "amount": "¼ teaspoon", "name": "salt" },
+            { "amount": "2 tablespoons", "name": "chopped green onions" },
+            { "amount": "1 tablespoon", "name": "chopped parsley (optional)" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Season the shrimp: Pat shrimp dry with paper towels. Season lightly with salt and pepper. Set aside.",
+        "Sauté the garlic: In a large skillet or wok over medium heat, melt 2 tablespoons of butter. Add minced garlic and sauté for 30-45 seconds until fragrant and lightly golden, being careful not to burn.",
+        "Cook the shrimp: Increase heat to medium-high. Add seasoned shrimp in a single layer and cook for 1-2 minutes per side until they turn pink and are just cooked through.",
+        "Create the sauce: Add remaining butter, lemon-lime soda, oyster sauce, and fish sauce. Stir gently to combine and coat the shrimp evenly. Let the sauce simmer for 1-2 minutes until slightly reduced.",
+        "Finish and garnish: Remove from heat. Add ground black pepper and adjust seasoning if needed. Transfer to a serving platter and garnish with chopped green onions and parsley.",
+        "Serve immediately: Best enjoyed hot with steamed white rice to soak up the delicious garlic butter sauce."
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Use fresh or fully thawed shrimp, avoid overcooking, and keep some sauce to drizzle over rice; cook in batches and for extra richness, combine butter and margarine."
+        },
+        {
+          "title": "Storage",
+          "text": "Store leftovers in an airtight container in the fridge for up to 2 days; reheat gently in a skillet."
+        },
+        {
+          "title": "Variations",
+          "text": "Substitute crab or crawfish, add chili for heat, splash in white wine, or stir in mayonnaise/heavy cream for a creamier sauce."
+        }
+      ]
+    },
+    {
+      "id": "tabbouleh",
+      "name": "Tabbouleh",
+      "description": "Tabbouleh is a fresh-tasting classic and popular Lebanese salad. The star of this dish is parsley—and lots of it! This salad is a classic in Middle Eastern homes and my mom would make this paired with any main dish, it pairs amazingly well no matter what the dish is. It's a simple salad of very finely chopped vegetables, lots of fresh parsley and bulgur wheat, all tossed with lime juice and olive oil. It's refreshing, citrusy, and minty fresh!",
+      "image": "images/Tabbouleh.jpg",
+      "prepTime": "20 minutes",
+      "cookTime": "0 minutes",
+      "servings": "4-6 people",
+      "difficulty": "Easy",
+      "published": "October 20, 2025",
+      "author": "Rania Nabil Abdelfattah",
+      "tags": ["Middle Eastern", "Side Dish", "Vegetable"],
+      "ingredients": [
+        {
+          "category": "Main Ingredients",
+          "items": [
+            { "amount": "½ cup", "name": "fine bulgur wheat" },
+            { "amount": "3 bunches", "name": "fresh parsley, finely chopped" },
+            { "amount": "¼ cup", "name": "fresh mint leaves, finely chopped" },
+            { "amount": "3 medium", "name": "tomatoes, finely diced" },
+            { "amount": "1 small", "name": "cucumber, finely diced (optional)" },
+            { "amount": "3", "name": "green onions, finely sliced" },
+            { "amount": "¼ cup", "name": "fresh lemon juice (adjust to taste)" },
+            { "amount": "¼ cup", "name": "extra virgin olive oil" },
+            { "amount": "To taste", "name": "salt and black pepper" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Prepare the bulgur: Place bulgur in a bowl and cover with hot water. Let it soak for 10–15 minutes or until tender, then drain and squeeze out excess water.",
+        "Chop the herbs and vegetables: Finely chop parsley, mint, tomatoes, cucumber, and green onions.",
+        "Combine everything: In a large bowl, mix the soaked bulgur with the chopped herbs and vegetables.",
+        "Dress the salad: Add lemon juice, olive oil, salt, and pepper. Toss until well combined.",
+        "Serve: Chill for 15–20 minutes before serving to allow flavors to meld."
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Use fine bulgur for authentic texture—if using coarse bulgur, soak longer until fully softened."
+        },
+        {
+          "title": "Storage",
+          "text": "Store in an airtight container in the fridge for up to 2 days; stir before serving as the bulgur absorbs dressing over time."
+        },
+        {
+          "title": "Variations",
+          "text": "Add diced cucumber for crunch, pomegranate seeds for sweetness, or quinoa instead of bulgur for a gluten-free option."
+        }
+      ]
+    },
+    {
+      "id": "stuffed-grape-leaves",
+      "name": "Stuffed Grape Leaves",
+      "description": "Stuffed grape leaves, or traditionally called Warak Enab, is a popular and culinary treasure found all over the Middle East with its own regional variation from Egypt, Jordan, Palestine, Syria, and more. This is a classic Middle Eastern dish that I grew up eating a lot, often shared by my mom's Middle Eastern friends who each had their own flavorful version. It features stuffed fillings of rice, ground beef, spices & herbs wrapped in grape leaves and cooked in a simmering broth. It is a healthy dish which you can be satisfied with by eating alone with a slice of lemon.",
+      "image": "images/Stuffed Grape Leaves.jpg",
+      "prepTime": "30 minutes",
+      "cookTime": "1 hour",
+      "servings": "6-8 people",
+      "difficulty": "Medium",
+      "published": "October 20, 2025",
+      "author": "Rania Nabil Abdelfattah",
+      "tags": ["Middle Eastern", "Main Dish", "Side Dish", "Vegetable", "Meat"],
+      "ingredients": [
+        {
+          "category": "Main Ingredients",
+          "items": [
+            { "amount": "1 jar (about 60)", "name": "grape leaves, rinsed and drained" },
+            { "amount": "1 ½ cups", "name": "uncooked short-grain rice" },
+            { "amount": "1 medium", "name": "onion, finely chopped" },
+            { "amount": "2 medium", "name": "tomatoes, finely diced" },
+            { "amount": "½ cup", "name": "chopped fresh parsley" },
+            { "amount": "¼ cup", "name": "chopped fresh mint" },
+            { "amount": "¼ cup", "name": "olive oil (plus extra for drizzling)" },
+            { "amount": "¼ cup", "name": "fresh lemon juice (plus more for serving)" },
+            { "amount": "1 tsp", "name": "salt" },
+            { "amount": "½ tsp", "name": "black pepper" },
+            { "amount": "½ tsp", "name": "ground allspice" },
+            { "amount": "1–2 cups", "name": "vegetable or chicken broth (for simmering)" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Prepare the leaves: Rinse grape leaves thoroughly and blanch in hot water for 2 minutes to soften. Drain and set aside.",
+        "Make the filling: In a bowl, combine rice, onion, tomatoes, parsley, mint, olive oil, lemon juice, salt, pepper, and allspice. Mix well.",
+        "Stuff the leaves: Place one grape leaf shiny side down, add 1 tablespoon of filling near the stem end, and fold the sides over before rolling tightly into a small log. Repeat with remaining leaves.",
+        "Arrange in the pot: Line the bottom of a large pot with a few grape leaves to prevent sticking, then layer stuffed rolls tightly.",
+        "Cook: Pour broth and a bit of olive oil over the rolls until just covered. Place a heatproof plate on top to keep them from floating. Simmer gently over low heat for 45–60 minutes until rice is tender.",
+        "Serve: Drizzle with extra lemon juice and olive oil before serving warm or chilled."
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Roll the grape leaves snugly but not too tight—rice will expand as it cooks."
+        },
+        {
+          "title": "Storage",
+          "text": "Store leftovers in an airtight container in the fridge for up to 3 days; reheat gently or enjoy cold."
+        },
+        {
+          "title": "Variations",
+          "text": "Add ground lamb or beef to the rice mixture for a heartier version, or include pine nuts and raisins for extra texture and sweetness."
+        }
+      ]
+    },
+    {
+      "id": "swedish-meatballs",
+      "name": "Swedish Meatballs",
+      "description": "Guilty as charged—when I think of Sweden, the first thing that comes to mind is their iconic meatballs. I still remember my first taste back in junior high, during a trip to IKEA with my friends. The store's food court offered an array of Swedish dishes, but the famous meatballs immediately caught my attention. Naturally, I had to try them, and I was hooked from the very first bite. They were juicy, tender, and packed with flavor, perfectly complemented by the rich, creamy gravy. Ever since that day, I couldn't get the taste out of my head, which inspired me to recreate this comforting dish at home.",
+      "image": "images/Swedish Meatballs.jpg",
+      "prepTime": "20 minutes",
+      "cookTime": "25 minutes",
+      "servings": "4-6 people",
+      "difficulty": "Medium",
+      "published": "October 20, 2025",
+      "author": "Rania Nabil Abdelfattah",
+      "tags": ["European", "Main Dish", "Meat"],
+      "ingredients": [
+        {
+          "category": "For the Meatballs",
+          "items": [
+            { "amount": "1 tbsp", "name": "olive oil" },
+            { "amount": "1 small", "name": "onion, finely chopped" },
+            { "amount": "1 clove", "name": "garlic, minced" },
+            { "amount": "1 lb", "name": "ground beef" },
+            { "amount": "½ cup", "name": "breadcrumbs" },
+            { "amount": "¼ cup", "name": "milk" },
+            { "amount": "1", "name": "egg" },
+            { "amount": "½ tsp", "name": "salt" },
+            { "amount": "¼ tsp", "name": "black pepper" },
+            { "amount": "¼ tsp", "name": "ground allspice" },
+            { "amount": "¼ tsp", "name": "ground nutmeg" },
+            { "amount": "2 tbsp", "name": "butter (for frying)" }
+          ]
+        },
+        {
+          "category": "For the Gravy",
+          "items": [
+            { "amount": "3 tbsp", "name": "butter" },
+            { "amount": "3 tbsp", "name": "all-purpose flour" },
+            { "amount": "2 cups", "name": "beef broth" },
+            { "amount": "1 cup", "name": "heavy cream" },
+            { "amount": "1 tsp", "name": "Worcestershire sauce" },
+            { "amount": "To taste", "name": "salt and pepper" }
+          ]
+        }
+      ],
+      "instructions": [
+        "Prepare the meatballs: In a bowl, combine breadcrumbs and milk; let soak for 5 minutes. Add onion, garlic, beef, egg, salt, pepper, allspice, and nutmeg. Mix gently until well combined.",
+        "Shape and cook: Roll into 1-inch balls. Heat butter in a skillet over medium heat and cook meatballs in batches until browned on all sides. Remove and set aside.",
+        "Make the gravy: In the same skillet, melt butter, then whisk in flour to create a roux. Gradually pour in beef broth while whisking continuously. Add cream and Worcestershire sauce, then simmer until thickened.",
+        "Combine and serve: Return meatballs to the gravy and simmer for 5–7 minutes to soak up flavor. Serve warm with mashed potatoes, egg noodles, or lingonberry jam."
+      ],
+      "notes": [
+        {
+          "title": "Pro Tip",
+          "text": "Chill the meat mixture before shaping—it helps the meatballs hold their shape while cooking."
+        },
+        {
+          "title": "Storage",
+          "text": "Store leftovers in an airtight container in the fridge for up to 3 days; reheat gently over low heat."
+        },
+        {
+          "title": "Variations",
+          "text": "Use all turkey or a combination of beef and pork, add a dash of Dijon mustard for depth, or serve with rice instead of potatoes."
+        }
+      ]
+    }
+  ]
+}
