@@ -1,16 +1,16 @@
-# Recipes4Keeps
+# Recipes 4 Keeps
 
-A responsive recipe sharing website built with HTML5 and CSS3 that celebrates family recipes and culinary traditions. This project showcases modern web development practices including accessibility, responsive design, and clean semantic markup.
+A responsive recipe sharing website built with HTML5 and CSS3 that celebrates family recipes and culinary traditions. This project showcases modern web development practices including accessibility, intuitive design, and clean semantic markup.
 
 ## About the Project
 
-Recipes4Keeps is a platform where users can browse, search, and discover family recipes passed down through generations. The website emphasizes the cultural significance of food and the importance of preserving culinary traditions. Built by four friends who bonded over their love for cooking, this site represents our journey in sharing treasured recipes from our families.
+Recipes 4 Keeps is a platform where users can browse, search, and discover family recipes passed down through generations. The website emphasizes the cultural significance of food and the importance of preserving culinary traditions. Built by four friends who bonded over their love for cooking, this site represents our journey in sharing treasured recipes from our families.
 
 The design uses a warm orange gradient color scheme that evokes comfort and home cooking, perfectly matching our tagline: "Foods and recipes are treasures worth keeping..."
 
 ## Live Demo
 
-Open `index.html` in your browser to explore the website locally.
+Open `index.html` in your browser to explore the website locally. For the best development experience, use VS Code with the Live Server extension.
 
 ## Project Structure
 
@@ -19,10 +19,19 @@ MS1 - HTML + CSS/
 ├── .vscode/
 │   └── launch.json          # VS Code debugging configuration
 ├── images/                   # Recipe and team photos
-│   ├── Recipe4Keeps_White.png
+│   ├── Recipe4Keeps_White.png  # Website logo (white version for header)
 │   ├── Japchae.png
 │   ├── Molokhia.png
-│   └── ...
+│   ├── Maja Blanca.jpg
+│   ├── Ooey Gooey Brownies.png
+│   ├── Curry Katsu.png
+│   ├── Fettuccine Alfredo.png
+│   ├── Siu Mai.jpg
+│   ├── Stir-Fry Garlic Bok Choy with Mushroom.jpg
+│   ├── Yna.jpeg             # Team member photos
+│   ├── Mae.png
+│   ├── Rans.jpg
+│   └── Chad.jpeg
 ├── index.html               # Homepage with featured recipes
 ├── about.html              # About Us page with team bios
 ├── recipes.html            # All Recipes page with filtering options
@@ -47,6 +56,7 @@ The main landing page that welcomes visitors and showcases what makes our recipe
 - Sticky navigation header with integrated search functionality
 - Hover effects on recipe cards showing cooking metadata
 - Responsive grid layout that adapts from 4 columns to 1 column based on screen size
+- Category tags positioned directly below recipe titles for consistent alignment across all cards
 
 ### About Us (about.html)
 
@@ -78,8 +88,10 @@ Browse and filter through the complete recipe catalog.
 
 **Features:**
 - Interactive filter buttons with gradient backgrounds and hover effects
-- Consistent recipe card design across all pages
+- Consistent recipe card design across all pages with aligned category tags
 - 4-column grid layout (locked for wider screens, responsive for tablets and mobile)
+- Left-aligned "Recommended Recipes" title for improved visual hierarchy
+- 8 recipe cards displayed across two rows with consistent vertical spacing
 
 ### Recipe Detail (recipe-detail.html)
 
@@ -128,10 +140,11 @@ The color scheme was carefully chosen to create a warm, inviting atmosphere:
 - Single column for mobile devices (below 768px)
 
 **Card Design**: Consistent card styling across all recipe displays
-- Rounded corners (8-15px border radius)
+- Rounded corners (15px border radius for recipe cards, 8px for other cards)
 - Subtle shadows (0 5px 20px rgba(0,0,0,0.1))
 - Hover animations with translateY transforms
 - White background with proper contrast
+- Category tags positioned immediately after titles for visual consistency
 
 **Navigation**: Sticky header that remains accessible while scrolling
 - CSS-only hamburger menu for mobile devices
@@ -300,22 +313,23 @@ All images are stored in the `/images` directory:
 - **Team Photos**: Named after team members (e.g., `Yna.jpeg`, `Mae.png`)
 
 **Image Requirements:**
-- Recipe photos: Recommended 600x400px minimum
-- Team photos: Square format, minimum 300x300px
-- Logo: PNG with transparent background
+- Recipe photos: Recommended 600x400px minimum for optimal display
+- Team photos: Square format, minimum 300x300px (displayed at 150x150px)
+- Logo: PNG with transparent background (white version for header)
+- All images optimized for web (compressed to under 200KB per image)
 
 ## Content Management
 
 ### Recipe Card Structure
 
 Each recipe card includes:
-- High-quality food photography
-- Recipe title (max 3 lines for visual consistency)
-- Brief description (2-3 sentences)
-- Cooking time with clock icon
-- Difficulty badge (color-coded)
-- Category tags (cuisine, meal type, etc.)
-- "View Recipe" call-to-action button
+- High-quality food photography (180px height, full width)
+- Recipe title (max 3 lines for visual consistency, 1.2rem font size)
+- Category tags positioned directly below title (for alignment consistency)
+- Brief description (2-3 sentences, fills available space)
+- Cooking time with clock icon (shown on hover)
+- Difficulty badge (color-coded: green/orange/red)
+- "View Recipe" call-to-action button (stays at bottom via `margin-top: auto`)
 
 ### Team Member Structure
 
@@ -344,9 +358,9 @@ The search functionality is currently visual-only (requires JavaScript implement
 
 ### Category Tag Alignment
 
-**Challenge**: Recipe cards had inconsistent heights because tags appeared at different positions.
+**Challenge**: Recipe cards had inconsistent heights because tags appeared at different positions, creating a scattered, unaligned appearance.
 
-**Solution**: Restructured the card content order using CSS flexbox with `order` property, placing tags immediately after titles. Used `margin-top: auto` on the button to push it to the bottom of each card.
+**Solution**: Restructured the card content order using CSS flexbox with the `order` property, placing tags immediately after titles. This ensures all cards have tags in the same visual position regardless of title length. Used `margin-top: auto` on the button to push it to the bottom of each card, and set `flex: 1` on the description to fill remaining space.
 
 ### CSS-only Mobile Navigation
 
@@ -362,9 +376,9 @@ The search functionality is currently visual-only (requires JavaScript implement
 
 ### Consistent Recipe Card Spacing
 
-**Challenge**: Cards bunching together vertically, especially on larger screens.
+**Challenge**: Cards bunching together vertically on larger screens, especially when multiple rows of recipes were displayed.
 
-**Solution**: Implemented explicit `row-gap` values with `!important` to ensure consistent vertical spacing. Set `grid-auto-rows` with `minmax()` for uniform card heights.
+**Solution**: Implemented explicit `row-gap` values of 5rem with `!important` to ensure consistent vertical spacing between rows. Set `grid-auto-rows` with `minmax(420px, auto)` for uniform card heights. Added individual card `margin-bottom: 3rem` as an additional safeguard for proper spacing.
 
 ## Future Enhancements
 
@@ -568,4 +582,4 @@ For questions about this project or collaboration opportunities:
 
 **Built with ❤️ and a love for cooking**
 
-*Last Updated: September 2025*
+*Last Updated: October 2025*
