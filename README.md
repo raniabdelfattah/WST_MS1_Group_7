@@ -1,16 +1,16 @@
-# Recipes4Keeps
+# Recipes 4 Keeps
 
 A responsive recipe sharing website built with HTML5 and CSS3 that celebrates family recipes and culinary traditions. This project showcases modern web development practices including accessibility, responsive design, and clean semantic markup.
 
 ## About the Project
 
-Recipes4Keeps is a platform where users can browse, search, and discover family recipes passed down through generations. The website emphasizes the cultural significance of food and the importance of preserving culinary traditions. Built by four friends who bonded over their love for cooking, this site represents our journey in sharing treasured recipes from our families.
+Recipes 4 Keeps is a platform where users can browse, search, and discover family recipes passed down through generations. The website emphasizes the cultural significance of food and the importance of preserving culinary traditions. Built by four friends who bonded over their love for cooking, this site represents our journey in sharing treasured recipes from our families.
 
 The design uses a warm orange gradient color scheme that evokes comfort and home cooking, perfectly matching our tagline: "Foods and recipes are treasures worth keeping..."
 
 ## Live Demo
 
-Open `index.html` in your browser to explore the website locally.
+Open `index.html` in your browser to explore the website locally. For the best development experience, use VS Code with the Live Server extension.
 
 ## Project Structure
 
