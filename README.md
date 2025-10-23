@@ -27,7 +27,7 @@ MS1 - HTML + CSS/
 ├── recipes.html            # All Recipes page with filtering
 ├── recipe-detail.html      # Individual recipe template
 ├── recipes.json            # Recipe database (16 recipes)
-├── styles.css              # Main stylesheet (2000+ lines)
+├── styles.css              # Main stylesheet 
 ├── script.js               # Main JavaScript functionality
 ├── recipe-detail.js        # Recipe detail page logic
 └── README.md               # Documentation
@@ -601,4 +601,4 @@ For questions about this project or collaboration opportunities:
 
 **Built with ❤️ and a love for cooking**
 
-*Last Updated: September 2025*
+*Last Updated: October 2025*
