@@ -1994,7 +1994,8 @@ body {
 
 .offcanvas-start {
     top: 0 !important;
-    left: 0 !important;
+    right: 0 !important; 
+    left: auto !important;
 }
 
 /* Close button styling to match current CSS design */
@@ -2023,15 +2024,23 @@ body {
 
 /* Keep current mobile menu styles */
 @media (max-width: 767px) {
-    /* Show the offcanvas content properly */
+
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+    }
+    
+    /* Show Bootstrap adds .show class, make it visible */
     .navbar__menu.offcanvas {
         display: flex !important;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         padding: 4rem 2rem;
-        visibility: hidden; /* Hidden by default */
-        transform: translateX(-100%); /* Off screen */
+        visibility: hidden;
+        transform: translateX(100%); /* Slide from RIGHT instead of left */
         transition: transform 0.3s ease, visibility 0.3s ease;
     }
     
@@ -2481,4 +2490,176 @@ body:has(.offcanvas.show) .navbar__toggle {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+}
+
+/* ==========================================================================
+   NEWSLETTER POPUP
+   ========================================================================== */
+
+.newsletter-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.newsletter-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.newsletter-popup {
+    background: white;
+    border-radius: 15px;
+    padding: 3rem 2.5rem;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.newsletter-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: #666;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.newsletter-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.newsletter-content {
+    text-align: center;
+}
+
+.newsletter-icon {
+    font-size: 3.5rem;
+    color: #CD853F;
+    margin-bottom: 1rem;
+}
+
+.newsletter-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.newsletter-description {
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.newsletter-input {
+    padding: 1rem 1.5rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.newsletter-input:focus {
+    border-color: #CD853F;
+}
+
+.newsletter-submit {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.newsletter-submit:hover {
+    background: linear-gradient(135deg, #f7931e, #ffcc02);
+    transform: translateY(-2px);
+}
+
+.newsletter-success {
+    display: none;
+    color: #10b981;
+    margin-top: 1.5rem;
+}
+
+.newsletter-success.show {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.newsletter-success i {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.newsletter-success p {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+@media (max-width: 767px) {
+    .newsletter-popup {
+        padding: 2rem 1.5rem;
+    }
+    
+    .newsletter-title {
+        font-size: 1.5rem;
+    }
+    
+    .newsletter-icon {
+        font-size: 2.5rem;
+    }
 }

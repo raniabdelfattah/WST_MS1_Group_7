@@ -14,12 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (navMenu) {
         // When menu opens - prevent body scroll
         navMenu.addEventListener('show.bs.offcanvas', function () {
-            document.body.style.overflow = 'hidden';
+            document.body.classList.add('menu-open');
         });
         
         // When menu closes - restore body scroll
         navMenu.addEventListener('hide.bs.offcanvas', function () {
-            document.body.style.overflow = '';
+            document.body.classList.remove('menu-open');
         });
         
         // Close menu when nav link is clicked
@@ -80,15 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
             sessionStorage.removeItem('searchTerm');
         }
         
-        // Also check for category filter from homepage
-        const selectedCategory = sessionStorage.getItem('selectedCategory');
-        if (selectedCategory) {
-            sessionStorage.removeItem('selectedCategory');
-            const matchingFilter = document.querySelector(`[data-filter="${selectedCategory}"]`);
-            if (matchingFilter) {
-                matchingFilter.click();
-            }
-        }
     }
     
     function performSearch(term) {
@@ -338,25 +329,64 @@ function announceToScreenReader(message) {
     setTimeout(() => announcement.remove(), 1000);
 }
     
-    // ==========================================================================
-    // CATEGORY CARD INTERACTIONS (Homepage)
-    // ==========================================================================
-    
-    const categoryCards = document.querySelectorAll('.category-card');
-    categoryCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const categoryName = this.querySelector('.category-card__name').textContent;
-            sessionStorage.setItem('selectedCategory', categoryName.toLowerCase());
-            window.location.href = 'recipes.html';
-        });
+// ==========================================================================
+// CATEGORY CARD INTERACTIONS (Homepage)
+// ==========================================================================
+
+const categoryCards = document.querySelectorAll('.category-card');
+categoryCards.forEach(card => {
+    card.addEventListener('click', function() {
+        const categoryName = this.querySelector('.category-card__name').textContent.trim().toLowerCase();
+        const categoryFilter = categoryName.replace(/\s+/g, '-');
         
-        card.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                this.click();
-            }
-        });
+        // Store the category filter (with hyphens)
+        sessionStorage.setItem('selectedCategory', categoryFilter);
+        
+        // Redirect to recipes page
+        window.location.href = 'recipes.html';
     });
+    
+    // Keyboard accessibility
+    card.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+        }
+    });
+});
+
+
+// ==========================================================================
+// AUTO-APPLY CATEGORY FILTER ON RECIPES PAGE
+// ==========================================================================
+
+    if (window.location.pathname.includes('recipes.html')) {
+        // Check for category filter from homepage
+        const selectedCategory = sessionStorage.getItem('selectedCategory');
+        
+        if (selectedCategory) {
+            // Small delay to ensure page loads first
+            setTimeout(() => {
+                // Clear the stored category
+                sessionStorage.removeItem('selectedCategory');
+                
+                // Find and click the matching filter button
+                const matchingFilter = document.querySelector(`[data-filter="${selectedCategory}"]`);
+                
+                if (matchingFilter) {
+                    matchingFilter.click();
+                    
+                    // Scroll to filter results
+                    setTimeout(() => {
+                        const resultsSection = document.querySelector('.filter-results-section');
+                        if (resultsSection) {
+                            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }, 300);
+                }
+            }, 100);
+        }
+    }
     
     // ==========================================================================
     // RECIPE CARD ANIMATIONS 
@@ -435,38 +465,6 @@ function announceToScreenReader(message) {
         });
     });
     
-    // ==========================================================================
-    // RECIPE DETAIL PAGE - INGREDIENT CHECKLIST
-    // ==========================================================================
-    
-    const ingredients = document.querySelectorAll('.ingredient');
-    ingredients.forEach((ingredient, index) => {
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.className = 'ingredient-checkbox';
-        checkbox.id = `ingredient-${index}`;
-        
-        const label = document.createElement('label');
-        label.htmlFor = `ingredient-${index}`;
-        label.className = 'ingredient-label';
-        
-        const contentWrapper = document.createElement('span');
-        contentWrapper.className = 'ingredient-content';
-        contentWrapper.innerHTML = ingredient.innerHTML;
-        ingredient.innerHTML = '';
-        
-        label.appendChild(checkbox);
-        label.appendChild(contentWrapper);
-        ingredient.appendChild(label);
-        
-        checkbox.addEventListener('change', function() {
-            if (this.checked) {
-                contentWrapper.classList.add('checked');
-            } else {
-                contentWrapper.classList.remove('checked');
-            }
-        });
-    });
     
     // ==========================================================================
     // PRINT RECIPE FUNCTIONALITY
@@ -511,3 +509,67 @@ function announceToScreenReader(message) {
     
 });
 
+
+    // ==========================================================================
+    // NEWSLETTER POPUP FUNCTIONALITY - HOMEPAGE ONLY
+    // ==========================================================================
+    
+    const newsletterOverlay = document.getElementById('newsletterOverlay');
+    const closeNewsletterBtn = document.getElementById('closeNewsletter');
+    const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterSuccess = document.getElementById('newsletterSuccess');
+    
+    // Only run on homepage (index.html)
+    const isHomepage = window.location.pathname.includes('index.html') || 
+                       window.location.pathname === '/' || 
+                       window.location.pathname.endsWith('/');
+    
+    if (newsletterOverlay && isHomepage) {
+        // Check if user has already subscribed
+        const hasSubscribed = localStorage.getItem('newsletterSubscribed');
+        
+        // Show popup immediately on homepage if user hasn't subscribed
+        if (!hasSubscribed) {
+            // Small delay to ensure page is fully loaded
+            setTimeout(() => {
+                newsletterOverlay.classList.add('show');
+            }, 500);
+        }
+        
+        // Close popup when clicking the X button
+        if (closeNewsletterBtn) {
+            closeNewsletterBtn.addEventListener('click', function() {
+                newsletterOverlay.classList.remove('show');
+            });
+        }
+        
+        // Close popup when clicking outside
+        newsletterOverlay.addEventListener('click', function(e) {
+            if (e.target === newsletterOverlay) {
+                newsletterOverlay.classList.remove('show');
+            }
+        });
+        
+        // Handle form submission
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const emailInput = this.querySelector('.newsletter-input');
+                const email = emailInput.value;
+                
+                // Hide form and show success message
+                newsletterForm.style.display = 'none';
+                newsletterSuccess.classList.add('show');
+                
+                // Store subscription status permanently
+                localStorage.setItem('newsletterSubscribed', 'true');
+                localStorage.setItem('subscriberEmail', email);
+                
+                // Close popup after 3 seconds
+                setTimeout(() => {
+                    newsletterOverlay.classList.remove('show');
+                }, 3000);
+            });
+        }
+    }
