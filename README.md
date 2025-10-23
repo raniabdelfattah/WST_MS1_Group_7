@@ -204,7 +204,7 @@ This project prioritizes inclusive design:
 | **JavaScript (ES6+)** | DOM manipulation, event handling, async/await for data fetching, local/session storage for user preferences |
 | **Bootstrap 5.3.2** | Offcanvas component for mobile navigation menu with smooth slide-in animations |
 | **JSON Database** | `recipes.json` file stores all recipe data (16 recipes) with structured fields for ingredients, instructions, metadata |
-| **DOM Manipulation** | Dynamic recipe card generation, filter system, search functionality, ingredient checklist, newsletter popup |
+| **DOM Manipulation** | Dynamic recipe card generation, filter system, search functionality, newsletter popup |
 | **Font Awesome 6.4.0** | Icon library via CDN for consistent iconography across the site |
 
 ### Key Features Implementation
@@ -413,7 +413,6 @@ The search functionality is currently visual-only (requires JavaScript implement
 - ✅ Interactive filter system with multiple selections
 - ✅ Dynamic recipe card generation from JSON
 - ✅ Newsletter popup with localStorage persistence
-- ✅ Ingredient checklist on recipe detail pages
 - ✅ Social sharing functionality
 - ✅ Smooth scroll-to-top button
 - ✅ Mobile offcanvas navigation menu
