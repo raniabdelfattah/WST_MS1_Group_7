@@ -1,32 +1,96 @@
 // ==========================================================================
 // RECIPES 4 KEEPS - MAIN JAVASCRIPT FILE
-// Handles functionality for all HTML pages
 // ==========================================================================
 
-document.addEventListener('DOMContentLoaded', function() {
+(function() {
+    'use strict';
+    
+    // Cache DOM elements (search once, use many times)
+    let DOM = {};
+    
+    // Recipe data storage
+    let recipesData = [];
+    let recipesLoaded = false;
+    let activeFilters = new Set();
     
     // ==========================================================================
-    // NAVIGATION FUNCTIONALITY - Bootstrap Offcanvas Integration
+    // INITIALIZE - Run when page loads
     // ==========================================================================
     
-    const navMenu = document.getElementById('nav-menu');
+    document.addEventListener('DOMContentLoaded', function() {
+        // Store all DOM elements we'll use
+        cacheDOMElements();
+        
+        // Set up all event listeners
+        initNavigation();
+        initSearch();
+        initFilters();
+        initCategoryCards();
+        initRecipeAnimations();
+        initSocialSharing();
+        initScrollToTop();
+        initPrintButton();
+        initNewsletter();
+        initCommentForm();
+        
+        // Load recipes if on recipes page
+        if (document.querySelector('.filters')) {
+            loadRecipesForFiltering();
+        }
+        
+        // Check for search term from other pages
+        if (window.location.pathname.includes('recipes.html')) {
+            handleSearchRedirect();
+        }
+        
+        // Check for category filter from homepage
+        if (window.location.pathname.includes('recipes.html')) {
+            handleCategoryRedirect();
+        }
+    });
     
-    if (navMenu) {
-        // When menu opens - prevent body scroll
-        navMenu.addEventListener('show.bs.offcanvas', function () {
+    // ==========================================================================
+    // CACHE DOM ELEMENTS - Store references once
+    // ==========================================================================
+    
+    function cacheDOMElements() {
+        DOM = {
+            navMenu: document.getElementById('nav-menu'),
+            searchForms: document.querySelectorAll('.search__form'),
+            searchInputs: document.querySelectorAll('.search__input'),
+            filterButtons: document.querySelectorAll('.filter-item'),
+            categoryCards: document.querySelectorAll('.category-card'),
+            recipeCards: document.querySelectorAll('.recipe-card'),
+            featuredSection: document.querySelector('.featured-recipes'),
+            newsletterOverlay: document.getElementById('newsletterOverlay'),
+            newsletterForm: document.getElementById('newsletterForm'),
+            closeNewsletterBtn: document.getElementById('closeNewsletter'),
+            commentForm: document.getElementById('commentForm')
+        };
+    }
+    
+    // ==========================================================================
+    // NAVIGATION - Bootstrap Offcanvas menu
+    // ==========================================================================
+    
+    function initNavigation() {
+        if (!DOM.navMenu) return;
+        
+        // Prevent body scroll when menu opens
+        DOM.navMenu.addEventListener('show.bs.offcanvas', function() {
             document.body.classList.add('menu-open');
         });
         
-        // When menu closes - restore body scroll
-        navMenu.addEventListener('hide.bs.offcanvas', function () {
+        // Restore scroll when menu closes
+        DOM.navMenu.addEventListener('hide.bs.offcanvas', function() {
             document.body.classList.remove('menu-open');
         });
         
-        // Close menu when nav link is clicked
+        // Close menu when clicking nav links
         const navLinks = document.querySelectorAll('.navbar__link');
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
-                const offcanvasInstance = bootstrap.Offcanvas.getInstance(navMenu);
+                const offcanvasInstance = bootstrap.Offcanvas.getInstance(DOM.navMenu);
                 if (offcanvasInstance) {
                     offcanvasInstance.hide();
                 }
@@ -35,82 +99,76 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ==========================================================================
-    // SEARCH FUNCTIONALITY - WITH REDIRECT TO RECIPES PAGE
+    // SEARCH - With redirect to recipes page
     // ==========================================================================
     
-    const searchForms = document.querySelectorAll('.search__form');
-    searchForms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const searchInput = this.querySelector('.search__input');
-            const searchTerm = searchInput.value.trim().toLowerCase();
-            
-            if (searchTerm) {
-                // Store search term in sessionStorage
-                sessionStorage.setItem('searchTerm', searchTerm);
+    function initSearch() {
+        DOM.searchForms.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const searchInput = this.querySelector('.search__input');
+                const searchTerm = searchInput.value.trim().toLowerCase();
                 
-                // If not on recipes page, redirect to it
-                if (!window.location.pathname.includes('recipes.html')) {
-                    window.location.href = 'recipes.html';
-                } else {
-                    // Already on recipes page, perform search
-                    performSearch(searchTerm);
+                if (searchTerm) {
+                    // Save search term
+                    sessionStorage.setItem('searchTerm', searchTerm);
+                    
+                    // Go to recipes page if not there
+                    if (!window.location.pathname.includes('recipes.html')) {
+                        window.location.href = 'recipes.html';
+                    } else {
+                        performSearch(searchTerm);
+                    }
+                    
+                    // Close mobile menu if open
+                    const offcanvasInstance = bootstrap.Offcanvas.getInstance(DOM.navMenu);
+                    if (offcanvasInstance) {
+                        offcanvasInstance.hide();
+                    }
                 }
-                
-                // Close offcanvas menu if open
-                const offcanvasInstance = bootstrap.Offcanvas.getInstance(navMenu);
-                if (offcanvasInstance) {
-                    offcanvasInstance.hide();
-                }
-            }
+            });
         });
-    });
+    }
     
-    // Check if there's a search term when recipes page loads
-    if (window.location.pathname.includes('recipes.html')) {
+    // Handle search when arriving from another page
+    function handleSearchRedirect() {
         const searchTerm = sessionStorage.getItem('searchTerm');
         if (searchTerm) {
-            // Populate search inputs with the term
-            document.querySelectorAll('.search__input').forEach(input => {
-                input.value = searchTerm;
-            });
-            // Perform the search
+            DOM.searchInputs.forEach(input => input.value = searchTerm);
             performSearch(searchTerm);
-            // Clear the stored search term
             sessionStorage.removeItem('searchTerm');
         }
-        
     }
     
+    // Perform the actual search
     function performSearch(term) {
-        const recipeCards = document.querySelectorAll('.recipe-card');
         let foundCount = 0;
         const foundRecipes = [];
         
-        recipeCards.forEach(card => {
+        DOM.recipeCards.forEach(card => {
             const title = card.querySelector('.recipe-card__title')?.textContent.toLowerCase() || '';
             const description = card.querySelector('.recipe-card__description')?.textContent.toLowerCase() || '';
             const tags = Array.from(card.querySelectorAll('.recipe-tags__item'))
                 .map(tag => tag.textContent.toLowerCase())
                 .join(' ');
             
-            // Search in title, description, and tags
+            // Check if search term matches
             if (title.includes(term) || description.includes(term) || tags.includes(term)) {
                 foundCount++;
                 foundRecipes.push(card.cloneNode(true));
             }
         });
         
-        // Show search results message and cards
         showSearchResults(term, foundCount, foundRecipes);
     }
     
+    // Display search results
     function showSearchResults(term, count, recipes) {
-        // Remove existing search results section
+        // Remove old results
         const existingSection = document.querySelector('.search-results-section');
         if (existingSection) existingSection.remove();
         
-        // Create search results section
+        // Create new results section
         const resultsSection = document.createElement('section');
         resultsSection.className = 'search-results-section';
         resultsSection.innerHTML = `
@@ -118,88 +176,77 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="search-message">
                     <div class="search-message__content">
                         <strong>Search Results:</strong> Found ${count} recipe(s) for "${term}"
-                        ${count === 0 ? '<br><small>Try searching for different keywords or <button class="clear-search-link" onclick="clearSearch()">clear the search</button>.</small>' : ''}
+                        ${count === 0 ? '<br><small>Try different keywords or <button class="clear-search-link" onclick="window.clearSearch()">clear search</button>.</small>' : ''}
                     </div>
-                    <button class="search-message__close" onclick="clearSearch()" aria-label="Clear search">
-                        ×
-                    </button>
+                    <button class="search-message__close" onclick="window.clearSearch()" aria-label="Clear search">×</button>
                 </div>
                 ${count > 0 ? '<div class="recipe-grid search-results-grid"></div>' : ''}
             </div>
         `;
         
-        // Insert before the recommended recipes section
-        const featuredSection = document.querySelector('.featured-recipes');
-        if (featuredSection) {
-            featuredSection.parentNode.insertBefore(resultsSection, featuredSection);
+        // Insert before featured recipes
+        if (DOM.featuredSection) {
+            DOM.featuredSection.parentNode.insertBefore(resultsSection, DOM.featuredSection);
             
-            // Add found recipe cards to the search results grid
+            // Add recipe cards
             if (count > 0) {
                 const resultsGrid = resultsSection.querySelector('.search-results-grid');
-                recipes.forEach(card => {
-                    resultsGrid.appendChild(card);
-                });
+                recipes.forEach(card => resultsGrid.appendChild(card));
             }
             
-            // Scroll to search results
+            // Scroll to results
             resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
     
-    // Clear search function (global)
+    // Clear search (exposed globally for onclick)
     window.clearSearch = function() {
-        // Remove search results section
-        const existingSection = document.querySelector('.search-results-section');
-        if (existingSection) existingSection.remove();
-        
-        // Clear search inputs
-        document.querySelectorAll('.search__input').forEach(input => input.value = '');
-        
-        // Clear any active filters
+        document.querySelector('.search-results-section')?.remove();
+        DOM.searchInputs.forEach(input => input.value = '');
         document.querySelectorAll('.filter-item.active').forEach(btn => btn.classList.remove('active'));
         activeFilters.clear();
-        
-        // Remove filter results section
-        const filterSection = document.querySelector('.filter-results-section');
-        if (filterSection) filterSection.remove();
+        document.querySelector('.filter-results-section')?.remove();
     };
     
-// ==========================================================================
-// FILTER FUNCTIONALITY - USING JSON DATA
-// ==========================================================================
-
-let recipesData = [];
-let recipesLoaded = false;
-
-// Load recipes data on page load
-async function loadRecipesForFiltering() {
-    try {
-        const response = await fetch('recipes.json');
-        if (!response.ok) throw new Error('Failed to load recipes');
-        const data = await response.json();
-        recipesData = data.recipes;
-        recipesLoaded = true;
-        console.log('✓ Recipes loaded for filtering:', recipesData.length);
-    } catch (error) {
-        console.error('Error loading recipes:', error);
+    // ==========================================================================
+    // FILTERS - Using JSON data
+    // ==========================================================================
+    
+    async function loadRecipesForFiltering() {
+        try {
+            const response = await fetch('recipes.json');
+            if (!response.ok) throw new Error('Failed to load recipes');
+            const data = await response.json();
+            recipesData = data.recipes;
+            recipesLoaded = true;
+        } catch (error) {
+            console.error('Error loading recipes:', error);
+        }
     }
-}
-
-// Only load if on recipes page
-if (document.querySelector('.filters')) {
-    loadRecipesForFiltering();
-}
-
-const filterButtons = document.querySelectorAll('.filter-item');
-let activeFilters = new Set();
-
-filterButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        console.log('Button clicked:', this.dataset.filter);
-        
+    
+    function initFilters() {
+        DOM.filterButtons.forEach(button => {
+            // Make keyboard accessible
+            button.setAttribute('role', 'button');
+            button.setAttribute('tabindex', '0');
+            
+            // Mouse click
+            button.addEventListener('click', handleFilterClick);
+            
+            // Keyboard support
+            button.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+    }
+    
+    function handleFilterClick() {
         const filterValue = this.dataset.filter.toLowerCase();
         
-        // Toggle active state
+        // Toggle filter on/off
         this.classList.toggle('active');
         
         if (this.classList.contains('active')) {
@@ -208,180 +255,144 @@ filterButtons.forEach(button => {
             activeFilters.delete(filterValue);
         }
         
-        console.log('Active filters:', Array.from(activeFilters));
-        
-        // Apply filters
         applyFilters();
-    });
-});
-
-function applyFilters() {
-    console.log('applyFilters called');
-    
-    if (!recipesLoaded || recipesData.length === 0) {
-        console.warn('Recipes not loaded yet, retrying in 500ms...');
-        setTimeout(applyFilters, 500);
-        return;
     }
     
-    const recipeCards = document.querySelectorAll('.featured-recipes .recipe-card');
-    let visibleCount = 0;
-    const filteredRecipes = [];
-    
-    if (activeFilters.size === 0) {
-        const filterSection = document.querySelector('.filter-results-section');
-        if (filterSection) filterSection.remove();
-        return;
-    }
-    
-    recipeCards.forEach(card => {
-        const titleElement = card.querySelector('.recipe-card__title');
-        const recipeTitle = titleElement ? titleElement.textContent.trim() : '';
-        
-        const recipeData = recipesData.find(r => r.name === recipeTitle);
-        
-        if (!recipeData) {
-            console.warn(`Recipe not found: ${recipeTitle}`);
+    function applyFilters() {
+        // Wait for recipes to load
+        if (!recipesLoaded || recipesData.length === 0) {
+            setTimeout(applyFilters, 500);
             return;
         }
         
-        const tags = recipeData.tags.map(tag => 
-            tag.toLowerCase().replace(/\s+/g, '-')
-        );
-        tags.push(recipeData.difficulty.toLowerCase());
+        // If no filters, remove results
+        if (activeFilters.size === 0) {
+            document.querySelector('.filter-results-section')?.remove();
+            return;
+        }
         
-        const matches = Array.from(activeFilters).some(filter => {
-            return tags.some(tag => {
-                const normalizedTag = tag.replace(/\s+/g, '-');
-                const normalizedFilter = filter.replace(/\s+/g, '-');
-                return normalizedTag.includes(normalizedFilter) || normalizedFilter.includes(normalizedTag);
+        let visibleCount = 0;
+        const filteredRecipes = [];
+        
+        DOM.recipeCards.forEach(card => {
+            const recipeTitle = card.querySelector('.recipe-card__title')?.textContent.trim();
+            const recipeData = recipesData.find(r => r.name === recipeTitle);
+            
+            if (!recipeData) return;
+            
+            // Normalize tags
+            const tags = recipeData.tags.map(tag => tag.toLowerCase().replace(/\s+/g, '-'));
+            tags.push(recipeData.difficulty.toLowerCase());
+            
+            // Check if any filter matches
+            const matches = Array.from(activeFilters).some(filter => {
+                return tags.some(tag => {
+                    const normalizedTag = tag.replace(/\s+/g, '-');
+                    const normalizedFilter = filter.replace(/\s+/g, '-');
+                    return normalizedTag.includes(normalizedFilter) || normalizedFilter.includes(normalizedTag);
+                });
             });
+            
+            if (matches) {
+                visibleCount++;
+                filteredRecipes.push(card.cloneNode(true));
+            }
         });
         
-        if (matches) {
-            visibleCount++;
-            filteredRecipes.push(card.cloneNode(true));
-        }
-    });
-    
-    console.log('Matches found:', visibleCount);
-    showFilterResults(visibleCount, filteredRecipes);
-    announceToScreenReader(`Showing ${visibleCount} recipes`);
-}
-
-function showFilterResults(count, recipes) {
-    const existingSection = document.querySelector('.filter-results-section');
-    if (existingSection) existingSection.remove();
-    
-    const resultsSection = document.createElement('section');
-    resultsSection.className = 'filter-results-section';
-    
-    const activeFilterNames = Array.from(activeFilters).map(filter => {
-        const btn = document.querySelector(`[data-filter="${filter}"]`);
-        return btn ? btn.textContent : filter;
-    }).join(', ');
-    
-    resultsSection.innerHTML = `
-        <div class="container">
-            <div class="search-message filter-message">
-                <div class="search-message__content">
-                    <strong>Filter Results:</strong> Showing ${count} recipe(s) for: ${activeFilterNames}
-                    ${count === 0 ? '<br><small>No recipes match the selected filters. Try different combinations or <button class="clear-search-link" onclick="clearAllFilters()">clear filters</button>.</small>' : ''}
-                </div>
-                <button class="search-message__close" onclick="clearAllFilters()" aria-label="Clear filters">
-                    ×
-                </button>
-            </div>
-            ${count > 0 ? '<div class="recipe-grid filter-results-grid"></div>' : ''}
-        </div>
-    `;
-    
-    const featuredSection = document.querySelector('.featured-recipes');
-    if (featuredSection) {
-        featuredSection.parentNode.insertBefore(resultsSection, featuredSection);
-        
-        if (count > 0) {
-            const resultsGrid = resultsSection.querySelector('.filter-results-grid');
-            recipes.forEach(card => {
-                resultsGrid.appendChild(card);
-            });
-        }
-        
-        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showFilterResults(visibleCount, filteredRecipes);
+        announceToScreenReader(`Showing ${visibleCount} recipes`);
     }
-}
-
-window.clearAllFilters = function() {
-    document.querySelectorAll('.filter-item.active').forEach(btn => btn.classList.remove('active'));
-    activeFilters.clear();
     
-    const filterSection = document.querySelector('.filter-results-section');
-    if (filterSection) filterSection.remove();
-};
-
-function announceToScreenReader(message) {
-    const announcement = document.createElement('div');
-    announcement.setAttribute('role', 'status');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.className = 'sr-only';
-    announcement.textContent = message;
-    document.body.appendChild(announcement);
-    setTimeout(() => announcement.remove(), 1000);
-}
-    
-// ==========================================================================
-// CATEGORY CARD INTERACTIONS (Homepage)
-// ==========================================================================
-
-const categoryCards = document.querySelectorAll('.category-card');
-categoryCards.forEach(card => {
-    card.addEventListener('click', function() {
-        const categoryName = this.querySelector('.category-card__name').textContent.trim().toLowerCase();
-        const categoryFilter = categoryName.replace(/\s+/g, '-');
+    function showFilterResults(count, recipes) {
+        // Remove old results
+        document.querySelector('.filter-results-section')?.remove();
         
-        // Store the category filter (with hyphens)
-        sessionStorage.setItem('selectedCategory', categoryFilter);
+        // Get active filter names
+        const activeFilterNames = Array.from(activeFilters).map(filter => {
+            const btn = document.querySelector(`[data-filter="${filter}"]`);
+            return btn ? btn.textContent : filter;
+        }).join(', ');
         
-        // Redirect to recipes page
-        window.location.href = 'recipes.html';
-    });
-    
-    // Keyboard accessibility
-    card.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.click();
+        // Create results section
+        const resultsSection = document.createElement('section');
+        resultsSection.className = 'filter-results-section';
+        resultsSection.innerHTML = `
+            <div class="container">
+                <div class="search-message filter-message">
+                    <div class="search-message__content">
+                        <strong>Filter Results:</strong> Showing ${count} recipe(s) for: ${activeFilterNames}
+                        ${count === 0 ? '<br><small>No matches. Try different filters or <button class="clear-search-link" onclick="window.clearAllFilters()">clear filters</button>.</small>' : ''}
+                    </div>
+                    <button class="search-message__close" onclick="window.clearAllFilters()" aria-label="Clear filters">×</button>
+                </div>
+                ${count > 0 ? '<div class="recipe-grid filter-results-grid"></div>' : ''}
+            </div>
+        `;
+        
+        // Insert and populate
+        if (DOM.featuredSection) {
+            DOM.featuredSection.parentNode.insertBefore(resultsSection, DOM.featuredSection);
+            
+            if (count > 0) {
+                const resultsGrid = resultsSection.querySelector('.filter-results-grid');
+                recipes.forEach(card => resultsGrid.appendChild(card));
+            }
+            
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-    });
-});
-
-
-// ==========================================================================
-// AUTO-APPLY CATEGORY FILTER ON RECIPES PAGE
-// ==========================================================================
-
-    if (window.location.pathname.includes('recipes.html')) {
-        // Check for category filter from homepage
+    }
+    
+    // Clear all filters (exposed globally)
+    window.clearAllFilters = function() {
+        document.querySelectorAll('.filter-item.active').forEach(btn => btn.classList.remove('active'));
+        activeFilters.clear();
+        document.querySelector('.filter-results-section')?.remove();
+    };
+    
+    // ==========================================================================
+    // CATEGORY CARDS - Homepage navigation
+    // ==========================================================================
+    
+    function initCategoryCards() {
+        DOM.categoryCards.forEach(card => {
+            // Make keyboard accessible
+            card.setAttribute('tabindex', '0');
+            
+            // Mouse click
+            card.addEventListener('click', function() {
+                const categoryName = this.querySelector('.category-card__name').textContent.trim().toLowerCase();
+                const categoryFilter = categoryName.replace(/\s+/g, '-');
+                sessionStorage.setItem('selectedCategory', categoryFilter);
+                window.location.href = 'recipes.html';
+            });
+            
+            // Keyboard support
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+    }
+    
+    // Handle category filter from homepage
+    function handleCategoryRedirect() {
         const selectedCategory = sessionStorage.getItem('selectedCategory');
         
         if (selectedCategory) {
-            // Small delay to ensure page loads first
             setTimeout(() => {
-                // Clear the stored category
                 sessionStorage.removeItem('selectedCategory');
                 
-                // Find and click the matching filter button
                 const matchingFilter = document.querySelector(`[data-filter="${selectedCategory}"]`);
-                
                 if (matchingFilter) {
                     matchingFilter.click();
                     
-                    // Scroll to filter results
                     setTimeout(() => {
-                        const resultsSection = document.querySelector('.filter-results-section');
-                        if (resultsSection) {
-                            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
+                        document.querySelector('.filter-results-section')?.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
                     }, 300);
                 }
             }, 100);
@@ -389,90 +400,95 @@ categoryCards.forEach(card => {
     }
     
     // ==========================================================================
-    // RECIPE CARD ANIMATIONS 
+    // RECIPE ANIMATIONS - Fade in on scroll
     // ==========================================================================
     
-    const recipeCards = document.querySelectorAll('.recipe-card');
+    function initRecipeAnimations() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        DOM.recipeCards.forEach(card => observer.observe(card));
+    }
     
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    // ==========================================================================
+    // SOCIAL SHARING - Recipe detail page
+    // ==========================================================================
     
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Add fade-in class that will be handled by CSS.
-                entry.target.classList.add('fade-in');
-                observer.unobserve(entry.target);
+    function initSocialSharing() {
+        const shareButtons = document.querySelectorAll('.share-btn');
+        
+        shareButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const recipeTitle = document.querySelector('.recipe-info__title')?.textContent || 'Recipe';
+                const recipeUrl = window.location.href;
+                
+                if (this.classList.contains('share-btn--facebook')) {
+                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(recipeUrl)}`, '_blank', 'width=600,height=400');
+                } 
+                else if (this.classList.contains('share-btn--x')) {
+                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(recipeTitle)}&url=${encodeURIComponent(recipeUrl)}`, '_blank', 'width=600,height=400');
+                } 
+                else if (this.classList.contains('share-btn--pinterest')) {
+                    const imageUrl = document.querySelector('.recipe-hero__image')?.src || '';
+                    window.open(`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(recipeUrl)}&media=${encodeURIComponent(imageUrl)}&description=${encodeURIComponent(recipeTitle)}`, '_blank', 'width=600,height=400');
+                } 
+                else if (this.classList.contains('share-btn--email')) {
+                    const subject = `Check out this recipe: ${recipeTitle}`;
+                    const body = `I found this great recipe!\n\n${recipeUrl}`;
+                    window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                }
+            });
+        });
+    }
+    
+    // ==========================================================================
+    // SCROLL TO TOP BUTTON
+    // ==========================================================================
+    
+    function initScrollToTop() {
+        // Create button
+        const scrollTopBtn = document.createElement('button');
+        scrollTopBtn.className = 'scroll-to-top';
+        scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        scrollTopBtn.setAttribute('aria-label', 'Scroll to top');
+        document.body.appendChild(scrollTopBtn);
+        
+        // Show/hide on scroll
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
             }
         });
-    }, observerOptions);
-    
-    recipeCards.forEach(card => {
-        observer.observe(card);
-    });
-    
-    // ==========================================================================
-    // SOCIAL SHARING FUNCTIONALITY
-    // ==========================================================================
-    
-    const shareButtons = document.querySelectorAll('.share-btn');
-    shareButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const recipeTitle = document.querySelector('.recipe-info__title')?.textContent || 'Recipe';
-            const recipeUrl = window.location.href;
-            
-            if (this.classList.contains('share-btn--facebook')) {
-                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(recipeUrl)}`, '_blank', 'width=600,height=400');
-            } else if (this.classList.contains('share-btn--x')) {
-                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(recipeTitle)}&url=${encodeURIComponent(recipeUrl)}`, '_blank', 'width=600,height=400');
-            } else if (this.classList.contains('share-btn--pinterest')) {
-                const imageUrl = document.querySelector('.recipe-hero__image')?.src || '';
-                window.open(`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(recipeUrl)}&media=${encodeURIComponent(imageUrl)}&description=${encodeURIComponent(recipeTitle)}`, '_blank', 'width=600,height=400');
-            } else if (this.classList.contains('share-btn--email')) {
-                const subject = `Check out this recipe: ${recipeTitle}`;
-                const body = `I found this great recipe and thought you might like it!\n\n${recipeUrl}`;
-                window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            }
+        
+        // Scroll to top on click
+        scrollTopBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-    });
+    }
     
     // ==========================================================================
-    // SMOOTH SCROLL TO TOP BUTTON
+    // PRINT RECIPE BUTTON - Recipe detail page
     // ==========================================================================
     
-    const scrollTopBtn = document.createElement('button');
-    scrollTopBtn.className = 'scroll-to-top';
-    scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    scrollTopBtn.setAttribute('aria-label', 'Scroll to top');
-    document.body.appendChild(scrollTopBtn);
-    
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            scrollTopBtn.classList.add('show');
-        } else {
-            scrollTopBtn.classList.remove('show');
-        }
-    });
-    
-    scrollTopBtn.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    
-    
-    // ==========================================================================
-    // PRINT RECIPE FUNCTIONALITY
-    // ==========================================================================
-    
-    if (document.querySelector('.recipe-detail')) {
-    // Check if a print button already exists
-    if (!document.querySelector('.print-btn')) {
+    function initPrintButton() {
+        if (!document.querySelector('.recipe-detail')) return;
+        if (document.querySelector('.print-btn')) return; // Already exists
+        
         const printBtn = document.createElement('button');
         printBtn.className = 'btn btn--secondary print-btn';
         printBtn.innerHTML = '<i class="fas fa-print"></i> Print Recipe';
@@ -483,17 +499,121 @@ categoryCards.forEach(card => {
             recipeNav.style.justifyContent = 'space-between';
             recipeNav.style.alignItems = 'center';
             recipeNav.appendChild(printBtn);
+            
+            printBtn.addEventListener('click', () => window.print());
         }
-        
-        printBtn.addEventListener('click', function() {
-            window.print();
-        });
     }
-}
-
     
     // ==========================================================================
-    // ACCESSIBILITY ENHANCEMENTS
+    // NEWSLETTER POPUP - Homepage only
+    // ==========================================================================
+    
+    function initNewsletter() {
+        if (!DOM.newsletterOverlay) return;
+        
+        // Only show on homepage
+        const isHomepage = window.location.pathname.includes('index.html') || 
+                           window.location.pathname === '/' || 
+                           window.location.pathname.endsWith('/');
+        
+        if (!isHomepage) return;
+        
+        // Check if already subscribed
+        const hasSubscribed = localStorage.getItem('newsletterSubscribed');
+        
+        if (!hasSubscribed) {
+            setTimeout(() => DOM.newsletterOverlay.classList.add('show'), 500);
+        }
+        
+        // Close button
+        if (DOM.closeNewsletterBtn) {
+            DOM.closeNewsletterBtn.addEventListener('click', function() {
+                DOM.newsletterOverlay.classList.remove('show');
+            });
+        }
+        
+        // Close when clicking outside
+        DOM.newsletterOverlay.addEventListener('click', function(e) {
+            if (e.target === DOM.newsletterOverlay) {
+                DOM.newsletterOverlay.classList.remove('show');
+            }
+        });
+        
+        // Form submission
+        if (DOM.newsletterForm) {
+            DOM.newsletterForm.addEventListener('submit', function(e) {
+                const emailInput = this.querySelector('.newsletter-input');
+                
+                if (!this.checkValidity()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.classList.add('was-validated');
+                    if (emailInput) emailInput.setAttribute('aria-invalid', 'true');
+                    return;
+                }
+                
+                e.preventDefault();
+                if (emailInput) emailInput.setAttribute('aria-invalid', 'false');
+                
+                const email = emailInput ? emailInput.value : '';
+                
+                // Show success message
+                this.style.display = 'none';
+                const successMsg = document.getElementById('newsletterSuccess');
+                if (successMsg) successMsg.classList.add('show');
+                
+                // Save subscription
+                localStorage.setItem('newsletterSubscribed', 'true');
+                localStorage.setItem('subscriberEmail', email);
+                
+                // Close popup
+                setTimeout(() => DOM.newsletterOverlay.classList.remove('show'), 3000);
+            });
+        }
+    }
+    
+    // ==========================================================================
+    // COMMENT FORM - Recipe detail page
+    // ==========================================================================
+    
+    function initCommentForm() {
+        if (!DOM.commentForm) return;
+        
+        // Make star labels keyboard accessible
+        const ratingLabels = DOM.commentForm.querySelectorAll('.rating-stars .form-check-label');
+        ratingLabels.forEach((label, index) => {
+            label.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const input = this.previousElementSibling || this.querySelector('input');
+                    if (input) input.checked = true;
+                }
+            });
+        });
+        
+        // Form validation
+        DOM.commentForm.addEventListener('submit', function(e) {
+            if (!this.checkValidity()) {
+                e.preventDefault();
+                e.stopPropagation();
+            } else {
+                e.preventDefault();
+                
+                // Show success modal
+                const successModal = new bootstrap.Modal(document.getElementById('commentSuccessModal'));
+                successModal.show();
+                
+                // Reset form
+                this.reset();
+                this.classList.remove('was-validated');
+            }
+            
+            this.classList.add('was-validated');
+        });
+    }
+    
+    // ==========================================================================
+    // ACCESSIBILITY HELPER
     // ==========================================================================
     
     function announceToScreenReader(message) {
@@ -507,69 +627,4 @@ categoryCards.forEach(card => {
         setTimeout(() => announcement.remove(), 1000);
     }
     
-});
-
-
-    // ==========================================================================
-    // NEWSLETTER POPUP FUNCTIONALITY - HOMEPAGE ONLY
-    // ==========================================================================
-    
-    const newsletterOverlay = document.getElementById('newsletterOverlay');
-    const closeNewsletterBtn = document.getElementById('closeNewsletter');
-    const newsletterForm = document.getElementById('newsletterForm');
-    const newsletterSuccess = document.getElementById('newsletterSuccess');
-    
-    // Only run on homepage (index.html)
-    const isHomepage = window.location.pathname.includes('index.html') || 
-                       window.location.pathname === '/' || 
-                       window.location.pathname.endsWith('/');
-    
-    if (newsletterOverlay && isHomepage) {
-        // Check if user has already subscribed
-        const hasSubscribed = localStorage.getItem('newsletterSubscribed');
-        
-        // Show popup immediately on homepage if user hasn't subscribed
-        if (!hasSubscribed) {
-            // Small delay to ensure page is fully loaded
-            setTimeout(() => {
-                newsletterOverlay.classList.add('show');
-            }, 500);
-        }
-        
-        // Close popup when clicking the X button
-        if (closeNewsletterBtn) {
-            closeNewsletterBtn.addEventListener('click', function() {
-                newsletterOverlay.classList.remove('show');
-            });
-        }
-        
-        // Close popup when clicking outside
-        newsletterOverlay.addEventListener('click', function(e) {
-            if (e.target === newsletterOverlay) {
-                newsletterOverlay.classList.remove('show');
-            }
-        });
-        
-        // Handle form submission
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const emailInput = this.querySelector('.newsletter-input');
-                const email = emailInput.value;
-                
-                // Hide form and show success message
-                newsletterForm.style.display = 'none';
-                newsletterSuccess.classList.add('show');
-                
-                // Store subscription status permanently
-                localStorage.setItem('newsletterSubscribed', 'true');
-                localStorage.setItem('subscriberEmail', email);
-                
-                // Close popup after 3 seconds
-                setTimeout(() => {
-                    newsletterOverlay.classList.remove('show');
-                }, 3000);
-            });
-        }
-    }
+})();

@@ -136,7 +136,7 @@ function displayRecipe(recipe) {
         </li>
     `).join('');
 
-    // Update notes/tips (Conditional rendering)
+    // Show recipe notes if available
     if (recipe.notes && recipe.notes.length > 0) {
         const notesContent = document.querySelector('.recipe-notes__content');
         notesContent.innerHTML = recipe.notes.map(note => `
@@ -175,7 +175,78 @@ async function initRecipeDetailPage() {
     
     // Display the recipe on the page
     displayRecipe(recipe);
+
+    // Initialize comment form behavior
+    initCommentForm();
 }
 
 // Run initialization when page loads
 document.addEventListener('DOMContentLoaded', initRecipeDetailPage);
+
+// Initialize Leave a Comment form with Bootstrap validation and success modal
+function initCommentForm() {
+    const form = document.getElementById('commentForm');
+    if (!form) return;
+
+    // Rating stars toggle
+    const ratingContainer = document.querySelector('.rating-stars');
+    const ratingInputs = form.querySelectorAll('input[name="rating"]');
+    const ratingLabels = form.querySelectorAll('.rating-stars .form-check-label');
+
+    function setStarsVisual(value) {
+        const selected = Number(value) || 0;
+        ratingLabels.forEach((label, idx) => {
+            const icon = label.querySelector('i');
+            if (!icon) return;
+            if (idx < selected) {
+                icon.classList.remove('fa-regular');
+                icon.classList.add('fa-solid');
+            } else {
+                icon.classList.remove('fa-solid');
+                icon.classList.add('fa-regular');
+            }
+        });
+    }
+
+    // Hover preview
+    if (ratingContainer) {
+        ratingLabels.forEach((label, idx) => {
+            label.addEventListener('mouseenter', () => setStarsVisual(idx + 1));
+            label.addEventListener('focus', () => setStarsVisual(idx + 1));
+        });
+        ratingContainer.addEventListener('mouseleave', () => {
+            const checked = Array.from(ratingInputs).find(r => r.checked);
+            setStarsVisual(checked ? checked.value : 0);
+        });
+    }
+
+    // Click selection
+    ratingInputs.forEach(input => {
+        input.addEventListener('change', () => setStarsVisual(input.value));
+    });
+
+    form.addEventListener('submit', function(e) {
+        // HTML5 + Bootstrap validation
+        if (!form.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+            form.classList.add('was-validated');
+            return;
+        }
+        e.preventDefault();
+
+        // Reset inputs 
+        form.reset();
+        form.classList.remove('was-validated');
+
+        // Reset stars visual after reset
+        setStarsVisual(0);
+
+        // Show success modal
+        const modalEl = document.getElementById('commentSuccessModal');
+        if (modalEl && window.bootstrap) {
+            const modal = new bootstrap.Modal(modalEl);
+            modal.show();
+        }
+    });
+}

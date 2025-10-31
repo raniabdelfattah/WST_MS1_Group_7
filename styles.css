@@ -119,7 +119,7 @@ body {
 .navbar__list {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 2.5rem;
     margin: 0;
 }
 
@@ -917,6 +917,7 @@ body {
     text-align: center;
     margin-bottom: 3rem;
     color: #333;
+    font-weight: 700;
 }
 
 .section-title.left-aligned,
@@ -1128,6 +1129,7 @@ body {
 .btn--primary:hover {
     background: linear-gradient(135deg, #f7931e, #ffcc02);
     transform: translateY(-1px);
+    color: white;
 }
 
 .btn--secondary {
@@ -1138,6 +1140,7 @@ body {
 .btn--secondary:hover {
     background: #5a6268;
     transform: translateY(-2px);
+    color: white;
 }
 
 .btn__icon {
@@ -1648,7 +1651,9 @@ body {
         border-radius: 8px;
         font-size: 1.2rem;
         background: rgba(255, 255, 255, 0.1);
-        margin: 0 2rem;
+        margin: 0 auto;
+        width: calc(100% - 4rem);
+        max-width: 500px;
     }
 
     .navbar__link:hover,
@@ -1849,12 +1854,14 @@ body {
         width: 100%;
         padding: 0 2rem;
         margin-bottom: 2rem;
-        order: -1; /* Place search at the top of menu */
+        order: -1; 
+        justify-content: center;
     }
     
     .navbar__menu .mobile-search .search__form {
         width: 100%;
-        min-width: auto;
+        min-width: 280px;  
+        text-align: center;
     }
     
     /* Ensure the navbar menu shows search when open */
@@ -1990,6 +1997,7 @@ body {
     background: linear-gradient(135deg, #D2691E, #CD853F) !important;
     border: none !important;
     width: 100% !important;
+    z-index: 1055 !important;
 }
 
 .offcanvas-start {
@@ -2066,9 +2074,24 @@ body {
         border-radius: 8px;
         font-size: 1.2rem;
         background: rgba(255, 255, 255, 0.1);
-        margin: 0 2rem;
+        margin: 0 auto;
+        width: calc(100% - 4rem);
+        max-width: 500px;
     }
 
+    /* Force wider menu items on mobile with proper spacing */
+    @media (max-width: 767px) {
+    .navbar__menu.offcanvas .navbar__link {
+        width: calc(100% - 4rem) !important;
+        max-width: none !important;
+        margin: 0 2rem !important;
+    }
+    
+    .navbar__list {
+        width: 100%;
+        padding: 0;
+    }
+}
     .navbar__link:hover,
     .navbar__link--active {
         background: rgba(255, 255, 255, 0.2);
@@ -2127,6 +2150,7 @@ body:has(.offcanvas.show) .navbar__toggle {
     .navbar__menu {
         display: flex;
         align-items: center;
+        margin-right: 40px;
     }
     
     .navbar__list {
@@ -2648,6 +2672,60 @@ body:has(.offcanvas.show) .navbar__toggle {
 .newsletter-success p {
     font-size: 1.1rem;
     margin: 0;
+}
+
+/* ========================
+   Comment Section Styling
+   ======================== */
+.comment-section .form-control {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: none;
+}
+.comment-section .form-control:focus {
+    border-color: #CD853F;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(205,133,63,0.15);
+}
+.comment-section .form-label {
+    color: #333;
+}
+.comment-section .rating-stars i {
+    font-size: 1.25rem;
+    color: #CD853F;
+}
+
+/* Hide default radio circles for rating stars but keep accessible */
+.comment-section .rating-stars .form-check-input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.comment-section .rating-stars .form-check-label {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Keep hamburger toggle fixed at top-right on mobile and visible when offcanvas opens */
+@media (max-width: 767px) {
+    .navbar__toggle {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 1100;
+    }
+}
+
+/* Hide toggle when offcanvas is open to avoid confusing clicks */
+body:has(.offcanvas.show) .navbar__toggle {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
 }
 
 @media (max-width: 767px) {

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Name - Recipes 4 Keeps</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -164,6 +165,70 @@
                     <div class="recipe-notes__content"></div>
                 </section>
 
+                <!-- Leave a Comment Section -->
+                <section class="comment-section py-4">
+                    <div class="container">
+                        <h2 class="section-title">Leave a Comment</h2>
+                        <p class="text-center mb-4">Got any question or comment? Let us know by submitting your comment below.</p>
+
+                        <form id="commentForm" class="needs-validation" novalidate>
+                            <!-- Rating -->
+                            <div class="mb-3" aria-labelledby="ratingLabel">
+                                <label id="ratingLabel" class="form-label fw-semibold">Recipe Rating</label>
+                                <div class="rating-stars d-flex align-items-center gap-2" role="radiogroup" aria-label="Recipe rating">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating" id="rating1" value="1" required>
+                                        <label class="form-check-label" for="rating1" aria-label="1 star" tabindex="0"><i class="fa-regular fa-star"></i></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating" id="rating2" value="2">
+                                        <label class="form-check-label" for="rating2" aria-label="2 stars" tabindex="0"><i class="fa-regular fa-star"></i></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating" id="rating3" value="3">
+                                        <label class="form-check-label" for="rating3" aria-label="3 stars" tabindex="0"><i class="fa-regular fa-star"></i></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating" id="rating4" value="4">
+                                        <label class="form-check-label" for="rating4" aria-label="4 stars" tabindex="0"><i class="fa-regular fa-star"></i></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating" id="rating5" value="5">
+                                        <label class="form-check-label" for="rating5" aria-label="5 stars" tabindex="0"><i class="fa-regular fa-star"></i></label>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <!-- Comment -->
+                            <div class="mb-3">
+                                <label for="commentText" class="form-label fw-semibold">Comment</label>
+                                <textarea id="commentText" class="form-control" rows="4" placeholder="Write your comment here..." required aria-describedby="commentError"></textarea>
+                                <div id="commentError" class="invalid-feedback">Comment is required.</div>
+                            </div>
+
+                            <!-- Name + Email Row -->
+                            <div class="row g-3">
+                                <div class="col-12 col-md-6">
+                                    <label for="commentName" class="form-label fw-semibold">Name</label>
+                                    <input type="text" id="commentName" class="form-control" placeholder="Your name" required aria-describedby="nameError">
+                                    <div id="nameError" class="invalid-feedback">Name is required.</div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label for="commentEmail" class="form-label fw-semibold">Email</label>
+                                    <input type="email" id="commentEmail" class="form-control" placeholder="name@example.com" required aria-describedby="emailError">
+                                    <div id="emailError" class="invalid-feedback">Please enter a valid email address.</div>
+                                </div>
+                            </div>
+
+                            <!-- Submit -->
+                            <div class="mt-4 text-center">
+                                <button type="submit" class="btn btn--primary">Submit Comment</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
 
                     <!-- Social Sharing -->
                     <section class="social-sharing">
@@ -241,14 +306,22 @@
             </div>
         </div>
     </footer>
+    <!-- Success Modal -->
+    <div class="modal fade" id="commentSuccessModal" tabindex="-1" aria-labelledby="commentSuccessTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commentSuccessTitle">Thank you!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Your comment and rating were submitted successfully.
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
-    crossorigin="anonymous"></script>
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
-    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="recipe-detail.js"></script>
 </body>
 </html>
