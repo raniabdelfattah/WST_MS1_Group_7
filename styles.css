@@ -118,10 +118,8 @@ body {
 }
 
 
-/* Inherits from parent logo styles */
-.logo__text {
-   
-}
+/* Inherits from parent logo styles 
+.logo__text {}*/
 
 
 /* CSS-only hamburger menu implementation */
@@ -144,9 +142,8 @@ body {
 }
 
 
-/* List item styles handled by flexbox parent */
-.navbar__item {
-}
+/* List item styles handled by flexbox parent 
+.navbar__item {}*/
 
 
 .navbar__link {
@@ -178,7 +175,9 @@ body {
     background: rgba(255, 255, 255, 0.9);
     border-radius: 25px;
     padding: 0.5rem;
-    min-width: 300px;
+    min-width: 250px; 
+    max-width: 350px; 
+    width: 100%; 
 }
 
 
@@ -377,7 +376,7 @@ body {
     background: white;
     padding: 2rem 0;
     border-bottom: 1px solid #e9ecef;
-    margin-: 1rem;
+    margin-bottom: 1rem;
 }
 
 
@@ -1262,12 +1261,6 @@ body {
     line-height: 1.5;
     font-size: 0.9rem;
     flex: 1;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limit to 2 lines */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    min-height: 2.7rem; /* Ensures consistent description height */
 }
 
 
@@ -1546,10 +1539,34 @@ body {
         max-width: 100%;
         padding: 0 clamp(15px, 2vw, 30px);
     }
+    
+    /* Force 3-column layout for recipe cards */
+    .recipe-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 1.5rem;
+        max-width: 100%;
+        padding: 0 20px;
+    }
+    
+    /* Adjust recipe card content */
+    .recipe-card__content {
+        padding: 1rem;
+    }
+    
+    .recipe-card__title {
+        font-size: 1rem;
+        min-height: 2.4rem;
+    }
+    
+    .recipe-card__description {
+        font-size: 0.85rem;
+        min-height: 2.5rem;
+    }
    
     .filters__grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
+        max-width: 100%;
     }
    
     .hero__title {
@@ -1559,14 +1576,67 @@ body {
     .section-title {
         font-size: clamp(1.8rem, 3vw, 2.3rem);
     }
+    
+    /* Adjust category cards */
+    .categories__grid {
+        gap: 1rem;
+    }
+    
+    .category-card {
+        padding: 15px;
+    }
+
+    .navbar__container {
+        padding: 0 15px;
+        gap: 1rem; /* Add spacing between elements */
+    }
+    
+    .search__form {
+        min-width: 200px; /* Reduce from 300px */
+        max-width: 250px;
+    }
+    
+    .logo__text {
+        font-size: 1.2rem; /* Reduce logo text size */
+    }
+    
+    .logo__image {
+        height: 35px; /* Reduce logo height */
+    }
+
+    .recipe-detail__header {
+        grid-template-columns: 1fr; /* Stack image and info vertically */
+        gap: 1.5rem;
+    }
+    
+    .recipe-hero__image {
+        height: 350px; /* Reduce height */
+    }
+    
+    .recipe-info__title {
+        font-size: 2rem;
+    }
+    
+    .recipe-meta-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns instead of auto-fit */
+        gap: 0.8rem;
+    }
 }
 
 
-/* Tablet Portrait / Large Phone Landscape (600px-899px) */
-@media (min-width: 600px) and (max-width: 899px) {
+/* Tablet Portrait / Large Phone Landscape (768px-899px) */
+@media (min-width: 768px) and (max-width: 899px) {
     .container {
         max-width: 100%;
         padding: 0 20px;
+    }
+    
+    /* Force 2-column layout for recipe cards */
+    .recipe-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem;
+        max-width: 100%;
+        padding: 0 15px;
     }
    
     /* Enable mobile menu */
@@ -1597,6 +1667,11 @@ body {
    
     .section-title {
         font-size: clamp(1.6rem, 3.5vw, 2rem);
+    }
+    
+    /* Adjust team member cards */
+    .team__grid {
+        gap: 1.5rem;
     }
 }
 
