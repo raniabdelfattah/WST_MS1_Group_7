@@ -834,11 +834,11 @@ The search functionality is currently visual-only (requires JavaScript implement
 
 
 **Team Members:**
-- **Helena Tantoco**: Recipe collection and content curation
-- **Karissa Mae Manicad**: Recipe testing and photography
-- **Rania Abdelfattah**: Cultural recipe research and writing
-- **Chadley De Lara**: Project coordination and content editing
-
+- **Helena Tantoco**: Front-end development; contributed to recipe collection and content writing
+- **Rania Abdelfattah**: Back-end development; contributed to recipe details and content writing
+- **Karissa Mae Manicad**: Quality assurance and testing; contributed to recipe content and review
+- **Chadley De Lara**: Documentation and project coordination; assisted with recipe content editing
+  
 
 **Technical Contributions:**
 - Bootstrap integration and modal implementation
