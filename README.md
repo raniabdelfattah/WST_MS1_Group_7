@@ -1,11 +1,17 @@
 # Recipes 4 Keeps
 
-A responsive recipe sharing website built with HTML5, CSS3, Bootstrap, and JavaScript that celebrates family recipes and culinary traditions. This project showcases modern web development practices including accessibility, responsive design, clean semantic markup, and interactive features.
+A responsive recipe sharing website built with HTML5, CSS3, Bootstrap 5.3.2, and JavaScript that celebrates family recipes and culinary traditions. This project showcases modern web development practices including accessibility, responsive design, clean semantic markup, dynamic content loading, and interactive features.
 
 ## Project Timeline
 
 View our complete project timeline and task breakdown in our Gantt Chart:
 **[Recipes 4 Keeps Gantt Chart](https://sharing.clickup.com/9016079716/g/h/8cpcxb4-4376/7dba737a757e949)**
+
+**Project Management Notes:**
+- **Team Communication**: Regular check-ins via GSpace and team meetings to track progress, address blockers, and ensure all members are aligned on project goals
+- **Task Management**: All tasks are assigned with clear deadlines and dependencies in ClickUp and GSpace. Team members update task status regularly to maintain visibility across the project
+- **Handling Delays**: If delays occur, the members reassess task priorities immediately. Members redistribute workload, adjust deadlines, or identify features that can be deferred to post-launch updates
+- **Feature Changes**: Document all feature changes in team GSpace with detailed descriptions. Team consensus required before implementing scope changes to avoid project drift
 
 ## About the Project
 
@@ -18,33 +24,26 @@ The design uses a warm orange gradient color scheme that evokes comfort and home
 Open `index.html` in your browser to explore the website locally. For the best development experience, use VS Code with the Live Server extension.
 
 ## Project Structure
-
 ```
-MS1 - HTML + CSS/
+Recipes-4-Keeps/
 ├── .vscode/
-│   └── launch.json          # VS Code debugging configuration
-├── images/                   # Recipe and team photos
-│   ├── Recipe4Keeps_White.png  # Website logo (white version for header)
-│   ├── Japchae.png
-│   ├── Molokhia.png
-│   ├── Maja Blanca.jpg
-│   ├── Ooey Gooey Brownies.png
-│   ├── Curry Katsu.png
-│   ├── Fettuccine Alfredo.png
-│   ├── Siu Mai.jpg
-│   ├── Stir-Fry Garlic Bok Choy with Mushroom.jpg
-│   ├── Yna.jpeg             # Team member photos
-│   ├── Mae.png
-│   ├── Rans.jpg
-│   └── Chad.jpeg
-├── js/                       # JavaScript files
-│   └── main.js              # Main JavaScript functionality
-├── index.html               # Homepage with featured recipes
-├── about.html              # About Us page with team bios
-├── recipes.html            # All Recipes page with filtering options
-├── recipe-detail.html      # Individual recipe template with comment section
-├── styles.css              # Main stylesheet with responsive design
-└── README.md               # Project documentation
+│   └── launch.json                     # VS Code debugging configuration
+│
+├── images/                             # Recipe photos, team photos, and logo
+│
+├── index.html                          # Homepage with featured recipes
+├── about.html                          # About Us page with team descriptions
+├── recipes.html                        # All Recipes page with filtering
+├── recipe-detail.html                  # Individual recipe template
+│
+├── styles.css                          # Main stylesheet with responsive design
+│
+├── script.js                           # Main JavaScript functionality
+├── recipe-detail.js                    # Recipe detail page JavaScript
+│
+├── recipes.json                        # Centralized recipe data store
+│
+└── README.md                           # Project documentation
 ```
 
 ## Pages Overview
@@ -62,9 +61,9 @@ The main landing page that welcomes visitors and showcases what makes our recipe
 **Features:**
 - Sticky navigation header with integrated search functionality
 - Hover effects on recipe cards showing cooking metadata
-- Responsive grid layout that adapts from 4 columns to 1 column based on screen size
+- Bootstrap Grid layout that adapts from 4 columns to 1 column based on screen size
 - Category tags positioned directly below recipe titles for consistent alignment across all cards
-- Fixed hamburger menu sliding functionality for mobile navigation
+- Bootstrap Offcanvas menu sliding from right for mobile navigation
 
 ### About Us (about.html)
 
@@ -76,7 +75,7 @@ Tells the story behind Recipes 4 Keeps and introduces the team.
 
 **Features:**
 - Orange gradient page header matching the site's color scheme
-- 4-column team grid that stacks responsively on smaller screens (maintained with custom CSS)
+- Bootstrap Grid layout for team members (4 columns → responsive stacking)
 - Circular profile images with consistent styling
 
 ### All Recipes (recipes.html)
@@ -85,7 +84,7 @@ Browse and filter through the complete recipe catalog.
 
 **Key Sections:**
 - **Filter System**: 4 category groups (Meal Type, Cuisine Type, Ingredient, Difficulty)
-- **Recipe Grid**: 8 recipe cards with comprehensive information
+- **Recipe Grid**: Dynamically loaded from recipes.json with 16 recipe cards
 - **Recommended Recipes Section**: Left-aligned title for better visual hierarchy
 
 **Filter Categories:**
@@ -96,10 +95,10 @@ Browse and filter through the complete recipe catalog.
 
 **Features:**
 - Interactive filter buttons with gradient backgrounds and hover effects
-- Consistent recipe card design across all pages with aligned category tags
-- 4-column grid layout (locked for wider screens, responsive for tablets and mobile)
+- Dynamic recipe loading from recipes.json via JavaScript
+- Bootstrap Grid layout with responsive columns
 - Left-aligned "Recommended Recipes" title for improved visual hierarchy
-- 8 recipe cards displayed across two rows with consistent vertical spacing
+- All 16 recipes display automatically without manual HTML updates
 
 ### Recipe Detail (recipe-detail.html)
 
@@ -113,7 +112,6 @@ Displays complete recipe information with step-by-step instructions and interact
 - **Cooking Tips**: Pro tips, storage information, and variation suggestions
 - **Social Sharing**: Buttons for Facebook, X (Twitter), Pinterest, and Email
 - **Leave a Comment**: Interactive comment form with star rating system
-- **Newsletter Signup**: Footer subscription form with validation
 
 **Features:**
 - Two-column layout for desktop (image and info side by side)
@@ -122,7 +120,7 @@ Displays complete recipe information with step-by-step instructions and interact
 - Print-friendly styles for easy recipe printing
 - Functional star rating system (1-5 stars)
 - Bootstrap modal for comment submission feedback
-- Form validation for both comment and newsletter forms
+- Form validation for comment form
 
 ## Design System
 
@@ -133,6 +131,7 @@ The color scheme was carefully chosen to create a warm, inviting atmosphere:
 - **Primary Orange** (#ff6b35): Main brand color used in gradients and primary buttons
 - **Secondary Orange** (#f7931e): Accent color for hover states and transitions
 - **Light Orange** (#ffcc02): Highlight color for gradient endpoints
+- **Peru** (#CD853F): Tag backgrounds and accent elements
 - **Background** (#f8f9fa): Soft gray for page backgrounds
 - **Text Primary** (#333): Dark gray for optimal readability
 - **Text Secondary** (#666): Medium gray for descriptions and metadata
@@ -146,12 +145,11 @@ The color scheme was carefully chosen to create a warm, inviting atmosphere:
 
 ### Layout Patterns
 
-**Grid System**: CSS Grid powers the responsive layouts throughout the site
-- Recipe grid locked to 4 columns on large screens (1200px+)
-- Adapts to 3 columns on tablets (1024px-1199px)
-- Switches to 2 columns on smaller tablets (768px-1023px)
-- Single column for mobile devices (below 768px)
-- Custom CSS maintained for team grid and categories to preserve original layout
+**Bootstrap Grid System**: Responsive grid layouts throughout the site
+- Recipe grid: 4 columns (large) → 3 columns (tablet) → 2 columns (small tablet) → 1 column (mobile)
+- Team grid: 4 columns → 2 columns → 1 column
+- Categories: 3 columns → 2 columns → 1 column
+- Consistent gap spacing with Bootstrap's `g-4` class
 
 **Card Design**: Consistent card styling across all recipe displays
 - Rounded corners (15px border radius for recipe cards, 8px for other cards)
@@ -161,46 +159,55 @@ The color scheme was carefully chosen to create a warm, inviting atmosphere:
 - Category tags positioned immediately after titles for visual consistency
 
 **Navigation**: Sticky header that remains accessible while scrolling
-- CSS-only hamburger menu for mobile devices with fixed left-slide functionality
+- Bootstrap Offcanvas for mobile navigation (slides from right)
 - Smooth transitions between navigation states
 - Integrated search bar with rounded styling
 
 ## Technical Features
 
-### Bootstrap Integration
+### Bootstrap 5.3.2 Integration
 
-Bootstrap 5.3.0 has been selectively integrated to enhance specific features:
+Bootstrap has been integrated to enhance responsive layouts and interactive features:
 
-**Used Bootstrap Components:**
+**Bootstrap Components Used:**
+- **Grid System**: Applied to Team Member Cards, Top Categories, and Recipe Cards across all pages (index.html, recipes.html, about.html)
+- **Offcanvas Navigation**: Upgraded from CSS-only menu to Bootstrap Offcanvas component (slides from right)
 - **Modals**: Success feedback modal after comment submission
-- **Form Validation**: Bootstrap validation classes on newsletter and comment forms
-- **JavaScript Libraries**: Bootstrap JS for modal functionality and form interactions
+- **Form Validation**: Bootstrap validation classes on comment form
 
 **Custom CSS Maintained:**
-- Recipe grid system (locked 4-column layout)
-- Primary buttons and call-to-action elements
-- Recipe cards with custom hover effects
-- Team member grid layout
-- Top categories section
-- All spacing and responsive breakpoints
+- Original design aesthetic and color schemes
+- Custom hover effects and transitions
+- Gradient backgrounds
+- Filter button styling
+- Recipe card hover effects
 
-This hybrid approach maintains our original design aesthetic while adding modern interactive features where they enhance user experience.
+This hybrid approach maintains our original design aesthetic while adding modern interactive features and responsive behavior where they enhance user experience.
 
 ### JavaScript Features
 
-The site now includes interactive functionality built with vanilla JavaScript:
+The site includes interactive functionality built with vanilla JavaScript:
 
 **Code Architecture:**
 - **IIFE Pattern**: All code wrapped in Immediately Invoked Function Expression for encapsulation
 - **DOM Caching**: Frequently accessed elements queried once and stored in cache object
 - **Modular Functions**: Separate dedicated functions for HTML generation and event handling
 
+**Dynamic Recipe Loading:**
+- `loadAndRenderRecipes()`: Fetches all recipes from recipes.json and renders them on page load
+- `createBootstrapRecipeCard()`: Generates recipe HTML with Bootstrap Grid column wrappers
+- `loadRecipesForFiltering()`: Loads recipe data for filter functionality
+- All 16 recipes auto-render without manual HTML updates
+
 **Interactive Features:**
 - **Star Rating System**: Clickable 5-star rating on recipe detail page
 - **Comment Submission**: Form handling with Bootstrap modal feedback
-- **Form Validation**: Real-time validation on comment and newsletter forms
+- **Form Validation**: Real-time validation on comment form
 - **Modal Management**: Success message display after form submission
-- **Hamburger Menu**: Fixed left-slide functionality for mobile navigation
+- **Mobile Menu**: Bootstrap Offcanvas navigation with smooth slide animation
+- **Search Functionality**: Search recipes by title, description, or tags
+- **Filter System**: Interactive category filtering with multiple selection support
+- **Category Navigation**: Click categories on homepage to filter recipes
 
 **Performance Optimizations:**
 - DOM elements cached to avoid repeated queries
@@ -239,11 +246,10 @@ This project prioritizes inclusive design:
 
 ### Advanced CSS Features
 
-**CSS-only Hamburger Menu**: No JavaScript required for mobile navigation
-- Uses hidden checkbox (`#nav-toggle`) to control menu state
-- Animated hamburger icon transforms into X when active
-- Full-screen mobile menu with smooth slide-in transition
-- Fixed left-side positioning
+**Bootstrap Offcanvas Navigation**
+- Uses Bootstrap’s offcanvas component for responsive mobile navigation
+- Hamburger icon automatically handled by Bootstrap’s toggle system
+- Smooth slide-in transition and accessible navigation behavior
 
 **Gradient Backgrounds**: Consistent orange gradient throughout
 - Hero section: `linear-gradient(135deg, #ff6b35, #f7931e, #ffcc02)`
@@ -279,8 +285,7 @@ This project prioritizes inclusive design:
 
 **External Dependencies:**
 - Font Awesome 6.4.0 (icons via CDN)
-- Bootstrap 5.3.0 (modal and form validation)
-- jQuery 3.6.0 (required by Bootstrap)
+- Bootstrap 5.3.2 (modal, form validation, and layout)
 
 ### Special Media Queries
 
@@ -313,7 +318,7 @@ The project includes a `.vscode/launch.json` file for easy development:
             "type": "chrome",
             "request": "launch",
             "name": "Open about.html",
-            "file": "c:\\Users\\USER\\Downloads\\MS1 - HTML + CSS\\index.html"
+            "file": "${workspaceFolder}/index.html"
         }
     ]
 }
@@ -349,7 +354,7 @@ Each HTML file follows a consistent structure:
 - Header with navigation
 - Main content area
 - Footer with social links and privacy notice
-- Custom JavaScript file (main.js) before closing body tag
+- Custom JavaScript file (script.js) before closing body tag
 
 ### CSS Organization
 
@@ -368,13 +373,21 @@ The `styles.css` file is organized into logical sections:
 
 ### JavaScript Organization
 
-The `main.js` file uses modern JavaScript patterns:
+The project uses two main JavaScript files for modular functionality:
 
-1. **IIFE Wrapper**: Entire codebase wrapped for encapsulation
-2. **DOM Cache Object**: Single query for all frequently used elements
-3. **HTML Builder Functions**: Modular functions for generating markup
-4. **Event Handlers**: Separate functions for different user interactions
-5. **Initialization**: Single init function called on DOMContentLoaded
+1. **script.js**  
+   - Handles general website logic (form validation, modal behavior, and navigation)
+   - Uses modern JavaScript patterns:
+     - **IIFE Wrapper** for encapsulation  
+     - **DOM Cache Object** for efficient element access  
+     - **HTML Builder Functions** for dynamic content  
+     - **Event Handlers** for user interactions  
+     - **Initialization** triggered on `DOMContentLoaded`
+
+2. **recipe-detail.js**  
+   - Handles dynamic rendering of recipe information  
+   - Fetches data from `recipes.json`  
+   - Updates the DOM based on the selected recipe
 
 ### Image Management
 
@@ -674,9 +687,8 @@ The search functionality is currently visual-only (requires JavaScript implement
 - Comment section with star rating system
 
 **External Resources:**
-- Bootstrap 5.3.0 for modal and form components
+- Bootstrap 5.3.2 for modal and form components
 - Font Awesome for icons
-- jQuery for Bootstrap functionality
 - Google Fonts for typography inspiration
 - W3C for web standards and validation tools
 

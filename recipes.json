@@ -3,6 +3,7 @@
     {
       "id": "japchae-korean-glass-noodles",
       "name": "Japchae Korean Glass Noodles",
+      "shortDescription": "Sweet potato noodles with vegetables in savory soy sauce.",
       "description": "Japchae is one of those dishes I've been dying to try ever since falling in love with K-Dramas! When I finally tasted it at a buffet restaurant, I was completely hooked. While you can grab japchae from 7/11 stores, I found that the portions are never quite enough and it's so much more economical to make it at home when I want a larger serving. This colorful Korean noodle dish is sort of a stir-fry, sort of a noodle salad - it's tossed together in a bowl rather than cooked on the stove and served barely warm. The chewy, slippery sweet potato noodles combined with tender beef and vibrant vegetables create the perfect comfort food that makes amazing leftovers for lunch too!",
       "image": "images/Japchae.png",
       "prepTime": "20 minutes",
@@ -85,6 +86,7 @@
     {
       "id": "maja-blanca",
       "name": "Maja Blanca",
+      "shortDescription": "Rich and creamy coconut pudding.",
       "description": "Maja Blanca is a popular, rich, and creamy Filipino coconut pudding that is gelatin-like in consistency. It's made from coconut milk, cornstarch, and sugar, often with corn kernels incorporated into the pudding and a topping of grated cheese, toasted coconut flakes (latik), or other toppings before it sets. This sweet dessert is a staple at Filipino celebrations, holidays like Christmas, and fiestas. Families may also enjoy this coconut pudding well-chilled and set as an after-meal dessert or midday snack.",
       "image": "images/Maja Blanca.jpg",
       "prepTime": "5 minutes",
@@ -135,6 +137,7 @@
   {
       "id": "siu-mai",
       "name": "Siu Mai (Shumai, 烧卖)",
+      "shortDescription": "Cantonese dim sum with pork and shrimp filling.",
       "description": "A Chinese dim sum siu mai is a popular, open-faced, steamed dumpling with a savory filling typically made of ground pork and shrimp, often combined with shiitake mushrooms. It's considered a staple of Cantonese cuisine and dim sum, recognizable by its distinctive shape with the top of the filling exposed, and sometimes garnished with finely diced carrots or fish roe. It is one of the most popular and classic items served at dim sum restaurants, particularly in Cantonese cuisine.",
       "image": "images/Siu Mai.jpg",
       "prepTime": "30 minutes",
@@ -194,6 +197,7 @@
     {
       "id": "stir-fry-garlic-bok-choy-mushroom",
       "name": "Stir-Fry Garlic Bok Choy with Mushroom",
+      "shortDescription": "Bokchoy with earthy mushrooms, and fragrant garlic.",
       "description": "This simple and comforting bok choy and mushroom stir fry holds a special place in my heart. My grandma used to pack this dish for my elementary and junior high school lunches, usually serving it alongside fried chicken as a side dish, though it's hearty enough to stand alone as a main meal. I have fond memories of enjoying this after exhausting Friday Taekwondo sessions; it was the perfect reward after a tiring day. What I love most about this recipe is its simplicity. The ingredients are easy to find and the cooking process is quick, making it an ideal weekday meal. The tender mushrooms and crisp bok choy come together in a savory, gingery sauce that's both satisfying and nostalgic.",
       "image": "images/Stir-Fry Garlic Bok Choy with Mushroom.jpg",
       "prepTime": "15 minutes",
@@ -263,6 +267,7 @@
     {
       "id": "ooey-gooey-brownies",
       "name": "Ooey Gooey Brownies",
+      "shortDescription": "Easy brownie recipe using simple and pantry-available ingredients.",
       "description": "Brownies are one of the most well-known staple desserts there is around the world. Whether you're a sweet-tooth or not, you have eaten a piece of brownie that you loved the most, you can't get enough of it and possibly want to recreate it to bring to a Sunday soireé with friends. As someone who loves a warm brownie to go with her tea or coffee, this foolproof recipe is tested and proven after trying out a bunch of other recipes out there and sharing this with friends and family have been a success in the past 2 years after i've developed my very own take on a fudgy, gooey brownie recipe. Enjoy!",
       "image": "images/Ooey Gooey Brownies.png",
       "prepTime": "15 minutes",
@@ -317,6 +322,7 @@
     {
       "id": "curry-katsu",
       "name": "Curry Katsu",
+      "shortDescription": "Delicious and crispy no-fuss curry katsu recipe.",
       "description": "I love good katsu. That crispy, just thick enough chicken katsu I often crave after a long day or even just to cap the night off? But katsu with curry sauce is even better. It elevates the whole meal experience without overboarding and it never fails to warm my heart no matter how bad (or even how good!) my day goes. I've lived in Tokyo for years now and have learned to create this katsu recipe which I often cook for family and friends whenever they come over to visit the city.",
       "image": "images/Curry Katsu.png",
       "prepTime": "20 minutes",
@@ -389,6 +395,7 @@
     {
       "id": "molokhia",
       "name": "Molokhia",
+      "shortDescription": "A classic Egyptian leafy broth with garlic and spices.",
       "description": "What else can warm you up better than a hearty bowl of soup? Molokhia is a Middle Eastern dish that originated from Egypt thousands of years ago, and the dish's name came from the Arabic word Mulukia (meaning royals) and the word malek meaning king, referring to food served exclusively to royalty. Eating this dish is so fulfilling because of the amount of labour and love that goes into it! My dad would buy 5-6 big bunches of these green leaves, and our family would gather around the room to pick apart the leaves from its long stems before washing and finely chopping it with a mincing knife the next day for it to be cooked. This soup is fulfilling and packed with the healthiest benefits to keep you nourished.",
       "image": "images/Molokhia.png",
       "prepTime": "20 minutes",
@@ -448,6 +455,7 @@
     {
       "id": "fettuccine-alfredo",
       "name": "Fettuccine Alfredo",
+      "shortDescription": "A quick and easy creamy pasta.",
       "description": "One of the most memorable alfredo dishes I've tasted was my close friend's recipe during high school. Cooked surrounded by friends in her little kitchen, I was reminded of not only the comforting taste of her pasta dish, but also of the presence of everyone I loved dearly. This dish may be simple and quick to make, but not everything hearty and fulfilling should be difficult to do. It's rich, creamy, delicious, and can be made for any occasion, whether for yourself or for gatherings with friends, let this be a memorable dish to you as it is for me.",
       "image": "images/Fettuccine Alfredo.png",
       "prepTime": "10 minutes",
@@ -514,6 +522,7 @@
     {
       "id": "sourdough-like-a-pro",
       "name": "Sourdough Like a Pro!",
+      "shortDescription": "Bake like it's pandemic with this simple yet professional way of baking sourdough.",
       "description": "You probably scrolled by a sourdough bread on TikTok or Instagram during the pandemic lockdown and was inspired to bake one successful loaf but find it intimidating with the mention of 'sourdough starter' because what even is that? Don't most of us just know about yeast before the pandemic happened? And because I had too much time on my hands when the world shut down, I decided to try to bake all on my own and as I write this I'm proud to finally share with you my (and 100% successful!) take on sourdough loaf, perfect for a weekend bake as the entire process takes more than one day.",
       "image": "images/Sourdough Like a Pro!.png",
       "prepTime": "15 minutes",
@@ -567,6 +576,7 @@
     {
       "id": "pancakes",
       "name": "Fluffy Pancakes",
+      "shortDescription": "Who doesn't love a good 'ol American breakfast (or brunch or snacks?) in the form of pancakes!",
       "description": "Perhaps we can all agree that the best and quickest way to satisfy our craving for a cake is by making pancakes whether it's pancakes with a side of bacon or just a stack of pancakes with a nice, melty butter and some sweet maple syrup (or if you're on the healthy side of things, accompany it with some berries!) This quick and easy recipe will have you wanting to make it almost every morning.",
       "image": "images/Pancakes.png",
       "prepTime": "15 minutes",
@@ -621,6 +631,7 @@
     {
       "id": "not-another-loaded-fries",
       "name": "Not Another Loaded Fries",
+      "shortDescription": "Crispy seasoned fries loaded with melted cheese, smoked bacon, and all your favorite nacho toppings.",
       "description": "Nacho fries are the ultimate comfort food mashup that combines two beloved snacks into one incredible dish. Whether you're hosting game night with friends, need a late-night study snack, or just craving something indulgent, these loaded fries hit every craving. As a uni student who's hosted plenty of movie nights and casual hangouts, I've learned that nacho fries are always a crowd-pleaser and surprisingly easy to pull off. This recipe came together after experimenting with different seasoning blends and topping combinations, and now it's my go-to whenever I want something satisfying without spending hours in the kitchen. The best part? You can customize the toppings based on what you have in your fridge or what your friends like. These fries disappear fast, so consider making a double batch!",
       "image": "images/Not Another Loaded Fries.png",
       "prepTime": "15 minutes",
@@ -686,6 +697,7 @@
     {
       "id": "inabraw-dinengdeng",
       "name": "Inabraw/Dinengdeng",
+      "shortDescription": "Traditional Ilokano vegetable soup with dried small shrimps or Armang.",
       "description": "This is my all-time favorite vegetable recipe and a dish that truly feels like home. Growing up in an Ilokano household, Inabraw was a constant presence at our dining table, appearing at lunch or dinner about 10 times a month if I had to estimate. Every time I eat it, the warmth fills not just my stomach but my heart as well. This isn't just food; it's a living tradition passed down through generations, from my lola's grandmother to her, then to my mom, and now to me. Getting the specifics of the Inabraw recipe was a bit of a challenge, as my lola was already getting a little impatient with me when I asked for her recipe. She doesn't like me asking too many questions. But hey, I've done it! I might need to wait three business days before asking for another recipe.",
       "image": "images/Inabraw (Dinengdeng).png",
       "prepTime": "15 minutes",
@@ -749,6 +761,7 @@
     {
       "id": "buttered-garlic-shrimp",
       "name": "Buttered Garlic Shrimp",
+      "shortDescription": "Succulent shrimp swimming in rich, garlicky butter sauce.",
       "description": "Buttered Garlic Shrimp is a beloved Filipino seafood dish featuring plump shrimp sautéed in an indulgent sauce of butter, garlic, and savory seasonings. This dish showcases the Filipino love for bold garlic flavors combined with the richness of butter, often enhanced with a splash of lemon-lime soda (like Sprite or 7UP) for a subtle sweetness that balances the savory elements. It's a popular pulutan (appetizer paired with drinks) and a favorite main dish served with steaming white rice. This recipe captures the restaurant-style version often found in Filipino seafood houses and dampa-style eateries, where fresh seafood meets simple but flavorful cooking techniques.",
       "image": "images/Buttered Garlic Shrimp.png",
       "prepTime": "15 minutes",
@@ -757,7 +770,7 @@
       "difficulty": "Easy",
       "published": "October 18, 2025",
       "author": "Karissa Mae Manicad",
-      "tags": ["Asian", "Side Dish", "Seafood"],
+      "tags": ["Asian", "Main Dish", "Seafood"],
       "ingredients": [
         {
           "category": "Main Ingredients",
@@ -801,6 +814,7 @@
     {
       "id": "tabbouleh",
       "name": "Tabbouleh",
+      "shortDescription": "A refreshing Middle Eastern salad made with bulgur, parsley, mint, tomatoes, and lemon.",
       "description": "Tabbouleh is a fresh-tasting classic and popular Lebanese salad. The star of this dish is parsley—and lots of it! This salad is a classic in Middle Eastern homes and my mom would make this paired with any main dish, it pairs amazingly well no matter what the dish is. It's a simple salad of very finely chopped vegetables, lots of fresh parsley and bulgur wheat, all tossed with lime juice and olive oil. It's refreshing, citrusy, and minty fresh!",
       "image": "images/Tabbouleh.jpg",
       "prepTime": "20 minutes",
@@ -851,6 +865,7 @@
     {
       "id": "stuffed-grape-leaves",
       "name": "Stuffed Grape Leaves",
+      "shortDescription": "Tender grape leaves stuffed with a flavorful mix of rice, herbs, and spices, simmered in a tangy lemon broth.",
       "description": "Stuffed grape leaves, or traditionally called Warak Enab, is a popular and culinary treasure found all over the Middle East with its own regional variation from Egypt, Jordan, Palestine, Syria, and more. This is a classic Middle Eastern dish that I grew up eating a lot, often shared by my mom's Middle Eastern friends who each had their own flavorful version. It features stuffed fillings of rice, ground beef, spices & herbs wrapped in grape leaves and cooked in a simmering broth. It is a healthy dish which you can be satisfied with by eating alone with a slice of lemon.",
       "image": "images/Stuffed Grape Leaves.jpg",
       "prepTime": "30 minutes",
@@ -905,6 +920,7 @@
     {
       "id": "swedish-meatballs",
       "name": "Swedish Meatballs",
+      "shortDescription": "Juicy, tender meatballs in a rich, creamy gravy—Swedish comfort food at its best.",
       "description": "Guilty as charged—when I think of Sweden, the first thing that comes to mind is their iconic meatballs. I still remember my first taste back in junior high, during a trip to IKEA with my friends. The store's food court offered an array of Swedish dishes, but the famous meatballs immediately caught my attention. Naturally, I had to try them, and I was hooked from the very first bite. They were juicy, tender, and packed with flavor, perfectly complemented by the rich, creamy gravy. Ever since that day, I couldn't get the taste out of my head, which inspired me to recreate this comforting dish at home.",
       "image": "images/Swedish Meatballs.jpg",
       "prepTime": "20 minutes",
