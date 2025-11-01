@@ -2777,4 +2777,3 @@ body:has(.offcanvas.show) .navbar__toggle {
     pointer-events: none !important;
     visibility: hidden !important;
 }
-

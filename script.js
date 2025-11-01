@@ -39,6 +39,13 @@
             handleSearchRedirect();
             handleCategoryRedirect();
         }
+        
+        // Load featured recipes on index.html
+        if (window.location.pathname.includes('index.html') || 
+            window.location.pathname === '/' || 
+            window.location.pathname.endsWith('/')) {
+            loadFeaturedRecipes();
+        }
     });
    
     // ==========================================================================
@@ -211,8 +218,85 @@
         return section;
     }
    
+    // HELPER FUNCTION: Calculate total time from prep, cook, chill, and other time variables
+    function calculateTotalTime(recipe) {
+        // Helper function to convert time string to minutes
+        function parseTimeToMinutes(timeStr) {
+            if (!timeStr) return 0;
+            
+            const lowerStr = timeStr.toLowerCase();
+            
+            // Extract all numbers from the string (handles ranges like "24-28 hours")
+            const numbers = timeStr.match(/\d+(\.\d+)?/g);
+            if (!numbers || numbers.length === 0) return 0;
+            
+            // Get the maximum number (for ranges like "24-28", take 28)
+            const maxNumber = Math.max(...numbers.map(n => parseFloat(n)));
+            
+            // Check if time is in hours
+            if (lowerStr.includes('hour') || lowerStr.includes('hr')) {
+                return maxNumber * 60; // Convert hours to minutes
+            }
+            
+            // Otherwise assume it's in minutes
+            return maxNumber;
+        }
+        
+        // Collect all time variables from the recipe object
+        let totalMinutes = 0;
+        
+        // Add prep time
+        if (recipe.prepTime) {
+            totalMinutes += parseTimeToMinutes(recipe.prepTime);
+        }
+        
+        // Add cook time
+        if (recipe.cookTime) {
+            totalMinutes += parseTimeToMinutes(recipe.cookTime);
+        }
+        
+        // Add chill time
+        if (recipe.chillTime) {
+            totalMinutes += parseTimeToMinutes(recipe.chillTime);
+        }
+        
+        // Add rest time
+        if (recipe.restTime) {
+            totalMinutes += parseTimeToMinutes(recipe.restTime);
+        }
+        
+        // Add marinating time
+        if (recipe.marinatingTime) {
+            totalMinutes += parseTimeToMinutes(recipe.marinatingTime);
+        }
+        
+        // Add any other time variables
+        if (recipe.proofingTime) {
+            totalMinutes += parseTimeToMinutes(recipe.proofingTime);
+        }
+        
+        if (recipe.soakingTime) {
+            totalMinutes += parseTimeToMinutes(recipe.soakingTime);
+        }
+        
+        // Format based on total minutes
+        if (totalMinutes >= 60) {
+            const hours = Math.floor(totalMinutes / 60);
+            const mins = totalMinutes % 60;
+            
+            if (mins === 0) {
+                return `${hours}h`;
+            } else {
+                return `${hours}h ${mins}m`;
+            }
+        }
+        return `${totalMinutes}m`;
+    }
+    
     // HELPER FUNCTION: Create Bootstrap Recipe Card HTML
     function createBootstrapRecipeCard(recipe) {
+        const totalTime = calculateTotalTime(recipe);
+        
         return `
             <article class="col-12 col-sm-6 col-lg-3">
                 <div class="recipe-card">
@@ -225,7 +309,7 @@
                                 <span class="recipe-meta__time">
                                     <i class="fas fa-clock" aria-hidden="true"></i>
                                     <span class="sr-only">Total time:</span>
-                                    ${recipe.prepTime}
+                                    ${totalTime}
                                 </span>
                                 <span class="recipe-meta__difficulty recipe-meta__difficulty--${recipe.difficulty.toLowerCase()}">${recipe.difficulty}</span>
                             </div>
@@ -243,7 +327,7 @@
             </article>
         `;
     }
-   
+    
     // Display search results using helper function
     function showSearchResults(term, count, recipes) {
         // Remove old results
@@ -442,6 +526,75 @@
         activeFilters.clear();
         document.querySelector('.filter-results-section')?.remove();
     };
+
+    // ==========================================================================
+    // Load Featured Recipes on Index Page
+    // ==========================================================================
+
+    async function loadFeaturedRecipes() {
+        const featuredSection = document.querySelector('.featured-recipes');
+        if (!featuredSection) return;
+        
+        try {
+            const response = await fetch('recipes.json');
+            if (!response.ok) throw new Error('Failed to load recipes');
+            const data = await response.json();
+            
+            // Featured recipe IDs
+            const featuredRecipeIds = [
+                'japchae-korean-glass-noodles',
+                'ooey-gooey-brownies',
+                'molokhia',
+                'maja-blanca'
+            ];
+            
+            // Get featured recipes in order
+            const featuredRecipes = featuredRecipeIds
+                .map(id => data.recipes.find(r => r.id === id))
+                .filter(recipe => recipe !== undefined);
+            
+            // Clear existing recipe grid
+            const existingGrid = featuredSection.querySelector('.recipe-grid');
+            if (existingGrid) {
+                existingGrid.remove();
+            }
+            
+            // Create new Bootstrap grid
+            const recipeGrid = document.createElement('div');
+            recipeGrid.className = 'recipe-grid row g-4';
+            
+            // Add featured recipes as Bootstrap cards
+            featuredRecipes.forEach(recipe => {
+                recipeGrid.innerHTML += createBootstrapRecipeCard(recipe);
+            });
+            
+            // Append to section
+            const container = featuredSection.querySelector('.container');
+            if (container) {
+                container.appendChild(recipeGrid);
+            }
+            
+            // Re-initialize animations for new cards
+            const newCards = recipeGrid.querySelectorAll('.recipe-card');
+            initRecipeAnimationsForCards(newCards);
+            
+        } catch (error) {
+            console.error('Error loading featured recipes:', error);
+            
+            // Show error to user
+            if (featuredSection) {
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'alert alert-danger text-center';
+                errorMsg.style.margin = '2rem auto';
+                errorMsg.style.maxWidth = '600px';
+                errorMsg.innerHTML = `
+                    <strong>Error!</strong> Unable to load featured recipes. 
+                    <br><small>Please check your internet connection and try again.</small>
+                `;
+                featuredSection.querySelector('.container')?.prepend(errorMsg);
+            }
+        }
+    }
 
     // ==========================================================================
     // Load and Render Recipes on Recipes Page
