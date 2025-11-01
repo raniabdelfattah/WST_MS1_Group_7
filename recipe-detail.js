@@ -268,9 +268,17 @@
             }
             e.preventDefault();
 
-            // Reset inputs 
-            form.reset();
-            form.classList.remove('was-validated');
+        // Remove validation styling FIRST
+        form.classList.remove('was-validated');
+        
+        // Reset form inputs
+        form.reset();
+        
+        // Clear input validation states
+        const inputs = form.querySelectorAll('.form-control, .form-check-input');
+        inputs.forEach(input => {
+            input.classList.remove('is-invalid', 'is-valid');
+        });
 
             // Reset stars visual after reset
             setStarsVisual(0);

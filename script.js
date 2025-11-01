@@ -31,20 +31,12 @@
         initScrollToTop();
         initPrintButton();
         initNewsletter();
-        initCommentForm();
         
-        // Load recipes if on recipes page
-        if (document.querySelector('.filters')) {
-            loadRecipesForFiltering();
-        }
-        
-        // Check for search term from other pages
+        // Load recipes for recipes.html page
         if (window.location.pathname.includes('recipes.html')) {
+            loadAndRenderRecipes(); // Load and display recipes with Bootstrap grid
+            loadRecipesForFiltering(); // Load for filtering functionality
             handleSearchRedirect();
-        }
-        
-        // Check for category filter from homepage
-        if (window.location.pathname.includes('recipes.html')) {
             handleCategoryRedirect();
         }
     });
@@ -162,6 +154,40 @@
         showSearchResults(term, foundCount, foundRecipes);
     }
     
+    // HELPER FUNCTION: Create Bootstrap Recipe Card HTML - FIXED ORDER
+    function createBootstrapRecipeCard(recipe) {
+        return `
+            <article class="col-12 col-sm-6 col-lg-3">
+                <div class="recipe-card">
+                    <div class="recipe-card__image">
+                        <img src="${recipe.image}" 
+                            alt="${recipe.name}" 
+                            class="recipe-card__photo">
+                        <div class="recipe-card__overlay">
+                            <div class="recipe-meta">
+                                <span class="recipe-meta__time">
+                                    <i class="fas fa-clock" aria-hidden="true"></i>
+                                    <span class="sr-only">Total time:</span>
+                                    ${recipe.prepTime}
+                                </span>
+                                <span class="recipe-meta__difficulty recipe-meta__difficulty--${recipe.difficulty.toLowerCase()}">${recipe.difficulty}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recipe-card__content">
+                        <h3 class="recipe-card__title">${recipe.name}</h3>
+                        <div class="recipe-tags">
+                            ${recipe.tags.slice(0, 3).map(tag => `<span class="recipe-tags__item">${tag}</span>`).join('')}
+                        </div>
+                        <p class="recipe-card__description">${recipe.shortDescription}</p>
+                        <a href="recipe-detail.html?id=${recipe.id}" class="recipe-card__link">View Recipe</a>
+                    </div>
+                </div>
+            </article>
+        `;
+    }
+
+    
     // Display search results
     function showSearchResults(term, count, recipes) {
         // Remove old results
@@ -180,7 +206,7 @@
                     </div>
                     <button class="search-message__close" onclick="window.clearSearch()" aria-label="Clear search">×</button>
                 </div>
-                ${count > 0 ? '<div class="recipe-grid search-results-grid"></div>' : ''}
+                ${count > 0 ? '<div class="recipe-grid row g-4 search-results-grid"></div>' : ''}
             </div>
         `;
         
@@ -188,10 +214,16 @@
         if (DOM.featuredSection) {
             DOM.featuredSection.parentNode.insertBefore(resultsSection, DOM.featuredSection);
             
-            // Add recipe cards
+            // Add recipe cards with Bootstrap structure
             if (count > 0) {
                 const resultsGrid = resultsSection.querySelector('.search-results-grid');
-                recipes.forEach(card => resultsGrid.appendChild(card));
+                recipes.forEach(card => {
+                    // Wrap existing card in Bootstrap column
+                    const col = document.createElement('div');
+                    col.className = 'col-12 col-sm-6 col-lg-3';
+                    col.appendChild(card.cloneNode(true));
+                    resultsGrid.appendChild(col);
+                });
             }
             
             // Scroll to results
@@ -303,6 +335,8 @@
         announceToScreenReader(`Showing ${visibleCount} recipes`);
     }
     
+    
+    //Display Filter Results with Bootstrap Grid
     function showFilterResults(count, recipes) {
         // Remove old results
         document.querySelector('.filter-results-section')?.remove();
@@ -325,7 +359,7 @@
                     </div>
                     <button class="search-message__close" onclick="window.clearAllFilters()" aria-label="Clear filters">×</button>
                 </div>
-                ${count > 0 ? '<div class="recipe-grid filter-results-grid"></div>' : ''}
+                ${count > 0 ? '<div class="recipe-grid row g-4 filter-results-grid"></div>' : ''}
             </div>
         `;
         
@@ -335,7 +369,13 @@
             
             if (count > 0) {
                 const resultsGrid = resultsSection.querySelector('.filter-results-grid');
-                recipes.forEach(card => resultsGrid.appendChild(card));
+                recipes.forEach(card => {
+                    // Wrap existing card in Bootstrap column
+                    const col = document.createElement('div');
+                    col.className = 'col-12 col-sm-6 col-lg-3';
+                    col.appendChild(card.cloneNode(true));
+                    resultsGrid.appendChild(col);
+                });
             }
             
             resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -348,7 +388,72 @@
         activeFilters.clear();
         document.querySelector('.filter-results-section')?.remove();
     };
-    
+
+    // ==========================================================================
+    // Load and Render Recipes on Recipes Page
+    // ==========================================================================
+
+    async function loadAndRenderRecipes() {
+        // Only run on recipes.html page
+        if (!window.location.pathname.includes('recipes.html')) return;
+        
+        const recommendedSection = document.querySelector('.featured-recipes');
+        if (!recommendedSection) return;
+        
+        try {
+            const response = await fetch('recipes.json');
+            if (!response.ok) throw new Error('Failed to load recipes');
+            const data = await response.json();
+            
+            // Clear existing recipe grids
+            const existingGrids = recommendedSection.querySelectorAll('.recipe-grid');
+            existingGrids.forEach(grid => grid.remove());
+            
+            // Create new Bootstrap grid
+            const recipeGrid = document.createElement('div');
+            recipeGrid.className = 'recipe-grid row g-4';
+            
+            // Add all recipes as Bootstrap cards
+            data.recipes.forEach(recipe => {
+                recipeGrid.innerHTML += createBootstrapRecipeCard(recipe);
+            });
+            
+            // Append to section
+            const container = recommendedSection.querySelector('.container');
+            if (container) {
+                container.appendChild(recipeGrid);
+            }
+            
+            // Re-initialize animations for new cards
+            const newCards = recipeGrid.querySelectorAll('.recipe-card');
+            initRecipeAnimationsForCards(newCards);
+            
+        } catch (error) {
+            console.error('Error loading recipes:', error);
+        }
+    }
+
+    // ==========================================================================
+    // HELPER: Initialize animations for specific cards
+    // ==========================================================================
+
+    function initRecipeAnimationsForCards(cards) {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        cards.forEach(card => observer.observe(card));
+    }
     // ==========================================================================
     // CATEGORY CARDS - Homepage navigation
     // ==========================================================================
@@ -570,46 +675,6 @@
                 setTimeout(() => DOM.newsletterOverlay.classList.remove('show'), 3000);
             });
         }
-    }
-    
-    // ==========================================================================
-    // COMMENT FORM - Recipe detail page
-    // ==========================================================================
-    
-    function initCommentForm() {
-        if (!DOM.commentForm) return;
-        
-        // Make star labels keyboard accessible
-        const ratingLabels = DOM.commentForm.querySelectorAll('.rating-stars .form-check-label');
-        ratingLabels.forEach((label, index) => {
-            label.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    const input = this.previousElementSibling || this.querySelector('input');
-                    if (input) input.checked = true;
-                }
-            });
-        });
-        
-        // Form validation
-        DOM.commentForm.addEventListener('submit', function(e) {
-            if (!this.checkValidity()) {
-                e.preventDefault();
-                e.stopPropagation();
-            } else {
-                e.preventDefault();
-                
-                // Show success modal
-                const successModal = new bootstrap.Modal(document.getElementById('commentSuccessModal'));
-                successModal.show();
-                
-                // Reset form
-                this.reset();
-                this.classList.remove('was-validated');
-            }
-            
-            this.classList.add('was-validated');
-        });
     }
     
     // ==========================================================================
