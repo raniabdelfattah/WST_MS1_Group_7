@@ -31,7 +31,6 @@
         initScrollToTop();
         initPrintButton();
         initNewsletter();
-        initCommentForm();
         
         // Load recipes if on recipes page
         if (document.querySelector('.filters')) {
@@ -570,46 +569,6 @@
                 setTimeout(() => DOM.newsletterOverlay.classList.remove('show'), 3000);
             });
         }
-    }
-    
-    // ==========================================================================
-    // COMMENT FORM - Recipe detail page
-    // ==========================================================================
-    
-    function initCommentForm() {
-        if (!DOM.commentForm) return;
-        
-        // Make star labels keyboard accessible
-        const ratingLabels = DOM.commentForm.querySelectorAll('.rating-stars .form-check-label');
-        ratingLabels.forEach((label, index) => {
-            label.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    const input = this.previousElementSibling || this.querySelector('input');
-                    if (input) input.checked = true;
-                }
-            });
-        });
-        
-        // Form validation
-        DOM.commentForm.addEventListener('submit', function(e) {
-            if (!this.checkValidity()) {
-                e.preventDefault();
-                e.stopPropagation();
-            } else {
-                e.preventDefault();
-                
-                // Show success modal
-                const successModal = new bootstrap.Modal(document.getElementById('commentSuccessModal'));
-                successModal.show();
-                
-                // Reset form
-                this.reset();
-                this.classList.remove('was-validated');
-            }
-            
-            this.classList.add('was-validated');
-        });
     }
     
     // ==========================================================================
