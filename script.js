@@ -1,7 +1,6 @@
 // ==========================================================================
-// RECIPES 4 KEEPS - MAIN JAVASCRIPT FILE
+// RECIPES 4 KEEPS - MAIN JAVASCRIPT FILE 
 // ==========================================================================
-
 
 (function() {
     'use strict';
@@ -43,12 +42,13 @@
     });
    
     // ==========================================================================
-    // CACHE DOM ELEMENTS - Store references once
+    // CACHE DOM ELEMENTS - Store references once with null safety
     // ==========================================================================
    
     function cacheDOMElements() {
         DOM = {
             navMenu: document.getElementById('nav-menu'),
+            navLinks: document.querySelectorAll('.navbar__link'),
             searchForms: document.querySelectorAll('.search__form'),
             searchInputs: document.querySelectorAll('.search__input'),
             filterButtons: document.querySelectorAll('.filter-item'),
@@ -63,7 +63,7 @@
     }
    
     // ==========================================================================
-    // NAVIGATION - Bootstrap Offcanvas menu
+    // NAVIGATION - Bootstrap Offcanvas menu with null checks
     // ==========================================================================
    
     function initNavigation() {
@@ -79,28 +79,31 @@
             document.body.classList.remove('menu-open');
         });
        
-        // Close menu when clicking nav links
-        const navLinks = document.querySelectorAll('.navbar__link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                const offcanvasInstance = bootstrap.Offcanvas.getInstance(DOM.navMenu);
-                if (offcanvasInstance) {
-                    offcanvasInstance.hide();
-                }
+        // Close menu when clicking nav links (use cached navLinks)
+        if (DOM.navLinks && DOM.navLinks.length > 0) {
+            DOM.navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const offcanvasInstance = bootstrap.Offcanvas.getInstance(DOM.navMenu);
+                    if (offcanvasInstance) {
+                        offcanvasInstance.hide();
+                    }
+                });
             });
-        });
+        }
     }
    
     // ==========================================================================
-    // SEARCH - With redirect to recipes page
+    // SEARCH - With redirect to recipes page and null checks
     // ==========================================================================
    
     function initSearch() {
+        if (!DOM.searchForms || DOM.searchForms.length === 0) return;
+        
         DOM.searchForms.forEach(form => {
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const searchInput = this.querySelector('.search__input');
-                const searchTerm = searchInput.value.trim().toLowerCase();
+                const searchTerm = searchInput?.value.trim().toLowerCase();
                
                 if (searchTerm) {
                     // Save search term
@@ -114,9 +117,11 @@
                     }
                    
                     // Close mobile menu if open
-                    const offcanvasInstance = bootstrap.Offcanvas.getInstance(DOM.navMenu);
-                    if (offcanvasInstance) {
-                        offcanvasInstance.hide();
+                    if (DOM.navMenu) {
+                        const offcanvasInstance = bootstrap.Offcanvas.getInstance(DOM.navMenu);
+                        if (offcanvasInstance) {
+                            offcanvasInstance.hide();
+                        }
                     }
                 }
             });
@@ -126,7 +131,7 @@
     // Handle search when arriving from another page
     function handleSearchRedirect() {
         const searchTerm = sessionStorage.getItem('searchTerm');
-        if (searchTerm) {
+        if (searchTerm && DOM.searchInputs) {
             DOM.searchInputs.forEach(input => input.value = searchTerm);
             performSearch(searchTerm);
             sessionStorage.removeItem('searchTerm');
@@ -166,7 +171,6 @@
            
             if (matches) {
                 foundCount++;
-                // Store the recipe data object instead of creating DOM elements here
                 foundRecipes.push(recipe);
             }
         });
@@ -174,7 +178,40 @@
         showSearchResults(term, foundCount, foundRecipes);
     }
    
-    // HELPER FUNCTION: Create Bootstrap Recipe Card HTML - FIXED ORDER
+    // ==========================================================================
+    // HELPER FUNCTION: Create Results Section (DRY principle)
+    // ==========================================================================
+   
+    function createResultsSection(type, title, count, recipes, extraMessage = '') {
+        const section = document.createElement('section');
+        section.className = `${type}-results-section`;
+        section.style.background = '#f8f9fa';
+        section.style.padding = '4rem 0';
+        
+        const hasRecipes = count > 0;
+        const clearFunction = type === 'search' ? 'clearSearch' : 'clearAllFilters';
+        
+        section.innerHTML = `
+            <div class="container">
+                <div class="search-message ${type}-message">
+                    <div class="search-message__content">
+                        <strong>${title}:</strong> ${hasRecipes ? `Found ${count} recipe(s)${extraMessage}` : `Found 0 recipes${extraMessage}`}
+                        ${!hasRecipes ? `<br><small>Try different keywords or <button class="clear-search-link" onclick="window.${clearFunction}()">clear ${type}</button>.</small>` : ''}
+                    </div>
+                    <button class="search-message__close" onclick="window.${clearFunction}()" aria-label="Clear ${type}">×</button>
+                </div>
+                ${hasRecipes ? `
+                    <div class="recipe-grid row g-4 ${type}-results-grid">
+                        ${recipes.map(recipe => createBootstrapRecipeCard(recipe)).join('')}
+                    </div>
+                ` : ''}
+            </div>
+        `;
+        
+        return section;
+    }
+   
+    // HELPER FUNCTION: Create Bootstrap Recipe Card HTML
     function createBootstrapRecipeCard(recipe) {
         return `
             <article class="col-12 col-sm-6 col-lg-3">
@@ -206,66 +243,30 @@
             </article>
         `;
     }
-
-
    
-    // Display search results
+    // Display search results using helper function
     function showSearchResults(term, count, recipes) {
         // Remove old results
         const existingSection = document.querySelector('.search-results-section');
         if (existingSection) existingSection.remove();
        
-        if (count === 0) {
-            // Handle no results case
-            const resultsSection = document.createElement('section');
-            resultsSection.className = 'search-results-section';
-            resultsSection.style.background = '#f8f9fa';
-            resultsSection.style.padding = '2rem 0';
-            resultsSection.innerHTML = `
-                <div class="container">
-                    <div class="search-message">
-                        <div class="search-message__content">
-                            <strong>Search Results:</strong> Found 0 recipes for "${term}"
-                            <br><small>Try different keywords or <button class="clear-search-link" onclick="window.clearSearch()">clear search</button>.</small>
-                        </div>
-                        <button class="search-message__close" onclick="window.clearSearch()" aria-label="Clear search">×</button>
-                    </div>
-                </div>
-            `;
-           
-            if (DOM.featuredSection) {
-                DOM.featuredSection.parentNode.insertBefore(resultsSection, DOM.featuredSection);
-            }
-            return;
-        }
-       
-        // Create new results section
-        const resultsSection = document.createElement('section');
-        resultsSection.className = 'search-results-section';
-        resultsSection.style.background = '#f8f9fa';
-        resultsSection.style.padding = '4rem 0';
-       
-        resultsSection.innerHTML = `
-            <div class="container">
-                <div class="search-message">
-                    <div class="search-message__content">
-                        <strong>Search Results:</strong> Found ${count} recipe(s) for "${term}"
-                    </div>
-                    <button class="search-message__close" onclick="window.clearSearch()" aria-label="Clear search">×</button>
-                </div>
-                <div class="recipe-grid row g-4 search-results-grid">
-                    ${recipes.map(recipe => createBootstrapRecipeCard(recipe)).join('')}
-                </div>
-            </div>
-        `;
+        const resultsSection = createResultsSection(
+            'search',
+            'Search Results',
+            count,
+            recipes,
+            count > 0 ? ` for "${term}"` : ` for "${term}"`
+        );
        
         // Insert before featured recipes
         if (DOM.featuredSection) {
             DOM.featuredSection.parentNode.insertBefore(resultsSection, DOM.featuredSection);
            
             // Re-initialize animations for new cards
-            const newCards = resultsSection.querySelectorAll('.recipe-card');
-            initRecipeAnimationsForCards(newCards);
+            if (count > 0) {
+                const newCards = resultsSection.querySelectorAll('.recipe-card');
+                initRecipeAnimationsForCards(newCards);
+            }
         }
        
         // Scroll to results
@@ -275,14 +276,19 @@
     // Clear search (exposed globally for onclick)
     window.clearSearch = function() {
         document.querySelector('.search-results-section')?.remove();
-        DOM.searchInputs.forEach(input => input.value = '');
-        document.querySelectorAll('.filter-item.active').forEach(btn => btn.classList.remove('active'));
+        if (DOM.searchInputs) {
+            DOM.searchInputs.forEach(input => input.value = '');
+        }
+        document.querySelectorAll('.filter-item.active').forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-pressed', 'false');
+        });
         activeFilters.clear();
         document.querySelector('.filter-results-section')?.remove();
     };
    
     // ==========================================================================
-    // FILTERS - Using JSON data
+    // FILTERS - Using JSON data with improved accessibility
     // ==========================================================================
    
     async function loadRecipesForFiltering() {
@@ -294,14 +300,30 @@
             recipesLoaded = true;
         } catch (error) {
             console.error('Error loading recipes:', error);
+            
+            // Show user-friendly error message
+            if (DOM.featuredSection) {
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'alert alert-danger text-center';
+                errorMsg.style.margin = '2rem auto';
+                errorMsg.style.maxWidth = '600px';
+                errorMsg.innerHTML = `
+                    <strong>Oops!</strong> Unable to load recipes. 
+                    <br><small>Please refresh the page or try again later.</small>
+                `;
+                DOM.featuredSection.prepend(errorMsg);
+            }
         }
     }
    
     function initFilters() {
+        if (!DOM.filterButtons || DOM.filterButtons.length === 0) return;
+        
         DOM.filterButtons.forEach(button => {
-            // Make keyboard accessible
+            // Make keyboard accessible with proper ARIA
             button.setAttribute('role', 'button');
             button.setAttribute('tabindex', '0');
+            button.setAttribute('aria-pressed', 'false'); // For screen readers
            
             // Mouse click
             button.addEventListener('click', handleFilterClick);
@@ -321,8 +343,12 @@
        
         // Toggle filter on/off
         this.classList.toggle('active');
+        
+        // Update ARIA state for accessibility
+        const isActive = this.classList.contains('active');
+        this.setAttribute('aria-pressed', isActive ? 'true' : 'false');
        
-        if (this.classList.contains('active')) {
+        if (isActive) {
             activeFilters.add(filterValue);
         } else {
             activeFilters.delete(filterValue);
@@ -347,7 +373,7 @@
         let visibleCount = 0;
         const filteredRecipes = [];
        
-        // Use the JSON data instead of DOM.recipeCards
+        // Use the JSON data instead of DOM elements
         recipesData.forEach(recipe => {
             // Normalize tags and include difficulty
             const tags = recipe.tags.map(tag => tag.toLowerCase().replace(/\s+/g, '-'));
@@ -364,7 +390,7 @@
            
             if (matches) {
                 visibleCount++;
-                filteredRecipes.push(recipe); // Store recipe data object
+                filteredRecipes.push(recipe);
             }
         });
        
@@ -372,7 +398,7 @@
         announceToScreenReader(`Showing ${visibleCount} recipes`);
     }    
    
-    // Display Filter Results with Bootstrap Grid
+    // Display Filter Results using helper function
     function showFilterResults(count, recipes) {
         // Remove old results
         document.querySelector('.filter-results-section')?.remove();
@@ -383,28 +409,13 @@
             return btn ? btn.textContent : filter;
         }).join(', ');
        
-        // Create results section
-        const resultsSection = document.createElement('section');
-        resultsSection.className = 'filter-results-section';
-        resultsSection.style.background = '#f8f9fa';
-        resultsSection.style.padding = '4rem 0';
-       
-        resultsSection.innerHTML = `
-            <div class="container">
-                <div class="search-message filter-message">
-                    <div class="search-message__content">
-                        <strong>Filter Results:</strong> Showing ${count} recipe(s) for: ${activeFilterNames}
-                        ${count === 0 ? '<br><small>No matches. Try different filters or <button class="clear-search-link" onclick="window.clearAllFilters()">clear filters</button>.</small>' : ''}
-                    </div>
-                    <button class="search-message__close" onclick="window.clearAllFilters()" aria-label="Clear filters">×</button>
-                </div>
-                ${count > 0 ? `
-                    <div class="recipe-grid row g-4 filter-results-grid">
-                        ${recipes.map(recipe => createBootstrapRecipeCard(recipe)).join('')}
-                    </div>
-                ` : ''}
-            </div>
-        `;
+        const resultsSection = createResultsSection(
+            'filter',
+            'Filter Results',
+            count,
+            recipes,
+            count > 0 ? ` for: ${activeFilterNames}` : `. Filters: ${activeFilterNames}`
+        );
        
         // Insert and populate
         if (DOM.featuredSection) {
@@ -422,16 +433,19 @@
    
     // Clear all filters (exposed globally)
     window.clearAllFilters = function() {
-        document.querySelectorAll('.filter-item.active').forEach(btn => btn.classList.remove('active'));
+        if (DOM.filterButtons) {
+            DOM.filterButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-pressed', 'false');
+            });
+        }
         activeFilters.clear();
         document.querySelector('.filter-results-section')?.remove();
     };
 
-
     // ==========================================================================
     // Load and Render Recipes on Recipes Page
     // ==========================================================================
-
 
     async function loadAndRenderRecipes() {
         // Only run on recipes.html page
@@ -470,16 +484,29 @@
            
         } catch (error) {
             console.error('Error loading recipes:', error);
+            
+            // Show error to user
+            if (recommendedSection) {
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'alert alert-danger text-center';
+                errorMsg.style.margin = '2rem auto';
+                errorMsg.style.maxWidth = '600px';
+                errorMsg.innerHTML = `
+                    <strong>Error!</strong> Unable to load recipes. 
+                    <br><small>Please check your internet connection and try again.</small>
+                `;
+                recommendedSection.querySelector('.container')?.prepend(errorMsg);
+            }
         }
     }
-
 
     // ==========================================================================
     // HELPER: Initialize animations for specific cards
     // ==========================================================================
 
-
     function initRecipeAnimationsForCards(cards) {
+        if (!cards || cards.length === 0) return;
+        
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -496,28 +523,42 @@
        
         cards.forEach(card => observer.observe(card));
     }
+    
     // ==========================================================================
-    // CATEGORY CARDS - Homepage navigation
+    // CATEGORY CARDS - Homepage navigation with caching
     // ==========================================================================
    
     function initCategoryCards() {
+        if (!DOM.categoryCards || DOM.categoryCards.length === 0) return;
+        
         DOM.categoryCards.forEach(card => {
             // Make keyboard accessible
             card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+            
+            // Cache the category name to avoid repeated DOM queries
+            const categoryNameElement = card.querySelector('.category-card__name');
+            if (!categoryNameElement) return; // Skip if name not found
+            
+            const categoryName = categoryNameElement.textContent.trim().toLowerCase();
+            const categoryFilter = categoryName.replace(/\s+/g, '-');
+            
+            // Store filter as data attribute for easier access
+            card.dataset.categoryFilter = categoryFilter;
+            
+            const handleCategoryClick = function() {
+                sessionStorage.setItem('selectedCategory', this.dataset.categoryFilter);
+                window.location.href = 'recipes.html';
+            };
            
             // Mouse click
-            card.addEventListener('click', function() {
-                const categoryName = this.querySelector('.category-card__name').textContent.trim().toLowerCase();
-                const categoryFilter = categoryName.replace(/\s+/g, '-');
-                sessionStorage.setItem('selectedCategory', categoryFilter);
-                window.location.href = 'recipes.html';
-            });
+            card.addEventListener('click', handleCategoryClick);
            
             // Keyboard support
             card.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    this.click();
+                    handleCategoryClick.call(this);
                 }
             });
         });
@@ -551,6 +592,8 @@
     // ==========================================================================
    
     function initRecipeAnimations() {
+        if (!DOM.recipeCards || DOM.recipeCards.length === 0) return;
+        
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -574,6 +617,7 @@
    
     function initSocialSharing() {
         const shareButtons = document.querySelectorAll('.share-btn');
+        if (!shareButtons || shareButtons.length === 0) return;
        
         shareButtons.forEach(button => {
             button.addEventListener('click', function(e) {
@@ -652,11 +696,12 @@
     }
    
     // ==========================================================================
-    // NEWSLETTER POPUP - Homepage only
+    // NEWSLETTER POPUP - Homepage only with proper checks
     // ==========================================================================
    
     function initNewsletter() {
-        if (!DOM.newsletterOverlay) return;
+        // Early return if elements don't exist
+        if (!DOM.newsletterOverlay || !DOM.newsletterForm) return;
        
         // Only show on homepage
         const isHomepage = window.location.pathname.includes('index.html') ||
@@ -672,7 +717,7 @@
             setTimeout(() => DOM.newsletterOverlay.classList.add('show'), 500);
         }
        
-        // Close button
+        // Close button - with null check
         if (DOM.closeNewsletterBtn) {
             DOM.closeNewsletterBtn.addEventListener('click', function() {
                 DOM.newsletterOverlay.classList.remove('show');
@@ -687,36 +732,33 @@
         });
        
         // Form submission
-        if (DOM.newsletterForm) {
-            DOM.newsletterForm.addEventListener('submit', function(e) {
-                const emailInput = this.querySelector('.newsletter-input');
-               
-                if (!this.checkValidity()) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.classList.add('was-validated');
-                    if (emailInput) emailInput.setAttribute('aria-invalid', 'true');
-                    return;
-                }
-               
-                e.preventDefault();
-                if (emailInput) emailInput.setAttribute('aria-invalid', 'false');
-               
-                const email = emailInput ? emailInput.value : '';
-               
-                // Show success message
-                this.style.display = 'none';
-                const successMsg = document.getElementById('newsletterSuccess');
-                if (successMsg) successMsg.classList.add('show');
-               
-                // Save subscription
-                localStorage.setItem('newsletterSubscribed', 'true');
-                localStorage.setItem('subscriberEmail', email);
-               
-                // Close popup
-                setTimeout(() => DOM.newsletterOverlay.classList.remove('show'), 3000);
-            });
-        }
+        DOM.newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const emailInput = this.querySelector('.newsletter-input');
+           
+            if (!this.checkValidity()) {
+                this.classList.add('was-validated');
+                if (emailInput) emailInput.setAttribute('aria-invalid', 'true');
+                return;
+            }
+           
+            if (emailInput) emailInput.setAttribute('aria-invalid', 'false');
+           
+            const email = emailInput?.value || '';
+           
+            // Show success message
+            this.style.display = 'none';
+            const successMsg = document.getElementById('newsletterSuccess');
+            if (successMsg) successMsg.classList.add('show');
+           
+            // Save subscription
+            localStorage.setItem('newsletterSubscribed', 'true');
+            localStorage.setItem('subscriberEmail', email);
+           
+            // Close popup
+            setTimeout(() => DOM.newsletterOverlay.classList.remove('show'), 3000);
+        });
     }
    
     // ==========================================================================
@@ -735,4 +777,3 @@
     }
    
 })();
-
