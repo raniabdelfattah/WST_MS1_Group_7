@@ -56,7 +56,7 @@ Recipes-4-Keeps/
 ├── recipe-detail.html           # Individual recipe template
 ├── script.js                    # Main JavaScript functionality
 ├── recipe-detail.js             # Recipe detail page specific JS
-├── recipes.json                 # Recipe database (18 recipes)
+├── recipes.json                 # Recipe database (16 recipes)
 ├── styles.css                   # Main stylesheet with responsive design
 └── README.md                    # Project documentation
 ```
@@ -334,7 +334,7 @@ Comprehensive recipe details with step-by-step instructions and interactive feat
 ## Recipe Database (recipes.json)
 
 **Structure:**
-- 18 total recipes spanning multiple cuisines and difficulty levels
+- 16 total recipes spanning multiple cuisines and difficulty levels
 - Comprehensive recipe objects including:
   - Unique ID (URL-friendly slug)
   - Recipe name and short description
@@ -638,4 +638,6 @@ For questions, feedback, or collaboration opportunities, please reach out to the
 
 ---
 
-**Recipes 4 Keeps** - *Preserving culinary traditions, one recipe at a time* 🍳✨
+**Built with ❤️ and a love for cooking**
+
+*Last Updated: November 2025*
