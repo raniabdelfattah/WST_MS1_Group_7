@@ -506,19 +506,21 @@ Comprehensive recipe details with step-by-step instructions and interactive feat
 ## Team Contributions
 
 **Helena Tantoco**
+- Front-end developer
 - Recipe content (Japchae, Stir-Fry Garlic Bok Choy, Inabraw/Dinengdeng)
 - About page team member content
 - Recipe testing and refinement
+
+**Rania Abdelfattah**
+- Back-end developer
+- Recipe content (Molokhia, Fettuccine Alfredo, Tabbouleh, Stuffed Grape Leaves, Swedish Meatballs)
+- Recipe detail page layout
+- Content organization
 
 **Karissa Mae Manicad**
 - Recipe content (Maja Blanca, Siu Mai, Buttered Garlic Shrimp)
 - Recipe image curation
 - MS2 Testing Documentation
-
-**Rania Abdelfattah**
-- Recipe content (Molokhia, Fettuccine Alfredo, Tabbouleh, Stuffed Grape Leaves, Swedish Meatballs)
-- Recipe detail page layout
-- Content organization
 
 **Chadley De Lara**
 - Recipe content (Ooey Gooey Brownies, Curry Katsu, Sourdough, Pancakes, Not Another Loaded Fries)
