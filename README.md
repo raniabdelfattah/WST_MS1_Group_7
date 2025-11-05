@@ -1,22 +1,112 @@
-# Recipes 4 Keeps
+# Recipes4Keeps
 
 A responsive recipe sharing website built with HTML5, CSS3, Bootstrap 5, and JavaScript that celebrates family recipes and culinary traditions. This project showcases modern web development practices including accessibility features, responsive design, dynamic content loading, and interactive user experiences.
 
 ## Project Timeline
 
 View our complete project timeline and task breakdown in our Gantt Chart:
-**[Recipes 4 Keeps Gantt Chart](https://sharing.clickup.com/9016079716/g/h/8cpcxb4-4376/7dba737a757e949)**
+**[Recipes4Keeps Gantt Chart](https://sharing.clickup.com/9016079716/g/h/8cpcxb4-4376/7dba737a757e949)**
 
 ## Testing & Quality Assurance
 
 Our team is continuously developing and improving the platform through comprehensive testing procedures. This includes functionality testing across different browsers and devices, cross-browser compatibility checks to ensure consistent experiences, responsive design validation at various breakpoints, accessibility audits for WCAG compliance, form validation testing, and user experience evaluations. See our detailed Testing Log and results here:
 **[MS2 Testing Documentation](https://docs.google.com/document/d/1DgL9C-ljX8cjXjpzMfzQ58mSFQD27aZ1w1b7mt3xA-I/edit?tab=t.0)**
 
+## Step by Step Contingency Plan
+
+Please access the Recipe4Keeps' Contingency plan via this link **[Recipe4Keeps Contingency Plan Document](https://doc.clickup.com/9016079716/d/h/8cpcxb4-4596/027719be7f9f7c0)**
+
 ## About the Project
 
 Recipes 4 Keeps is a platform where users can browse, search, and discover family recipes passed down through generations - _shared by the 4 main 'cooks' behind the brains: Helena Rose Tantoco, Rania Nabil Abdelfattah, Chadley Marie De Lara and Karissa Mae Manicad_. The website emphasizes the cultural significance of food and the importance of preserving culinary traditions. Built by four friends who bonded over their love for cooking, this site represents our journey in sharing treasured recipes from our families to yours.
 
 The design uses a warm orange gradient color scheme (Sienna #D2691E, Peru #CD853F, Sandy Brown #F4A460) that evokes comfort and home cooking, perfectly matching our tagline: "Foods and recipes are treasures worth keeping..."
+
+## MS2 DRAFT FEEDBACK IMPLEMENTATION CHECKLIST
+
+**_Feedback 1: Bootstrap Implementation_
+- To fully meet the requirement, try using more Bootstrap classes like container, row, col, btn, form control, and card on more sections.
+- If Tailwind is the option, use it fully with its utility first style instead of mixing many custom rules.
+- Forms (such as newsletter) could use Bootstrap’s built-in accessibility features for form validation and aria attributes.
+- Some features may be easier to manage using more Bootstrap components.**
+**************
+Assigned To: Helena Rose Tantoco
+Status: Completed
+Notes & Justification: 
+_Accomplished:_
+Leave a Comment Modal
+Newsletter Form Validation
+Bootstrap Grid System
+Form Controls & Components
+Didn’t use Tailwind
+
+_Feedback 2: JavaScript Best Practices__
+- Try to avoid repeated DOM searches inside loops for better performance.
+- Break JavaScript into modules and use modern syntax.
+- Use const and let instead of var to match modern JavaScript.
+**************
+Assigned To: Rania Nabil Abdelfattah
+Status: Completed
+Notes & Justification:
+_Accomplished:_
+Encapsulation with IIFE
+DOM Caching Object
+Extracted HTML Builder functions
+Already Implemented:
+Use const and let instead of var to match modern JavaScript (no resolution needed as the existing code already matched modern JavaScript).
+
+_Feedback 3: ReadMe section implementation and Updates_
+- Add the Gantt Chart Link to the readmesectio
+- Add the feedback and what was accomplished/what the group opted out from implementing out of all the feedbacks received.
+**************
+Assigned To: Chadley Marie De Lara
+Status: Completed
+Notes & Justification:
+Accomplished:
+Complete Feature Documentation - All interactive functionality including dynamic recipe loading from JSON, multi-filter system with search, newsletter popup, comment system with star ratings, social sharing, and mobile navigation with Bootstrap Offcanvas
+Technical Implementation Details - Responsive design system (320px-1920px+ breakpoints), accessibility features (WCAG 2.1 compliance, ARIA labels, keyboard navigation), performance optimizations (DOM caching, Intersection Observer), and the complete recipes.json database structure with all 18 recipes
+Project Organization & Testing - Team contributions, development challenges with solutions, MS2 Testing Documentation link under the "Testing & Quality Assurance" section, project timeline with Gantt Chart, and installation/setup instructions
+
+_Feedback 4: Managing Projects_
+- Add simple planning documents such as a task list, flow chart, Kanban board, or Gantt chart.
+- Include notes about what to do if delays happen or if features change.
+- Add a short testing and results record.
+**************
+Assigned To: Chadley Marie De Lara, Karissa Mae Manicad
+Status: Completed
+Accomplished:
+Gantt Chart and Task Timeline via ClickUp (link also attached on README | WST-MS2 Branch) (Chad)
+README Updates (Chad)
+Gantt chart creation (Mae)
+Group Contingency Plan (Chad)
+Test and Results Log (Mae)
+Note: The Gantt chart has already been created since MS1.
+
+_Feedback 5: Suggested Advanced Features_
+- Add more advanced features in later versions such as user accounts, ratings, and recipe submissions.
+- Some error messages (like for missing recipe) are simple — you could offer suggestions or links for recovery.
+- More explicit tab order control for keyboard users would help.
+**************
+Assigned To: N/A
+Status: Not Implemented
+Not Implemented:
+The listed features below were not prioritized for this project as the database is not yet a requirement and some of the features don’t align with the nature of our project which is more similar to a personal portfolio website (content generated by authors only).
+User accounts system - more of a social media feature
+Recipe ratings  - ratings applied but without a database storage
+Recipe submission functionality/User-generated content  - more of a social media feature ; defeats the purpose of Recipes 4 Keeps as only the authors can share their recipes on the platform
+Error messages (e.g., missing recipes) could offer suggested links for recovery - adding recovery links would add unnecessary UI complexity since users can easily navigate via our main menu, which remains accessible on error pages..
+Accomplished:
+Recipe Rating Functionality - without database storage 
+Explicit Tab Order - used tabindex=”0” on cards/buttons
+Found in: 
+Category cards (index.html)
+Filter buttons (recipes.html)
+Team member cards (about.html - via role="button")
+
+
+
+
+
 
 ## Live Demo
 
