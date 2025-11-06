@@ -812,13 +812,27 @@
                     window.open(shareUrl, 'pinterest-share', popupParams);
                 }
                 else if (this.classList.contains('share-btn--email')) {
-                    // Use mailto: protocol to open user's default email client
+                    // Get recipe information
                     const emailSubject = `Check out this recipe: ${recipeTitle}`;
                     const emailBody = `Hi there!\n\nI found this amazing recipe on Recipes 4 Keeps and thought you might like it:\n\n${recipeTitle}\n\n${recipeUrl}\n\nEnjoy cooking!`;
                     
-                    // Create mailto link
-                    shareUrl = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-                    window.location.href = shareUrl;
+                    // Try mailto: first (opens default email client)
+                    const mailtoLink = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                    
+                    // Create a temporary link and click it
+                    const tempLink = document.createElement('a');
+                    tempLink.href = mailtoLink;
+                    tempLink.style.display = 'none';
+                    document.body.appendChild(tempLink);
+                    tempLink.click();
+                    document.body.removeChild(tempLink);
+                    
+                    // Fallback to Gmail after a short delay (if mailto didn't work)
+                    setTimeout(() => {
+                        const gmailBody = emailBody.replace(/\n/g, '%0A');
+                        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&su=${encodeURIComponent(emailSubject)}&body=${gmailBody}`;
+                        window.open(gmailUrl, 'email-share', popupParams);
+                    }, 500);
                 }
                 
                 // Visual feedback - show sharing confirmation
