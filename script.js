@@ -765,37 +765,81 @@
     }
    
     // ==========================================================================
-    // SOCIAL SHARING - Recipe detail page
+    // SOCIAL SHARING - Recipe detail page with enhanced popups
     // ==========================================================================
-   
+
     function initSocialSharing() {
         const shareButtons = document.querySelectorAll('.share-btn');
         if (!shareButtons || shareButtons.length === 0) return;
-       
+    
         shareButtons.forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
-               
+            
+                // Get recipe information
                 const recipeTitle = document.querySelector('.recipe-info__title')?.textContent || 'Recipe';
                 const recipeUrl = window.location.href;
-               
+                const recipeImage = document.querySelector('.recipe-hero__image')?.src || '';
+                
+                // Create compelling captions
+                const defaultCaption = `Try this recipe: ${recipeTitle} on Recipes 4 Keeps!`;
+                const hashtags = 'Recipes4Keeps,Cooking,Recipe';
+                
+                // Popup window settings
+                const popupWidth = 600;
+                const popupHeight = 600;
+                const left = (window.screen.width - popupWidth) / 2;
+                const top = (window.screen.height - popupHeight) / 2;
+                const popupParams = `width=${popupWidth},height=${popupHeight},left=${left},top=${top},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`;
+            
+                let shareUrl = '';
+            
                 if (this.classList.contains('share-btn--facebook')) {
-                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(recipeUrl)}`, '_blank', 'width=600,height=400');
+                    // Facebook Share Dialog
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(recipeUrl)}&quote=${encodeURIComponent(defaultCaption)}`;
+                    window.open(shareUrl, 'facebook-share', popupParams);
                 }
                 else if (this.classList.contains('share-btn--x')) {
-                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(recipeTitle)}&url=${encodeURIComponent(recipeUrl)}`, '_blank', 'width=600,height=400');
+                    // X (Twitter) Share with image and hashtags
+                    const twitterText = `${defaultCaption}\n\n${recipeUrl}`;
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}&hashtags=${hashtags}`;
+                    window.open(shareUrl, 'twitter-share', popupParams);
                 }
                 else if (this.classList.contains('share-btn--pinterest')) {
-                    const imageUrl = document.querySelector('.recipe-hero__image')?.src || '';
-                    window.open(`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(recipeUrl)}&media=${encodeURIComponent(imageUrl)}&description=${encodeURIComponent(recipeTitle)}`, '_blank', 'width=600,height=400');
+                    // Pinterest Pin with image, description, and URL
+                    const pinterestDesc = `${recipeTitle} - ${defaultCaption}`;
+                    shareUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(recipeUrl)}&media=${encodeURIComponent(recipeImage)}&description=${encodeURIComponent(pinterestDesc)}`;
+                    window.open(shareUrl, 'pinterest-share', popupParams);
                 }
                 else if (this.classList.contains('share-btn--email')) {
-                    const subject = `Check out this recipe: ${recipeTitle}`;
-                    const body = `I found this great recipe!\n\n${recipeUrl}`;
-                    window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    // Email with formatted subject and body
+                    const emailSubject = `Check out this recipe: ${recipeTitle}`;
+                    const emailBody = `Hi there!\n\nI found this amazing recipe on Recipes 4 Keeps and thought you might like it:\n\n${recipeTitle}\n\n${recipeUrl}\n\nEnjoy cooking!\n`;
+                    window.location.href = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
                 }
+                
+                // Visual feedback - show sharing confirmation
+                showSharingFeedback(this);
             });
         });
+    }
+
+    // Show visual feedback when sharing
+    function showSharingFeedback(button) {
+        const originalHTML = button.innerHTML;
+        const originalBG = button.style.background;
+        
+        // Change button temporarily
+        button.innerHTML = '<i class="fas fa-check btn__icon"></i> Shared!';
+        button.style.background = '#10b981';
+        button.style.pointerEvents = 'none';
+        
+        // Reset after 2 seconds
+        setTimeout(() => {
+            button.innerHTML = originalHTML;
+            button.style.background = originalBG;
+            button.style.pointerEvents = 'auto';
+        }, 2000);
     }
    
     // ==========================================================================
