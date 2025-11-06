@@ -812,18 +812,13 @@
                     window.open(shareUrl, 'pinterest-share', popupParams);
                 }
                 else if (this.classList.contains('share-btn--email')) {
-                    // Email with formatted subject and body
+                    // Use mailto: protocol to open user's default email client
                     const emailSubject = `Check out this recipe: ${recipeTitle}`;
-                    const emailBody = `Hi there!\n\nI found this amazing recipe on Recipes 4 Keeps and thought you might like it:\n\n${recipeTitle}\n\n${recipeUrl}\n\nEnjoy cooking!\n`;
-                    // Use direct link instead of window.location to avoid popup blocker
-                    const mailtoLink = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-                    // Create temporary link and click it
-                    const tempLink = document.createElement('a');
-                    tempLink.href = mailtoLink;
-                    tempLink.style.display = 'none';
-                    document.body.appendChild(tempLink);
-                    tempLink.click();
-                    document.body.removeChild(tempLink);
+                    const emailBody = `Hi there!\n\nI found this amazing recipe on Recipes 4 Keeps and thought you might like it:\n\n${recipeTitle}\n\n${recipeUrl}\n\nEnjoy cooking!`;
+                    
+                    // Create mailto link
+                    shareUrl = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                    window.location.href = shareUrl;
                 }
                 
                 // Visual feedback - show sharing confirmation
