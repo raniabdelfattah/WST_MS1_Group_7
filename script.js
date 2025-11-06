@@ -771,7 +771,7 @@
     function initSocialSharing() {
         const shareButtons = document.querySelectorAll('.share-btn');
         if (!shareButtons || shareButtons.length === 0) return;
-    
+
         shareButtons.forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -815,7 +815,15 @@
                     // Email with formatted subject and body
                     const emailSubject = `Check out this recipe: ${recipeTitle}`;
                     const emailBody = `Hi there!\n\nI found this amazing recipe on Recipes 4 Keeps and thought you might like it:\n\n${recipeTitle}\n\n${recipeUrl}\n\nEnjoy cooking!\n`;
-                    window.location.href = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                    // Use direct link instead of window.location to avoid popup blocker
+                    const mailtoLink = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                    // Create temporary link and click it
+                    const tempLink = document.createElement('a');
+                    tempLink.href = mailtoLink;
+                    tempLink.style.display = 'none';
+                    document.body.appendChild(tempLink);
+                    tempLink.click();
+                    document.body.removeChild(tempLink);
                 }
                 
                 // Visual feedback - show sharing confirmation
