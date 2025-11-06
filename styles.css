@@ -453,6 +453,50 @@ body {
     font-weight: bold;
 }
 
+/* Clear All Filters Button Container */
+.clear-filters-container {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Clear All Filters Button Styling */
+.btn--clear-filters {
+    background: #6c757d;
+    color: white;
+    width: auto;
+    min-width: 250px;
+    height: 50px;
+    border-radius: 25px;
+    margin-bottom: 0;
+    transition: all 0.3s ease;
+}
+
+.btn--clear-filters:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+    color: white;
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.4);
+}
+
+.btn--clear-filters .btn__icon {
+    font-size: 1.1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .clear-filters-container {
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+    }
+    
+    .btn--clear-filters {
+        width: calc(100% - 2rem);
+        max-width: 350px;
+        min-width: auto;
+    }
+}
 
 /* ==========================================================================
    ABOUT PAGE SPECIFIC STYLES
